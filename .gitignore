@@ -63,3 +63,6 @@ crashlytics-build.properties
 
 Grayland/Temp/UnityLockfile
 Grayland/Library/EditorInstance.json
+Grayland/Library/CurrentLayout-default.dwlt
+Grayland/Library/shadercompiler-UnityShaderCompiler.exe0.log
+*.dwlt
