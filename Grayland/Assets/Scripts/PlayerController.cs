@@ -159,9 +159,8 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        // Changes position of eyes based on velocity of player
         eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, velocity.x / 80, .25f), Mathf.Lerp(eyes.localPosition.y, velocity.y / 100, .25f));
-
-        Debug.Log(landed);
     }
 
     /// <summary>
