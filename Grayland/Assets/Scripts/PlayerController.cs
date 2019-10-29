@@ -34,13 +34,18 @@ public class PlayerController : MonoBehaviour
     Transform eyes;
 
     [SerializeField, Tooltip("Particle object for jumping, landing, and clinging to walls")]
-    GameObject particleObj;
+    GameObject jumpParticle;
+
+    [SerializeField, Tooltip("Particle object for ground movement")]
+    ParticleSystem groundParticle;
 
     BoxCollider2D col;
     Vector2 velocity;
     bool grounded, landed;
     bool isClinged = false, canMove = true;
     float currentGravity;
+    bool isBlinking = false;
+    bool playOnce;
 
     #endregion
 
@@ -48,6 +53,11 @@ public class PlayerController : MonoBehaviour
     {
         col = GetComponent<BoxCollider2D>();
         currentGravity = gravity;
+    }
+
+    private void Start()
+    {
+        StartCoroutine(SetUpBlink());
     }
 
     private void Update()
@@ -122,7 +132,7 @@ public class PlayerController : MonoBehaviour
                     // Ensures particle only spawns once
                     if (!landed)
                     {
-                        Instantiate(particleObj, new Vector2(transform.position.x, transform.position.y - .5f), Quaternion.identity);
+                        Instantiate(jumpParticle, new Vector2(transform.position.x, transform.position.y - .5f), Quaternion.identity);
                         landed = true;
                     }
                 }
@@ -141,9 +151,9 @@ public class PlayerController : MonoBehaviour
             if (!landed)
             {
                 if (leftCheck)
-                    Instantiate(particleObj, new Vector2(transform.position.x -.5f, transform.position.y), Quaternion.Euler(0f, 0f, -90f));
+                    Instantiate(jumpParticle, new Vector2(transform.position.x -.5f, transform.position.y), Quaternion.Euler(0f, 0f, -90f));
                 else
-                    Instantiate(particleObj, new Vector2(transform.position.x +.5f, transform.position.y), Quaternion.Euler(0f, 0f, 90f));
+                    Instantiate(jumpParticle, new Vector2(transform.position.x +.5f, transform.position.y), Quaternion.Euler(0f, 0f, 90f));
                 landed = true;
             }
 
@@ -161,6 +171,39 @@ public class PlayerController : MonoBehaviour
 
         // Changes position of eyes based on velocity of player
         eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, velocity.x / 80, .25f), Mathf.Lerp(eyes.localPosition.y, velocity.y / 100, .25f));
+
+        // Eyes blinking
+        if (isBlinking)
+        {
+            eyes.localScale = new Vector2(eyes.localScale.x, Mathf.Lerp(eyes.localScale.y, 0f, .33f));
+
+            if (eyes.localScale.y <= .025f)
+            {
+                isBlinking = false;
+            }
+        }
+        else
+            eyes.localScale = new Vector2(eyes.localScale.x, Mathf.Lerp(eyes.localScale.y, 1f, .33f));
+
+        // Hotfix for alleviating lerp issues relative to scale
+        if (eyes.localScale.y >= .995f)
+            eyes.localScale = new Vector2(eyes.localScale.x, 1f);
+
+        // Hotifx for alleviating lerp issues relative to position
+        if (eyes.localPosition.y < .01f && eyes.localPosition.y > -.01f && velocity.y > -1 && velocity.y < 0)
+            eyes.localPosition = new Vector2(eyes.localPosition.x, 0f);
+
+        // Plays particles if moving, stops particles if not moving
+        if ((velocity.y > -1.5f && velocity.y < 0 && velocity.x == 0) || isClinged)
+        {
+            playOnce = true;
+            groundParticle.Stop();
+        }
+        else if (playOnce)
+        {
+            playOnce = false;
+            groundParticle.Play();
+        }
     }
 
     /// <summary>
@@ -173,5 +216,18 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(afterWallJumpBuffer);
         if (!isClinged)
             canMove = true;
+    }
+
+    /// <summary>
+    /// Sets bool that determines if player's eyes are blinking
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator SetUpBlink()
+    {
+        int i = Random.Range(3, 6);
+        yield return new WaitForSeconds(i);
+        Debug.Log("Begin blink");
+        isBlinking = true;
+        StartCoroutine(SetUpBlink()); // Loops blink
     }
 }
