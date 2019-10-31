@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class PlayerController : MonoBehaviour
@@ -27,6 +28,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Layers for objects that can be clinged to by the player")]
     LayerMask whatIsCling;
 
+    [SerializeField, Tooltip("Layers for objects that are considered ceilings")]
+    LayerMask whatIsCeiling;
+
     [SerializeField, Tooltip("After wall jumping, how long it takes for the player to regain ")]
     float afterWallJumpBuffer = .1f;
 
@@ -39,6 +43,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Particle object for ground movement")]
     ParticleSystem groundParticle;
 
+    [SerializeField, Tooltip("Debug text")]
+    Text debugText;
+
     BoxCollider2D col;
     Vector2 velocity;
     bool grounded, landed;
@@ -46,6 +53,8 @@ public class PlayerController : MonoBehaviour
     float currentGravity;
     bool isBlinking = false;
     bool playOnce;
+
+    bool overlap, touchingGround;
 
     #endregion
 
@@ -62,19 +71,23 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        bool hasJumped = false;
         // Use GetAxisRaw to ensure input is either 0, 1 or -1.
         float moveInput = Input.GetAxisRaw("Horizontal");
 
         if (grounded && !isClinged)
         {
-            velocity.y = 0;
+            velocity.y = -.5f;
 
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") && !hasJumped)
             {
                 // Velocity needed to achieve jump height
                 velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(currentGravity));
-
+                hasJumped = true;
                 landed = false;
+                grounded = false;
+                if (moveInput == 0)
+                    velocity.x = 0f;
             }
         }
         
@@ -102,6 +115,7 @@ public class PlayerController : MonoBehaviour
         // Wall cling checking 
         RaycastHit2D leftCheck = Physics2D.Raycast(transform.position, Vector2.left, .51f, whatIsCling); // Left side
         RaycastHit2D rightCheck = Physics2D.Raycast(transform.position, Vector2.right, .51f, whatIsCling); // Right side
+        RaycastHit2D ceilingCheck = Physics2D.Raycast(transform.position, Vector2.up, .51f, whatIsCeiling);
         Debug.DrawRay(transform.position, new Vector2(-.51f, 0f), Color.green);
         Debug.DrawRay(transform.position, new Vector2(.51f, 0f), Color.red);
         isClinged = leftCheck || rightCheck; // Determine if the player is clinged to a wall
@@ -109,33 +123,49 @@ public class PlayerController : MonoBehaviour
         // Fix for ensuring landed is false when player is in the air
         if (hits.Length == 1 && !isClinged)
             landed = false;
-
+        
+        // Fuck it change this to downwards raycast like fuck it
         // Ground checking
         foreach (Collider2D hit in hits)
         {
             // Ignore own collider
             if (hit == col)
+            {
+                touchingGround = false;
                 continue;
+            }
 
             ColliderDistance2D colliderDistance = hit.Distance(col);
 
             // Are we still overlapping this collider?
             if (colliderDistance.isOverlapped)
             {
+                overlap = true;
                 transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
 
                 // If the object beneath us intersects, grounded is true 
                 if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
                 {
+                    touchingGround = true;
                     grounded = true;
+                    canMove = true;
+                    velocity.y = 0f;
 
                     // Ensures particle only spawns once
                     if (!landed)
                     {
                         Instantiate(jumpParticle, new Vector2(transform.position.x, transform.position.y - .5f), Quaternion.identity);
                         landed = true;
+                        grounded = true;
                     }
                 }
+                else
+                    touchingGround = false;
+            }
+            else
+            {
+                touchingGround = false;
+                overlap = false;
             }
         }
 
@@ -151,23 +181,33 @@ public class PlayerController : MonoBehaviour
             if (!landed)
             {
                 if (leftCheck)
-                    Instantiate(jumpParticle, new Vector2(transform.position.x -.5f, transform.position.y), Quaternion.Euler(0f, 0f, -90f));
+                    Instantiate(jumpParticle, new Vector2(transform.position.x - .5f, transform.position.y), Quaternion.Euler(0f, 0f, -90f));
                 else
-                    Instantiate(jumpParticle, new Vector2(transform.position.x +.5f, transform.position.y), Quaternion.Euler(0f, 0f, 90f));
+                    Instantiate(jumpParticle, new Vector2(transform.position.x + .5f, transform.position.y), Quaternion.Euler(0f, 0f, 90f));
                 landed = true;
             }
 
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") && !hasJumped)
             {
                 currentGravity = gravity;
                 float speedX = leftCheck ? speed : -speed;
                 velocity = new Vector2(speedX, Mathf.Sqrt(2f * jumpHeight * Mathf.Abs(currentGravity)));
-                
+
+                hasJumped = true;
                 isClinged = false;
                 landed = false;
+                grounded = false;
                 StartCoroutine(SetCanMove(true));
             }
         }
+        else
+        {
+            currentGravity = gravity;
+        }
+        
+        // Stops upward velocity if player hits ceiling
+        if (ceilingCheck)
+            velocity.y = 0f;
 
         // Changes position of eyes based on velocity of player
         eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, velocity.x / 80, .25f), Mathf.Lerp(eyes.localPosition.y, velocity.y / 100, .25f));
@@ -194,7 +234,7 @@ public class PlayerController : MonoBehaviour
             eyes.localPosition = new Vector2(eyes.localPosition.x, 0f);
 
         // Plays particles if moving, stops particles if not moving
-        if ((velocity.y > -1.5f && velocity.y < 0 && velocity.x == 0) || isClinged)
+        if ((velocity.y > -1.5f && velocity.y < .25f && velocity.x > -.25f && velocity.x < .25f) || isClinged)
         {
             playOnce = true;
             groundParticle.Stop();
@@ -204,6 +244,31 @@ public class PlayerController : MonoBehaviour
             playOnce = false;
             groundParticle.Play();
         }
+
+        /*
+        if (!canMove && !isClinged && (touchingGround || grounded))
+        {
+            Debug.Log("Called hotfix #1");
+            canMove = true;
+            touchingGround = true;
+            grounded = true;
+        }*/
+
+        if (!grounded && landed && !isClinged)
+        {
+            Debug.Log("Called hotfix #2");
+            canMove = true;
+            grounded = true;
+        }
+
+        debugText.text = "Velocity X: " + velocity.x + "\n" +
+            "Velocity Y: " + velocity.y + "\n" +
+            "Grounded: " + grounded + "\n" +
+            "Landed: " + landed + "\n" +
+            "Can Move: " + canMove + "\n" +
+            "Clinging: " + isClinged + "\n" +
+            "Colliding with Object: " + overlap + "\n" +
+            "Colliding with Ground?: " + touchingGround;
     }
 
     /// <summary>
@@ -226,7 +291,6 @@ public class PlayerController : MonoBehaviour
     {
         int i = Random.Range(3, 6);
         yield return new WaitForSeconds(i);
-        Debug.Log("Begin blink");
         isBlinking = true;
         StartCoroutine(SetUpBlink()); // Loops blink
     }
