@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     bool overlap, touchingGround;
 
     #endregion
-
+    
     private void Awake()
     {
         col = GetComponent<BoxCollider2D>();
@@ -112,28 +112,27 @@ public class PlayerController : MonoBehaviour
         // Get overlapping colliders after velocity is applied
         Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, col.size, 0);
 
-        // Wall cling checking 
+        // Wall cling and ceiling checking 
         RaycastHit2D leftCheck = Physics2D.Raycast(transform.position, Vector2.left, .51f, whatIsCling); // Left side
         RaycastHit2D rightCheck = Physics2D.Raycast(transform.position, Vector2.right, .51f, whatIsCling); // Right side
         RaycastHit2D ceilingCheck = Physics2D.Raycast(transform.position, Vector2.up, .51f, whatIsCeiling);
         Debug.DrawRay(transform.position, new Vector2(-.51f, 0f), Color.green);
         Debug.DrawRay(transform.position, new Vector2(.51f, 0f), Color.red);
-        isClinged = leftCheck || rightCheck; // Determine if the player is clinged to a wall
+
+        // Determines if the player is clinged to a wall. If both are true, the player is inside the ground and isn't clinging.
+        isClinged = leftCheck ^ rightCheck; 
 
         // Fix for ensuring landed is false when player is in the air
         if (hits.Length == 1 && !isClinged)
             landed = false;
         
-        // Fuck it change this to downwards raycast like fuck it
+        // Change this to downwards raycasting eventually?
         // Ground checking
         foreach (Collider2D hit in hits)
         {
             // Ignore own collider
             if (hit == col)
-            {
-                touchingGround = false;
                 continue;
-            }
 
             ColliderDistance2D colliderDistance = hit.Distance(col);
 
@@ -190,7 +189,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Jump") && !hasJumped)
             {
                 currentGravity = gravity;
-                float speedX = leftCheck ? speed : -speed;
+                float speedX = leftCheck ? speed : -speed; // Are we clinged on the left or right? 
                 velocity = new Vector2(speedX, Mathf.Sqrt(2f * jumpHeight * Mathf.Abs(currentGravity)));
 
                 hasJumped = true;
