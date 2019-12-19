@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using CreativeSpore.SuperTilemapEditor;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class PlayerController : MonoBehaviour
@@ -56,6 +57,8 @@ public class PlayerController : MonoBehaviour
 
     bool overlap, touchingGround;
 
+    STETilemap tilemap;
+
     #endregion
     
     private void Awake()
@@ -66,6 +69,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        tilemap = FindObjectOfType<STETilemap>();
         StartCoroutine(SetUpBlink());
     }
 
@@ -115,12 +119,29 @@ public class PlayerController : MonoBehaviour
         // Wall cling and ceiling checking 
         RaycastHit2D leftCheck = Physics2D.Raycast(transform.position, Vector2.left, .51f, whatIsCling); // Left side
         RaycastHit2D rightCheck = Physics2D.Raycast(transform.position, Vector2.right, .51f, whatIsCling); // Right side
-        RaycastHit2D ceilingCheck = Physics2D.Raycast(transform.position, Vector2.up, .51f, whatIsCeiling);
+        RaycastHit2D ceilingCheck = Physics2D.Raycast(transform.position, Vector2.up, .51f, whatIsCeiling); // Ceiling
         Debug.DrawRay(transform.position, new Vector2(-.51f, 0f), Color.green);
         Debug.DrawRay(transform.position, new Vector2(.51f, 0f), Color.red);
 
         // Determines if the player is clinged to a wall. If both are true, the player is inside the ground and isn't clinging.
-        isClinged = leftCheck ^ rightCheck; 
+        isClinged = leftCheck ^ rightCheck;
+
+        // Checks which tile is collided with
+        if (rightCheck)
+        {
+            // In case the tile is null with the original point
+            Vector2 checkPos = new Vector2(rightCheck.point.x + .5f, rightCheck.point.y);
+            Tile tile = tilemap.GetTile(checkPos);
+            Debug.Log(tile.paramContainer.FindParam("type").GetAsInt());
+        }
+        else if (leftCheck)
+        {
+            // The tile will be null with the original point, so this guarantees the point is in the tile to the left of the player
+            Vector2 checkPos = new Vector2(leftCheck.point.x - .5f, leftCheck.point.y);
+            Tile tile = tilemap.GetTile(checkPos);
+            Debug.Log(tile.paramContainer.FindParam("type").GetAsInt());
+        } 
+        // Otherwise, set 
 
         // Fix for ensuring landed is false when player is in the air
         if (hits.Length == 1 && !isClinged)
