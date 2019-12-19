@@ -39,7 +39,14 @@ MonoBehaviour:
       - {x: 1, y: 0}
       type: 1
     paramContainer:
-      m_paramList: []
+      m_paramList:
+      - name: type
+        _paramType: 2
+        _boolValue: 0
+        _intValue: 0
+        _floatValue: 0
+        _stringValue: 
+        _objectValue: {fileID: 0}
     prefabData:
       prefab: {fileID: 0}
       offset: {x: 0, y: 0, z: 0}
@@ -62,7 +69,14 @@ MonoBehaviour:
       - {x: 1, y: 0}
       type: 1
     paramContainer:
-      m_paramList: []
+      m_paramList:
+      - name: type
+        _paramType: 2
+        _boolValue: 0
+        _intValue: 1
+        _floatValue: 0
+        _stringValue: 
+        _objectValue: {fileID: 0}
     prefabData:
       prefab: {fileID: 0}
       offset: {x: 0, y: 0, z: 0}
@@ -85,7 +99,14 @@ MonoBehaviour:
       - {x: 1, y: 0}
       type: 1
     paramContainer:
-      m_paramList: []
+      m_paramList:
+      - name: type
+        _paramType: 2
+        _boolValue: 0
+        _intValue: 2
+        _floatValue: 0
+        _stringValue: 
+        _objectValue: {fileID: 0}
     prefabData:
       prefab: {fileID: 0}
       offset: {x: 0, y: 0, z: 0}
@@ -108,7 +129,14 @@ MonoBehaviour:
       - {x: 1, y: 0}
       type: 1
     paramContainer:
-      m_paramList: []
+      m_paramList:
+      - name: type
+        _paramType: 2
+        _boolValue: 0
+        _intValue: 3
+        _floatValue: 0
+        _stringValue: 
+        _objectValue: {fileID: 0}
     prefabData:
       prefab: {fileID: 0}
       offset: {x: 0, y: 0, z: 0}
@@ -131,7 +159,14 @@ MonoBehaviour:
       - {x: 1, y: 0}
       type: 1
     paramContainer:
-      m_paramList: []
+      m_paramList:
+      - name: type
+        _paramType: 2
+        _boolValue: 0
+        _intValue: 4
+        _floatValue: 0
+        _stringValue: 
+        _objectValue: {fileID: 0}
     prefabData:
       prefab: {fileID: 0}
       offset: {x: 0, y: 0, z: 0}
@@ -154,7 +189,14 @@ MonoBehaviour:
       - {x: 1, y: 0}
       type: 1
     paramContainer:
-      m_paramList: []
+      m_paramList:
+      - name: type
+        _paramType: 2
+        _boolValue: 0
+        _intValue: 5
+        _floatValue: 0
+        _stringValue: 
+        _objectValue: {fileID: 0}
     prefabData:
       prefab: {fileID: 0}
       offset: {x: 0, y: 0, z: 0}
@@ -177,7 +219,14 @@ MonoBehaviour:
       - {x: 1, y: 0}
       type: 1
     paramContainer:
-      m_paramList: []
+      m_paramList:
+      - name: type
+        _paramType: 2
+        _boolValue: 0
+        _intValue: 6
+        _floatValue: 0
+        _stringValue: 
+        _objectValue: {fileID: 0}
     prefabData:
       prefab: {fileID: 0}
       offset: {x: 0, y: 0, z: 0}
