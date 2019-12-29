@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Layers for objects that are considered ceilings")]
     LayerMask whatIsCeiling;
 
-    [SerializeField, Tooltip("After wall jumping, how long it takes for the player to regain ")]
+    [SerializeField, Tooltip("After wall jumping, how long it takes for the player to regain input abilities")]
     float afterWallJumpBuffer = .1f;
 
     [SerializeField, Tooltip("Child object that holds eyes sprite")]
@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
 
     bool overlap, touchingGround;
 
+    LevelController levelControl;
     STETilemap tilemap;
 
     #endregion
@@ -75,6 +76,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        #region Movement
         bool hasJumped = false;
         // Use GetAxisRaw to ensure input is either 0, 1 or -1.
         float moveInput = Input.GetAxisRaw("Horizontal");
@@ -112,7 +114,9 @@ public class PlayerController : MonoBehaviour
         velocity.y += currentGravity * Time.deltaTime; // Vertical movement
         transform.Translate(velocity * Time.deltaTime); // Horizontal movement
         grounded = false; // Resets grounded state
+        #endregion
 
+        #region Collision
         // Get overlapping colliders after velocity is applied
         Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, col.size, 0);
 
@@ -126,28 +130,10 @@ public class PlayerController : MonoBehaviour
         // Determines if the player is clinged to a wall. If both are true, the player is inside the ground and isn't clinging.
         isClinged = leftCheck ^ rightCheck;
 
-        // Checks which tile is collided with
-        if (rightCheck)
-        {
-            // In case the tile is null with the original point
-            Vector2 checkPos = new Vector2(rightCheck.point.x + .5f, rightCheck.point.y);
-            Tile tile = tilemap.GetTile(checkPos);
-            Debug.Log(tile.paramContainer.FindParam("type").GetAsInt());
-        }
-        else if (leftCheck)
-        {
-            // The tile will be null with the original point, so this guarantees the point is in the tile to the left of the player
-            Vector2 checkPos = new Vector2(leftCheck.point.x - .5f, leftCheck.point.y);
-            Tile tile = tilemap.GetTile(checkPos);
-            Debug.Log(tile.paramContainer.FindParam("type").GetAsInt());
-        } 
-        // Otherwise, set 
-
         // Fix for ensuring landed is false when player is in the air
         if (hits.Length == 1 && !isClinged)
             landed = false;
         
-        // Change this to downwards raycasting eventually?
         // Ground checking
         foreach (Collider2D hit in hits)
         {
@@ -155,11 +141,20 @@ public class PlayerController : MonoBehaviour
             if (hit == col)
                 continue;
 
+            // Do death collision here
+            
+
             ColliderDistance2D colliderDistance = hit.Distance(col);
 
             // Are we still overlapping this collider?
             if (colliderDistance.isOverlapped)
             {
+                if (hit.gameObject.CompareTag("Deathbox"))
+                {
+                    levelControl.LoadLevel(levelControl.GetCurrentLevelId());
+                    return;
+                }
+
                 overlap = true;
                 transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
 
@@ -200,6 +195,17 @@ public class PlayerController : MonoBehaviour
             // Ensures particle only spawns once
             if (!landed)
             {
+                Collider2D tileCol = leftCheck ? leftCheck.collider : rightCheck.collider;
+
+                // TILE INTERACTIONS
+
+                // Switch
+                if (tileCol.CompareTag("Switch"))
+                {
+                    SwitchTile switchTile = tileCol.GetComponentInParent<SwitchTile>();
+                    switchTile.ChangeLockState();
+                }
+
                 if (leftCheck)
                     Instantiate(jumpParticle, new Vector2(transform.position.x - .5f, transform.position.y), Quaternion.Euler(0f, 0f, -90f));
                 else
@@ -228,6 +234,9 @@ public class PlayerController : MonoBehaviour
         // Stops upward velocity if player hits ceiling
         if (ceilingCheck)
             velocity.y = 0f;
+        #endregion
+
+        #region Animations
 
         // Changes position of eyes based on velocity of player
         eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, velocity.x / 80, .25f), Mathf.Lerp(eyes.localPosition.y, velocity.y / 100, .25f));
@@ -265,15 +274,9 @@ public class PlayerController : MonoBehaviour
             groundParticle.Play();
         }
 
-        /*
-        if (!canMove && !isClinged && (touchingGround || grounded))
-        {
-            Debug.Log("Called hotfix #1");
-            canMove = true;
-            touchingGround = true;
-            grounded = true;
-        }*/
+        #endregion
 
+        #region Debugging and Hotfixes
         if (!grounded && landed && !isClinged)
         {
             Debug.Log("Called hotfix #2");
@@ -281,7 +284,9 @@ public class PlayerController : MonoBehaviour
             grounded = true;
         }
 
-        debugText.text = "Velocity X: " + velocity.x + "\n" +
+        // Debug text
+        if (debugText != null)
+            debugText.text = "Velocity X: " + velocity.x + "\n" +
             "Velocity Y: " + velocity.y + "\n" +
             "Grounded: " + grounded + "\n" +
             "Landed: " + landed + "\n" +
@@ -289,6 +294,7 @@ public class PlayerController : MonoBehaviour
             "Clinging: " + isClinged + "\n" +
             "Colliding with Object: " + overlap + "\n" +
             "Colliding with Ground?: " + touchingGround;
+        #endregion
     }
 
     /// <summary>
@@ -313,5 +319,19 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(i);
         isBlinking = true;
         StartCoroutine(SetUpBlink()); // Loops blink
+    }
+
+    public void GrabLevelController(LevelController controller)
+    {
+        levelControl = controller;
+    }
+
+    /// <summary>
+    /// Call this when colliding with a tile
+    /// </summary>
+    /// <param name="ground">If true, the player is colliding with a ground object. If false, they are colliding with a wall</param>
+    void TileCollide(bool ground)
+    {
+
     }
 }
