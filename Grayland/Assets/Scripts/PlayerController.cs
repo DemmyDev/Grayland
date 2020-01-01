@@ -206,6 +206,13 @@ public class PlayerController : MonoBehaviour
                     switchTile.ChangeLockState();
                 }
 
+                // Pressure
+                if (tileCol.CompareTag("Pressure"))
+                {
+                    PressureTile pressureTile = tileCol.GetComponentInParent<PressureTile>();
+                    pressureTile.ChangeMoveState(false);
+                }
+
                 if (leftCheck)
                     Instantiate(jumpParticle, new Vector2(transform.position.x - .5f, transform.position.y), Quaternion.Euler(0f, 0f, -90f));
                 else
@@ -215,6 +222,13 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetButtonDown("Jump") && !hasJumped)
             {
+                Collider2D tileCol = leftCheck ? leftCheck.collider : rightCheck.collider;
+                if (tileCol.CompareTag("Pressure"))
+                {
+                    PressureTile pressureTile = tileCol.GetComponentInParent<PressureTile>();
+                    pressureTile.ChangeMoveState(true);
+                }
+
                 currentGravity = gravity;
                 float speedX = leftCheck ? speed : -speed; // Are we clinged on the left or right? 
                 velocity = new Vector2(speedX, Mathf.Sqrt(2f * jumpHeight * Mathf.Abs(currentGravity)));

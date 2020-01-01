@@ -8,17 +8,21 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] Transform endPoint;
     Vector2 startPointPos, endPointPos;
 
-    [SerializeField] float platformSpeed;
+    [SerializeField] float maxSpeed;
+    [SerializeField] float smoothTime;
 
     // If true, move to startpoint. If false, move to endpoint.
-    bool moveToStart = false;
+    [SerializeField] bool moveToStart = false;
 
     // If true, platform stops current movement
-    bool canMove = true;
+    [SerializeField] bool canMove = true;
+
+    Vector2 target;
+    Vector2 velocity = Vector2.zero;
 
     void Start()
     {
-        startPointPos = platform.transform.position;
+        startPointPos = platform.position;
         endPointPos = endPoint.position;
     }
 
@@ -28,11 +32,19 @@ public class MovingPlatform : MonoBehaviour
         {
             if (moveToStart)
             {
-                platform.position = new Vector2(Mathf.Lerp(platform.position.x, startPointPos.x, platformSpeed), Mathf.Lerp(platform.position.y, startPointPos.y, platformSpeed));
+                target = startPointPos;
+                platform.position = Vector2.SmoothDamp(platform.position, target, ref velocity, smoothTime, maxSpeed);
+                float distance = Vector2.Distance(platform.position, startPointPos);
+                if (distance < .05)
+                    platform.position = startPointPos;
             }
             else if (!moveToStart)
             {
-                platform.position = new Vector2(Mathf.Lerp(platform.position.x, endPointPos.x, platformSpeed), Mathf.Lerp(platform.position.y, endPointPos.y, platformSpeed));
+                target = endPointPos;
+                platform.position = Vector2.SmoothDamp(platform.position, target, ref velocity, smoothTime, maxSpeed);
+                float distance = Vector2.Distance(platform.position, endPointPos);
+                if (distance < .05)
+                    platform.position = endPointPos;
             }
         }
     }
@@ -41,7 +53,7 @@ public class MovingPlatform : MonoBehaviour
     /// Sets move states of platform.
     /// </summary>
     /// <param name="moveState">If true, move to startpoint. If false, move to endpoint</param>
-    /// <param name="canMovePlatform">Stops </param>
+    /// <param name="canMovePlatform">Stops movement if false. Continues movement if true</param>
     public void SetMoveState(bool moveState, bool canMovePlatform)
     {
         moveToStart = moveState;
