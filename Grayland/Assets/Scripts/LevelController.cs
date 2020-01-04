@@ -13,7 +13,7 @@ public class LevelController : MonoBehaviour
     List<GameObject> levels;
 
     Vector2 spawnPoint;
-    GameObject currentLevel, currentPlayer;
+    GameObject currentLevel, currentPlayer, currentEndpoint;
     int levelId = 0;
 
     #endregion
@@ -32,20 +32,25 @@ public class LevelController : MonoBehaviour
         // Destroy current level
         if (currentLevel != null) Destroy(currentLevel);
         if (currentPlayer != null) Destroy(currentPlayer);
+        if (currentEndpoint != null) Destroy(currentEndpoint);
 
         // Reset values
         levelId = newLevelId; // Shouldn't change if restarting the current level
         currentLevel = null;
         spawnPoint = Vector2.zero;
+        currentEndpoint = null;
 
         // Instantiate level, set spawnpoint
         currentLevel = Instantiate(levels[levelId]);
         spawnPoint = currentLevel.transform.Find("SpawnPoint").position;
+        currentEndpoint = currentLevel.transform.Find("LevelEndpoint").gameObject;
         currentLevel.transform.parent = gameObject.transform;
 
         currentPlayer = Instantiate(player, spawnPoint, Quaternion.identity);
         currentPlayer.transform.position = spawnPoint;
         currentPlayer.GetComponent<PlayerController>().GrabLevelController(this);
+
+        currentEndpoint.GetComponent<LevelEndpoint>().GrabLevelController(this);
     }
 
     /// <summary>
@@ -55,5 +60,10 @@ public class LevelController : MonoBehaviour
     public int GetCurrentLevelId()
     {
         return levelId;
+    }
+
+    public PlayerController GetPlayerController()
+    {
+        return currentPlayer.GetComponent<PlayerController>();
     }
 }

@@ -23,6 +23,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Max height the character will jump, regardless of gravity")]
     float jumpHeight = 4;
 
+    [SerializeField, Tooltip("Force applied on player when colliding with Bounce tile on the Y-axis")]
+    float bounceForceY;
+
+    [SerializeField, Tooltip("Multiplier of speed when player collides with Bounce tile on the X-axis")]
+    float bounceForceX;
+
     [SerializeField, Tooltip("Gravity applied to player (must be negative value)")]
     float gravity = -9.8f;
 
@@ -44,6 +50,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Particle object for ground movement")]
     ParticleSystem groundParticle;
 
+    [SerializeField, Tooltip("Child object used for sticking objects")]
+    SpriteRenderer stickySprRend;
+
     [SerializeField, Tooltip("Debug text")]
     Text debugText;
 
@@ -59,12 +68,14 @@ public class PlayerController : MonoBehaviour
 
     LevelController levelControl;
     STETilemap tilemap;
+    SpriteRenderer sprRend;
 
     #endregion
     
     private void Awake()
     {
         col = GetComponent<BoxCollider2D>();
+        sprRend = GetComponent<SpriteRenderer>();
         currentGravity = gravity;
     }
 
@@ -149,9 +160,17 @@ public class PlayerController : MonoBehaviour
             // Are we still overlapping this collider?
             if (colliderDistance.isOverlapped)
             {
+                // Deathbox collision
                 if (hit.gameObject.CompareTag("Deathbox"))
                 {
                     levelControl.LoadLevel(levelControl.GetCurrentLevelId());
+                    return;
+                }
+
+                // Endpoint collision
+                if (hit.gameObject.CompareTag("Endpoint"))
+                {
+                    hit.gameObject.GetComponent<LevelEndpoint>().EndLevel(this);
                     return;
                 }
 
@@ -172,6 +191,22 @@ public class PlayerController : MonoBehaviour
                         Instantiate(jumpParticle, new Vector2(transform.position.x, transform.position.y - .5f), Quaternion.identity);
                         landed = true;
                         grounded = true;
+                    }
+
+                    // Bounce
+                    if (hit.gameObject.CompareTag("Bounce"))
+                    {
+                        BounceTile bounceTile = hit.GetComponentInParent<BounceTile>();
+                        // Assuming the bounce tile will boost the Y-axis
+                        if (!bounceTile.GetAxis())
+                        {
+                            velocity.y = Mathf.Sqrt(bounceForceY * jumpHeight * Mathf.Abs(currentGravity));
+                            hasJumped = true;
+                            landed = false;
+                            grounded = false;
+                            if (moveInput == 0)
+                                velocity.x = 0f;
+                        }
                     }
                 }
                 else
@@ -211,6 +246,25 @@ public class PlayerController : MonoBehaviour
                 {
                     PressureTile pressureTile = tileCol.GetComponentInParent<PressureTile>();
                     pressureTile.ChangeMoveState(false);
+                }
+
+                // Bounce 
+                if (tileCol.CompareTag("Bounce"))
+                {
+                    BounceTile bounceTile = tileCol.GetComponentInParent<BounceTile>();
+                    // Assuming the bounce tile will boost the X-axis
+                    if (bounceTile.GetAxis())
+                    {
+                        currentGravity = gravity;
+                        float speedX = leftCheck ? speed : -speed; // Are we clinged on the left or right? 
+                        velocity = new Vector2(bounceForceX * speedX, Mathf.Sqrt(2f * jumpHeight * Mathf.Abs(currentGravity)));
+
+                        hasJumped = true;
+                        isClinged = false;
+                        landed = false;
+                        grounded = false;
+                        StartCoroutine(SetCanMove(true));
+                    }
                 }
 
                 if (leftCheck)
@@ -290,13 +344,13 @@ public class PlayerController : MonoBehaviour
 
         #endregion
 
-        #region Debugging and Hotfixes
-        if (!grounded && landed && !isClinged)
+        #region Debug and Hotfixes
+        /*if (!grounded && landed && !isClinged)
         {
             Debug.Log("Called hotfix #2");
             canMove = true;
             grounded = true;
-        }
+        }*/
 
         // Debug text
         if (debugText != null)
@@ -335,17 +389,15 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(SetUpBlink()); // Loops blink
     }
 
+    public void SetStickyChild(Sprite spr)
+    {
+        stickySprRend.sprite = spr;
+        stickySprRend.transform.localPosition = new Vector2(Random.Range(-.75f, .75f), Random.Range(0, .75f));
+        stickySprRend.transform.localEulerAngles = new Vector3(0f, 0f, Random.Range(0, 360));
+    }
+
     public void GrabLevelController(LevelController controller)
     {
         levelControl = controller;
-    }
-
-    /// <summary>
-    /// Call this when colliding with a tile
-    /// </summary>
-    /// <param name="ground">If true, the player is colliding with a ground object. If false, they are colliding with a wall</param>
-    void TileCollide(bool ground)
-    {
-
     }
 }

@@ -8,6 +8,8 @@ TagManager:
   - Switch
   - Pressure
   - Deathbox
+  - Endpoint
+  - Bounce
   layers:
   - Default
   - TransparentFX
