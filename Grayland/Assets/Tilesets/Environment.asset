@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d98f5be51926f46bc797504da5ad22, type: 3}
   m_Name: Environment
   m_EditorClassIdentifier: 
-  AtlasTexture: {fileID: 2800000, guid: 450b99c44977cb94291dee96dc92fae3, type: 3}
+  AtlasTexture: {fileID: 2800000, guid: 498a62f676ee33149b0e57aa8ea00fbc, type: 3}
   TilePxSize: {x: 32, y: 32}
   SliceOffset: {x: 0, y: 0}
   SlicePadding: {x: 0, y: 0}
   BackgroundColor: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 0.8039216}
-  VisualTileSize: {x: 32, y: 32}
+  VisualTileSize: {x: 128, y: 128}
   VisualTilePadding: 1
   TileRowLength: 8
   m_tileViews: []

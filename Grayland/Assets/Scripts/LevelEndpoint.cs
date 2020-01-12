@@ -14,7 +14,6 @@ public class LevelEndpoint : MonoBehaviour
     GameObject nextLevelUI;
 
     bool isLevelEnded = false;
-    LevelController levelControl;
     Collider2D col;
     SpriteRenderer spr;
     
@@ -31,13 +30,9 @@ public class LevelEndpoint : MonoBehaviour
     {
         if (isLevelEnded && Input.GetKeyDown(KeyCode.Return))
         {
-            levelControl.LoadLevel(0);
+            Debug.Log("Go to next level");
+            StartCoroutine(LevelController.levelController.LoadLevel(true));
         }
-    }
-
-    public void GrabLevelController(LevelController controller)
-    {
-        levelControl = controller;
     }
 
     public void EndLevel(PlayerController player)

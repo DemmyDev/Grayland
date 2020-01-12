@@ -90,7 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6775861129448055877}
   - component: {fileID: 6775861129448055876}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,9 +248,12 @@ MonoBehaviour:
     m_Bits: 1280
   afterWallJumpBuffer: 0.25
   eyes: {fileID: 6775861129448055877}
+  body: {fileID: 6775861130570068108}
   jumpParticle: {fileID: 924670469977847833, guid: 86174c2e503d660418260076962809ff,
     type: 3}
   groundParticle: {fileID: 8149846699035076284}
+  deathParticle: {fileID: 924670469977847833, guid: 26ce11af693868a42a3a8f7fe916136f,
+    type: 3}
   stickySprRend: {fileID: 7032932756044268039}
   debugText: {fileID: 0}
 --- !u!1 &6775861130570068109
@@ -263,7 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6775861130570068108}
   - component: {fileID: 6775861130570068111}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +380,7 @@ GameObject:
   - component: {fileID: 8149846699035076283}
   - component: {fileID: 8149846699035076284}
   - component: {fileID: 8149846699035076285}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GroundParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

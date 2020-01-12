@@ -36,7 +36,7 @@ public class MovingPlatform : MonoBehaviour
                 platform.position = Vector2.SmoothDamp(platform.position, target, ref velocity, smoothTime, maxSpeed);
                 float distance = Vector2.Distance(platform.position, startPointPos);
                 if (distance < .05)
-                    platform.position = startPointPos;
+                    moveToStart = !moveToStart;
             }
             else if (!moveToStart)
             {
@@ -44,7 +44,7 @@ public class MovingPlatform : MonoBehaviour
                 platform.position = Vector2.SmoothDamp(platform.position, target, ref velocity, smoothTime, maxSpeed);
                 float distance = Vector2.Distance(platform.position, endPointPos);
                 if (distance < .05)
-                    platform.position = endPointPos;
+                    moveToStart = !moveToStart;
             }
         }
     }
