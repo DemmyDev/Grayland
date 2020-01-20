@@ -170,7 +170,7 @@ public class PlayerController : MonoBehaviour
                     // Deathbox collision
                     if (hit.gameObject.CompareTag("Deathbox"))
                     {
-                        StartCoroutine(LevelController.levelController.LoadLevel(false));
+                        Invoke("DelayTransition", .5f);
                         Instantiate(deathParticle, transform.position, Quaternion.identity);
                         groundParticle.gameObject.SetActive(false);
                         eyes.gameObject.SetActive(false);
@@ -408,5 +408,10 @@ public class PlayerController : MonoBehaviour
         stickySprRend.sprite = spr;
         stickySprRend.transform.localPosition = new Vector2(Random.Range(-.75f, .75f), Random.Range(0, .75f));
         stickySprRend.transform.localEulerAngles = new Vector3(0f, 0f, Random.Range(0, 360));
+    }
+
+    void DelayTransition()
+    {
+        StartCoroutine(LevelController.levelController.LoadLevel(false));
     }
 }
