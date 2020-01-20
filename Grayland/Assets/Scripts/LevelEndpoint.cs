@@ -7,22 +7,20 @@ public class LevelEndpoint : MonoBehaviour
     [SerializeField, Tooltip("Time until the player is allowed to input a button to move on to the next level")]
     float timeToAllowNextLevel = 3f;
 
-    [SerializeField, Tooltip("UI enabled immediately after entering endpoint object")]
-    GameObject levelBeatUI;
-
-    [SerializeField, Tooltip("UI enabled after timeToAllownextLevel time")]
-    GameObject nextLevelUI;
-
     bool isLevelEnded = false;
     Collider2D col;
     SpriteRenderer spr;
-    
+
+    GameObject levelCompleteUI, nextLevelUI;
 
     private void Start()
     {
         col = GetComponent<Collider2D>();
         spr = GetComponent<SpriteRenderer>();
-        levelBeatUI.SetActive(false);
+        levelCompleteUI = UIController.UIControl.GetCompleteUI();
+        nextLevelUI = UIController.UIControl.GetNextLevelUI();
+
+        levelCompleteUI.SetActive(false);
         nextLevelUI.SetActive(false);
     }
 
@@ -38,7 +36,7 @@ public class LevelEndpoint : MonoBehaviour
     public void EndLevel(PlayerController player)
     {
         Invoke("NextLevel", timeToAllowNextLevel);
-        levelBeatUI.SetActive(true);
+        levelCompleteUI.SetActive(true);
         player.SetStickyChild(spr.sprite);
         spr.enabled = false;
         col.enabled = false;
