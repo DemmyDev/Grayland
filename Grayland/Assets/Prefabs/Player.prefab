@@ -218,7 +218,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.95, y: 0.95}
+  m_Size: {x: 0.925, y: 0.925}
   m_EdgeRadius: 0
 --- !u!114 &6775861129569522283
 MonoBehaviour:
@@ -239,6 +239,8 @@ MonoBehaviour:
   jumpHeight: 3.5
   bounceForceY: 4
   bounceForceX: 2
+  clingBufferTime: 0.25
+  coyoteTime: 0.1
   gravity: -45
   whatIsCling:
     serializedVersion: 2

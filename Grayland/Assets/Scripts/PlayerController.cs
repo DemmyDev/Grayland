@@ -24,10 +24,19 @@ public class PlayerController : MonoBehaviour
     float jumpHeight = 4;
 
     [SerializeField, Tooltip("Force applied on player when colliding with Bounce tile on the Y-axis")]
-    float bounceForceY;
+    float bounceForceY = 4f;
 
     [SerializeField, Tooltip("Multiplier of speed when player collides with Bounce tile on the X-axis")]
-    float bounceForceX;
+    float bounceForceX = 2f;
+
+    [SerializeField, Tooltip("Time it takes after wall-jumping until player is able to cling to a wall again")]
+    float clingBufferTime = .25f;
+
+    [SerializeField, Tooltip("Time that player has to input a jump after falling off ledge without jumping")]
+    float coyoteTime = .1f;
+
+    [SerializeField, Tooltip("Amount of time a jump can be buffered for before landing")]
+    float jumpBufferTime = .1f;
 
     [SerializeField, Tooltip("Gravity applied to player (must be negative value)")]
     float gravity = -9.8f;
@@ -69,6 +78,8 @@ public class PlayerController : MonoBehaviour
     float currentGravity;
     bool isBlinking = false;
     bool playOnce, isDead = false;
+    float clingBufferTimeCurrent = 0f, coyoteTimeCurrent = 0f, jumpBufferCurrent = 0f;
+    bool isJumping = false, allowJumping = false;
 
     bool overlap, touchingGround;
     
@@ -82,12 +93,15 @@ public class PlayerController : MonoBehaviour
         col = GetComponent<BoxCollider2D>();
         sprRend = GetComponent<SpriteRenderer>();
         currentGravity = gravity;
+        clingBufferTimeCurrent = clingBufferTime;
+        coyoteTimeCurrent = coyoteTime;
     }
 
     private void Start()
     {
         tilemap = FindObjectOfType<STETilemap>();
         StartCoroutine(SetUpBlink());
+        StartCoroutine(EnableJump());
     }
 
     private void Update()
@@ -101,19 +115,63 @@ public class PlayerController : MonoBehaviour
 
             if (grounded && !isClinged)
             {
+                coyoteTimeCurrent = coyoteTime;
                 velocity.y = -.5f;
-
-                if (Input.GetButtonDown("Jump") && !hasJumped)
+                
+                if (Input.GetButtonDown("Jump") && !hasJumped && allowJumping)
                 {
                     // Velocity needed to achieve jump height
                     velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(currentGravity));
                     hasJumped = true;
+                    isJumping = true;
                     landed = false;
                     grounded = false;
+
                     if (moveInput == 0)
                         velocity.x = 0f;
                 }
             }
+            // If the player is in mid-air and hasn't jumped
+            else if (!grounded && !isClinged && !isJumping)
+            {
+                // Coyote time!
+                coyoteTimeCurrent -= Time.deltaTime;
+
+                if (Input.GetButtonDown("Jump") && coyoteTimeCurrent > 0 && allowJumping)
+                {
+                    velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(currentGravity));
+                    hasJumped = true;
+                    isJumping = true;
+                    landed = false;
+                    grounded = false;
+                    coyoteTimeCurrent = coyoteTime;
+
+                    if (moveInput == 0)
+                        velocity.x = 0f;
+                }
+            }
+            
+            // Jump buffer!
+            if (jumpBufferCurrent < jumpBufferTime)
+            {
+                jumpBufferCurrent += Time.deltaTime;
+
+                if (grounded && allowJumping)
+                {
+                    velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(currentGravity));
+                    hasJumped = true;
+                    isJumping = true;
+                    landed = false;
+                    grounded = false;
+                    coyoteTimeCurrent = coyoteTime;
+
+                    if (moveInput == 0)
+                        velocity.x = 0f;
+                }
+            }
+
+            if (Input.GetButtonDown("Jump") && allowJumping)
+                jumpBufferCurrent = 0f;
 
             // Determine accel and decel values based on if the player is grounded or not
             float acceleration = grounded ? walkAcceleration : airAcceleration;
@@ -139,14 +197,24 @@ public class PlayerController : MonoBehaviour
             Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, col.size, 0);
 
             // Wall cling and ceiling checking 
-            RaycastHit2D leftCheck = Physics2D.Raycast(transform.position, Vector2.left, .51f, whatIsCling); // Left side
-            RaycastHit2D rightCheck = Physics2D.Raycast(transform.position, Vector2.right, .51f, whatIsCling); // Right side
-            RaycastHit2D ceilingCheck = Physics2D.Raycast(transform.position, Vector2.up, .51f, whatIsCeiling); // Ceiling
-            Debug.DrawRay(transform.position, new Vector2(-.51f, 0f), Color.green);
-            Debug.DrawRay(transform.position, new Vector2(.51f, 0f), Color.red);
+            RaycastHit2D leftCheck = Physics2D.Raycast(transform.position, Vector2.left, .5f, whatIsCling); // Left side
+            RaycastHit2D rightCheck = Physics2D.Raycast(transform.position, Vector2.right, .5f, whatIsCling); // Right side
+            Debug.DrawRay(transform.position, new Vector2(-.5f, 0f), Color.green);
+            Debug.DrawRay(transform.position, new Vector2(.5f, 0f), Color.red);
 
-            // Determines if the player is clinged to a wall. If both are true, the player is inside the ground and isn't clinging.
-            isClinged = leftCheck ^ rightCheck;
+            RaycastHit2D ceilingCheck = Physics2D.BoxCast(transform.position, new Vector2(.75f, .1f), 0f, Vector2.up, .35f, whatIsCeiling); // Ceiling check
+            
+            // If the cling buffer time doesn't apply anymore
+            if (clingBufferTimeCurrent <= 0)
+            {
+                // Determines if the player is clinged to a wall. If both are true, the player is inside the ground and isn't clinging.
+                isClinged = leftCheck ^ rightCheck;
+            }
+            // Otherwise, continue counting down the cling buffer time
+            else
+            {
+                clingBufferTimeCurrent -= Time.deltaTime;
+            }
 
             // Fix for ensuring landed is false when player is in the air
             if (hits.Length == 1 && !isClinged)
@@ -158,9 +226,6 @@ public class PlayerController : MonoBehaviour
                 // Ignore own collider
                 if (hit == col)
                     continue;
-
-                // Do death collision here
-
 
                 ColliderDistance2D colliderDistance = hit.Distance(col);
 
@@ -193,6 +258,7 @@ public class PlayerController : MonoBehaviour
                     // If the object beneath us intersects, grounded is true 
                     if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
                     {
+                        isJumping = false;
                         touchingGround = true;
                         grounded = true;
                         canMove = true;
@@ -287,7 +353,7 @@ public class PlayerController : MonoBehaviour
                     landed = true;
                 }
 
-                if (Input.GetButtonDown("Jump") && !hasJumped)
+                if (Input.GetButtonDown("Jump") && !hasJumped && allowJumping)
                 {
                     Collider2D tileCol = leftCheck ? leftCheck.collider : rightCheck.collider;
                     if (tileCol.CompareTag("Pressure"))
@@ -299,8 +365,10 @@ public class PlayerController : MonoBehaviour
                     currentGravity = gravity;
                     float speedX = leftCheck ? speed : -speed; // Are we clinged on the left or right? 
                     velocity = new Vector2(speedX, Mathf.Sqrt(2f * jumpHeight * Mathf.Abs(currentGravity)));
+                    clingBufferTimeCurrent = clingBufferTime;
 
                     hasJumped = true;
+                    isJumping = true;
                     isClinged = false;
                     landed = false;
                     grounded = false;
@@ -313,8 +381,9 @@ public class PlayerController : MonoBehaviour
             }
 
             // Stops upward velocity if player hits ceiling
-            if (ceilingCheck)
+            if (ceilingCheck ^ isClinged)
                 velocity.y = 0f;
+
             #endregion
 
             #region Animations
@@ -401,6 +470,12 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(i);
         isBlinking = true;
         StartCoroutine(SetUpBlink()); // Loops blink
+    }
+
+    private IEnumerator EnableJump()
+    {
+        yield return new WaitForSeconds(.5f);
+        allowJumping = true;
     }
 
     public void SetStickyChild(Sprite spr)
