@@ -80,9 +80,13 @@ public class PlayerController : MonoBehaviour
     bool playOnce, isDead = false;
     float clingBufferTimeCurrent = 0f, coyoteTimeCurrent = 0f;
     float jumpBufferCurrent = 0f;
-    bool isJumping = false, allowJumping = false, jumpActive = false;
-    float jumpActiveTime = 0;
+    bool isJumping = false, isWallJumping = false, allowJumping = false, jumpActive = false;
+    float speedX;
+    float jumpActiveTime = 0, jumpButtonDownTime = 0f, detachActiveTime = 0f;
+    
     float moveInput;
+
+    bool detachActive;
 
     bool overlap, touchingGround;
     
@@ -109,8 +113,20 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        #region Input & Jump Logic
+
+        if (Input.GetButtonDown("Detach") && detachActiveTime <= 0)
+            detachActiveTime = .033f;
+
+        if (detachActiveTime > 0)
+        {
+            detachActive = true;
+            detachActiveTime -= Time.deltaTime;
+        }
+        else detachActive = false;
+
         if (Input.GetButtonDown("Jump") && jumpActiveTime <= 0)
-            jumpActiveTime = .1f;
+            jumpActiveTime = .033f;
 
         if (jumpActiveTime > 0)
         {
@@ -119,7 +135,7 @@ public class PlayerController : MonoBehaviour
         }
         else jumpActive = false;
 
-        // Use GetAxisRaw to ensure input is either 0, 1 or -1.
+        // Use GetAxisRaw to ensure input is either 0, 1 or -1. LeftInput = -1, RightInput = 1, NoInput = 0
         moveInput = Input.GetAxisRaw("Horizontal");
 
         if (grounded && !isClinged)
@@ -178,6 +194,13 @@ public class PlayerController : MonoBehaviour
 
         if (jumpActive && allowJumping)
             jumpBufferCurrent = 0f;
+
+        if (isJumping && velocity.y > 3f && !Input.GetButton("Jump") && !isWallJumping)
+        {
+            velocity.y += 2 * currentGravity * Time.deltaTime;
+        }
+
+        #endregion
     }
 
     private void FixedUpdate()
@@ -273,6 +296,7 @@ public class PlayerController : MonoBehaviour
                     {
                         isJumping = false;
                         touchingGround = true;
+                        isWallJumping = false;
                         grounded = true;
                         canMove = true;
                         velocity.y = 0f;
@@ -311,12 +335,13 @@ public class PlayerController : MonoBehaviour
             }
 
             // If player is clinged, stop and lock movement
-            if (isClinged)
+            if (isClinged && !detachActive)
             {
                 currentGravity = 0f;
                 velocity = Vector2.zero;
                 moveInput = 0f;
                 canMove = false;
+                isWallJumping = false;
 
                 // Ensures particle only spawns once
                 if (!landed)
@@ -346,8 +371,9 @@ public class PlayerController : MonoBehaviour
                         // Assuming the bounce tile will boost the X-axis
                         if (bounceTile.GetAxis())
                         {
+                            isWallJumping = true;
                             currentGravity = gravity;
-                            float speedX = leftCheck ? speed : -speed; // Are we clinged on the left or right? 
+                            speedX = leftCheck ? speed : -speed; // Are we clinged on the left or right? 
                             velocity = new Vector2(bounceForceX * speedX, Mathf.Sqrt(2f * jumpHeight * Mathf.Abs(currentGravity)));
                             
                             isClinged = false;
@@ -361,6 +387,7 @@ public class PlayerController : MonoBehaviour
                         Instantiate(jumpParticle, new Vector2(transform.position.x - .5f, transform.position.y), Quaternion.Euler(0f, 0f, -90f));
                     else
                         Instantiate(jumpParticle, new Vector2(transform.position.x + .5f, transform.position.y), Quaternion.Euler(0f, 0f, 90f));
+
                     landed = true;
                 }
 
@@ -374,16 +401,38 @@ public class PlayerController : MonoBehaviour
                     }
 
                     currentGravity = gravity;
-                    float speedX = leftCheck ? speed : -speed; // Are we clinged on the left or right? 
+                    speedX = leftCheck ? speed : -speed; // Are we clinged on the left or right? 
                     velocity = new Vector2(speedX, Mathf.Sqrt(2f * jumpHeight * Mathf.Abs(currentGravity)));
                     clingBufferTimeCurrent = clingBufferTime;
                     
                     isJumping = true;
+                    isWallJumping = true;
                     isClinged = false;
                     landed = false;
                     grounded = false;
                     StartCoroutine(SetCanMove(true));
                 }
+            }
+            else if (isClinged && detachActive)
+            {
+                Collider2D tileCol = leftCheck ? leftCheck.collider : rightCheck.collider;
+                if (tileCol.CompareTag("Pressure"))
+                {
+                    PressureTile pressureTile = tileCol.GetComponentInParent<PressureTile>();
+                    pressureTile.ChangeMoveState(true);
+                }
+
+                currentGravity = gravity;
+                speedX = leftCheck ? speed : -speed; // Are we clinged on the left or right? 
+                velocity = new Vector2(speedX / 2, 0f);
+                clingBufferTimeCurrent = clingBufferTime;
+
+                isClinged = false;
+                isJumping = true;
+                isWallJumping = true;
+                landed = false;
+                grounded = false;
+                StartCoroutine(SetCanMove(true));
             }
             else
             {
@@ -391,8 +440,21 @@ public class PlayerController : MonoBehaviour
             }
 
             // Stops upward velocity if player hits ceiling
-            if ((ceilingCheck ^ isClinged) && ceilingCheck.transform.tag != "BounceX")
-                velocity.y = 0f;
+            if (ceilingCheck)
+            {
+                bool hittinCeiling = true;
+                Collider2D[] ceilingHits = Physics2D.OverlapBoxAll(transform.position, col.size, 0);
+
+                // If colliding with a Bounce tile, the player is not hitting the ceiling
+                foreach (Collider2D hit in ceilingHits)
+                {
+                    if (hit.transform.tag == "Bounce")
+                        hittinCeiling = false;
+                }
+
+                if (hittinCeiling)
+                    velocity.y = 0f;
+            }
 
             #endregion
 
@@ -436,13 +498,7 @@ public class PlayerController : MonoBehaviour
 
             #endregion
 
-            #region Debug and Hotfixes
-            /*if (!grounded && landed && !isClinged)
-            {
-                Debug.Log("Called hotfix #2");
-                canMove = true;
-                grounded = true;
-            }*/
+            #region Debug
 
             // Debug text
             if (debugText != null)
@@ -455,7 +511,6 @@ public class PlayerController : MonoBehaviour
                 "Colliding with Object: " + overlap + "\n" +
                 "Colliding with Ground?: " + touchingGround;
             #endregion
-            Debug.Log("Is Jumping: " + isJumping);
         }
     }
 
