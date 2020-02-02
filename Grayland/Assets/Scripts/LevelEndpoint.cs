@@ -35,6 +35,7 @@ public class LevelEndpoint : MonoBehaviour
 
     public void EndLevel(PlayerController player)
     {
+        AudioManager.am.Play("Endpoint");
         Invoke("NextLevel", timeToAllowNextLevel);
         levelCompleteUI.SetActive(true);
         player.SetStickyChild(spr.sprite);

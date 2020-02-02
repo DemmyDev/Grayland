@@ -145,6 +145,9 @@ public class PlayerController : MonoBehaviour
 
             if (jumpActive && allowJumping)
             {
+                float pitch = 1 + Random.Range(-.25f, .25f);
+                AudioManager.am.Play("Jump", pitch);
+
                 // Velocity needed to achieve jump height
                 velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(currentGravity));
                 isJumping = true;
@@ -163,6 +166,8 @@ public class PlayerController : MonoBehaviour
 
             if (jumpActive && coyoteTimeCurrent > 0 && allowJumping)
             {
+                float pitch = 1 + Random.Range(-.25f, .25f);
+                AudioManager.am.Play("Jump", pitch);
                 velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(currentGravity));
                 isJumping = true;
                 landed = false;
@@ -181,6 +186,9 @@ public class PlayerController : MonoBehaviour
 
             if (grounded && allowJumping)
             {
+                float pitch = 1 + Random.Range(-.25f, .25f);
+                AudioManager.am.Play("Jump", pitch);
+
                 velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(currentGravity));
                 isJumping = true;
                 landed = false;
@@ -271,6 +279,7 @@ public class PlayerController : MonoBehaviour
                     // Deathbox collision
                     if (hit.gameObject.CompareTag("Deathbox"))
                     {
+                        AudioManager.am.Play("Death");
                         Invoke("DelayTransition", .5f);
                         Instantiate(deathParticle, transform.position, Quaternion.identity);
                         groundParticle.gameObject.SetActive(false);
@@ -304,6 +313,7 @@ public class PlayerController : MonoBehaviour
                         // Ensures particle only spawns once
                         if (!landed)
                         {
+                            AudioManager.am.Play("Land");
                             Instantiate(jumpParticle, new Vector2(transform.position.x, transform.position.y - .5f), Quaternion.identity);
                             landed = true;
                             grounded = true;
@@ -316,6 +326,8 @@ public class PlayerController : MonoBehaviour
                             // Assuming the bounce tile will boost the Y-axis
                             if (!bounceTile.GetAxis())
                             {
+                                AudioManager.am.Play("Bounce");
+
                                 velocity.y = Mathf.Sqrt(bounceForceY * jumpHeight * Mathf.Abs(currentGravity));
                                 landed = false;
                                 grounded = false;
@@ -346,6 +358,7 @@ public class PlayerController : MonoBehaviour
                 // Ensures particle only spawns once
                 if (!landed)
                 {
+                    AudioManager.am.Play("Land");
                     Collider2D tileCol = leftCheck ? leftCheck.collider : rightCheck.collider;
 
                     // TILE INTERACTIONS
@@ -367,6 +380,8 @@ public class PlayerController : MonoBehaviour
                     // Bounce 
                     if (tileCol.CompareTag("Bounce"))
                     {
+                        AudioManager.am.Play("Bounce");
+
                         BounceTile bounceTile = tileCol.GetComponentInParent<BounceTile>();
                         // Assuming the bounce tile will boost the X-axis
                         if (bounceTile.GetAxis())
@@ -400,6 +415,8 @@ public class PlayerController : MonoBehaviour
                         pressureTile.ChangeMoveState(true);
                     }
 
+                    float pitch = 1 + Random.Range(-.25f, .25f);
+                    AudioManager.am.Play("Jump", pitch);
                     currentGravity = gravity;
                     speedX = leftCheck ? speed : -speed; // Are we clinged on the left or right? 
                     velocity = new Vector2(speedX, Mathf.Sqrt(2f * jumpHeight * Mathf.Abs(currentGravity)));
