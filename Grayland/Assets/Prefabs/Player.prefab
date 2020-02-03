@@ -241,6 +241,7 @@ MonoBehaviour:
   bounceForceX: 2
   clingBufferTime: 0.25
   coyoteTime: 0.1
+  jumpBufferTime: 0.1
   gravity: -45
   whatIsCling:
     serializedVersion: 2
