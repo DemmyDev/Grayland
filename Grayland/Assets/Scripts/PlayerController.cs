@@ -561,6 +561,10 @@ public class PlayerController : MonoBehaviour
         allowJumping = true;
     }
 
+    /// <summary>
+    /// Sets a sprite that sticks to the player
+    /// </summary>
+    /// <param name="spr">Sprite sticking to player</param>
     public void SetStickyChild(Sprite spr)
     {
         stickySprRend.sprite = spr;

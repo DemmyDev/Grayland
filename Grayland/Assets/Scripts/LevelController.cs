@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public class LevelController : MonoBehaviour
     {
         if (isColorized)
         {
-            currentSat = Mathf.Lerp(currentSat, 0f, Time.deltaTime);
+            currentSat = Mathf.Lerp(currentSat, -20f, Time.deltaTime);
             postProcess.profile.GetSetting<ColorGrading>().saturation.value = currentSat; // Yeah apparently having ColorGrading be stored as a variable results in a NullReference :(
         }
     }
@@ -81,7 +82,7 @@ public class LevelController : MonoBehaviour
 
         if (levelId > levels.Count)
         {
-            Debug.Log("Last level! Do 'thanks for playing' stuff");
+            SceneManager.LoadScene(0);
         }
         else
         {
