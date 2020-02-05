@@ -259,6 +259,7 @@ MonoBehaviour:
     type: 3}
   stickySprRend: {fileID: 7032932756044268039}
   debugText: {fileID: 0}
+  tempShader: {fileID: 4800000, guid: 7ea0d5ea506b6ab499d77ff9cf8911fb, type: 3}
 --- !u!1 &6775861130570068109
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,7 +330,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 33efb7913926fd74b9b98b1f4e703fdf, type: 3}
-  m_Color: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
+  m_Color: {r: 0.2627451, g: 0.2627451, b: 0.2627451, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

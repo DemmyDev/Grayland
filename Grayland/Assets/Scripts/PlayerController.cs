@@ -94,7 +94,9 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer sprRend;
 
     #endregion
-    
+
+
+    [SerializeField] Shader tempShader;
     private void Awake()
     {
         col = GetComponent<BoxCollider2D>();
@@ -106,6 +108,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        //Camera.main.SetReplacementShader(tempShader, "RenderType");
         tilemap = FindObjectOfType<STETilemap>();
         StartCoroutine(SetUpBlink());
         StartCoroutine(EnableJump());
@@ -232,6 +235,7 @@ public class PlayerController : MonoBehaviour
             }
 
             velocity.y += currentGravity * Time.deltaTime; // Vertical movement
+            if (velocity.y < -25f) velocity.y = -25f; // Terminal velocity
             transform.Translate(velocity * Time.deltaTime); // Horizontal movement
             grounded = false; // Resets grounded state
             #endregion

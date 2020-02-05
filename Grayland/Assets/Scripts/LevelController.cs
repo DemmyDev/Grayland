@@ -14,19 +14,17 @@ public class LevelController : MonoBehaviour
     [SerializeField, Tooltip("Transition object (child of this object)")]
     GameObject transition;
 
-    [SerializeField, Tooltip("Post-processing object")]
-    PostProcessVolume postProcess;
-
     [SerializeField, Tooltip("List of level prefabs")]
     List<GameObject> levels;
 
     Vector2 spawnPoint;
     GameObject currentLevel, currentPlayer, currentEndpoint;
     int levelId = 1;
-    float currentSat = -100;
+    float currentIntensity = 1f;
     bool isColorized = false;
     Animation anim;
     static public LevelController levelController;
+    GrayscaleEffect grayscale;
     
     #endregion
 
@@ -34,6 +32,7 @@ public class LevelController : MonoBehaviour
     {
         if (levelController == null) levelController = this;
         anim = transition.GetComponent<Animation>();
+        grayscale = Camera.main.GetComponent<GrayscaleEffect>();
         LevelTransition(false);
     }
 
@@ -42,8 +41,8 @@ public class LevelController : MonoBehaviour
     {
         if (isColorized)
         {
-            currentSat = Mathf.Lerp(currentSat, -20f, Time.deltaTime);
-            postProcess.profile.GetSetting<ColorGrading>().saturation.value = currentSat; // Yeah apparently having ColorGrading be stored as a variable results in a NullReference :(
+            currentIntensity = Mathf.Lerp(currentIntensity, 0f, Time.deltaTime);
+            grayscale.intensity = currentIntensity;
         }
     }
 
@@ -95,8 +94,8 @@ public class LevelController : MonoBehaviour
             currentPlayer = Instantiate(player, spawnPoint, Quaternion.identity);
             currentPlayer.transform.position = spawnPoint;
 
-            currentSat = -100f;
-            postProcess.profile.GetSetting<ColorGrading>().saturation.value = currentSat;
+            currentIntensity = 1f;
+            grayscale.intensity = currentIntensity;
             isColorized = false;
         }
     }
