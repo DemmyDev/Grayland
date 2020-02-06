@@ -41,7 +41,11 @@ public class LevelController : MonoBehaviour
     {
         if (isColorized)
         {
-            currentIntensity = Mathf.Lerp(currentIntensity, 0f, Time.deltaTime);
+            if (currentIntensity > .05f)
+                currentIntensity = Mathf.Lerp(currentIntensity, 0f, Time.deltaTime);
+            else
+                currentIntensity = 0f;
+                  
             grayscale.intensity = currentIntensity;
         }
     }

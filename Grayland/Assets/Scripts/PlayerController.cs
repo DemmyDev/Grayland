@@ -572,8 +572,8 @@ public class PlayerController : MonoBehaviour
     public void SetStickyChild(Sprite spr)
     {
         stickySprRend.sprite = spr;
-        stickySprRend.transform.localPosition = new Vector2(Random.Range(-.75f, .75f), Random.Range(0, .75f));
-        stickySprRend.transform.localEulerAngles = new Vector3(0f, 0f, Random.Range(0, 360));
+        stickySprRend.transform.localPosition = new Vector2(Random.Range(-.66f, .66f), Random.Range(0, .75f));
+        stickySprRend.transform.localEulerAngles = new Vector3(0f, 0f, Random.Range(-45, 45));
     }
 
     void DelayTransition()

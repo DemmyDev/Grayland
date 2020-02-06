@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3765486689155349248}
   m_Layer: 0
-  m_Name: Level_5
+  m_Name: Level_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1899,6 +1899,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 566797362336048974, guid: b1cd6d5791d00334d8b4fdd5eb0c2a11,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 566797362862112710, guid: b1cd6d5791d00334d8b4fdd5eb0c2a11,
+        type: 3}
+      propertyPath: canMove
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 566797362221056108, guid: b1cd6d5791d00334d8b4fdd5eb0c2a11,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1913,16 +1923,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 566797362336048974, guid: b1cd6d5791d00334d8b4fdd5eb0c2a11,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 566797362862112710, guid: b1cd6d5791d00334d8b4fdd5eb0c2a11,
-        type: 3}
-      propertyPath: canMove
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 566797362221056109, guid: b1cd6d5791d00334d8b4fdd5eb0c2a11,
         type: 3}
@@ -1972,20 +1972,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3765486689155349248}
     m_Modifications:
-    - target: {fileID: 5045117495696336255, guid: 7e52feb9f0a5c0e4a886a2204e51557b,
-        type: 3}
-      propertyPath: m_Name
-      value: LevelEndpoint
-      objectReference: {fileID: 0}
     - target: {fileID: 1009508614959892494, guid: 7e52feb9f0a5c0e4a886a2204e51557b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.5
+      value: -15.5
       objectReference: {fileID: 0}
     - target: {fileID: 1009508614959892494, guid: 7e52feb9f0a5c0e4a886a2204e51557b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.5
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 1009508614959892494, guid: 7e52feb9f0a5c0e4a886a2204e51557b,
         type: 3}
@@ -2031,6 +2026,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045117495696336255, guid: 7e52feb9f0a5c0e4a886a2204e51557b,
+        type: 3}
+      propertyPath: m_Name
+      value: LevelEndpoint
       objectReference: {fileID: 0}
     - target: {fileID: 6707724114308854922, guid: 7e52feb9f0a5c0e4a886a2204e51557b,
         type: 3}
