@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6.5
-  walkAcceleration: 25
+  walkAcceleration: 30
   airAcceleration: 40
   groundDeceleration: 40
   jumpHeight: 3.5

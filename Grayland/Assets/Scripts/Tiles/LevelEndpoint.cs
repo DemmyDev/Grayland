@@ -26,7 +26,7 @@ public class LevelEndpoint : MonoBehaviour
 
     void Update()
     {
-        if (isLevelEnded && Input.GetKeyDown(KeyCode.Return))
+        if (isLevelEnded && Input.GetButtonDown("Interact"))
         {
             Debug.Log("Go to next level");
             StartCoroutine(LevelController.levelController.LoadLevel(true));
