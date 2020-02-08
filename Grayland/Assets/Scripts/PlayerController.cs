@@ -94,8 +94,7 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer sprRend;
 
     #endregion
-
-
+    
     [SerializeField] Shader tempShader;
     private void Awake()
     {
@@ -349,6 +348,13 @@ public class PlayerController : MonoBehaviour
                     overlap = false;
                 }
             }
+            
+            RaycastHit2D groundCheck = Physics2D.Raycast(transform.position, Vector2.down, .5f, whatIsCling);
+            if (isClinged && groundCheck)
+            {
+                velocity.x = 0f;
+                isClinged = false;
+            }
 
             // If player is clinged, stop and lock movement
             if (isClinged && !detachActive)
@@ -398,7 +404,7 @@ public class PlayerController : MonoBehaviour
                             isClinged = false;
                             landed = false;
                             grounded = false;
-                            StartCoroutine(SetCanMove(true));
+                            StartCoroutine(SetCanMove(.66f));
                         }
                     }
 
@@ -543,6 +549,13 @@ public class PlayerController : MonoBehaviour
     private IEnumerator SetCanMove(bool move)
     {
         yield return new WaitForSeconds(afterWallJumpBuffer);
+        if (!isClinged)
+            canMove = true;
+    }
+
+    private IEnumerator SetCanMove(float time)
+    {
+        yield return new WaitForSeconds(time);
         if (!isClinged)
             canMove = true;
     }
