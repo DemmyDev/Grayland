@@ -346,6 +346,9 @@ public class PlayerController : MonoBehaviour
                 {
                     touchingGround = false;
                     overlap = false;
+
+                    // If dialogueActive is true
+                        // Call WriteText to disable text
                 }
             }
             
