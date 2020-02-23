@@ -10,6 +10,7 @@ TagManager:
   - Deathbox
   - Endpoint
   - Bounce
+  - Dialogue
   layers:
   - Default
   - TransparentFX
