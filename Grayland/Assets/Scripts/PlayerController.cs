@@ -86,9 +86,8 @@ public class PlayerController : MonoBehaviour
     
     float moveInput;
 
-    bool detachActive;
-
     bool overlap, touchingGround;
+
     
     STETilemap tilemap;
     SpriteRenderer sprRend;
@@ -116,17 +115,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         #region Input & Jump Logic
-
-        if (Input.GetButtonDown("Detach") && detachActiveTime <= 0)
-            detachActiveTime = .033f;
-
-        if (detachActiveTime > 0)
-        {
-            detachActive = true;
-            detachActiveTime -= Time.deltaTime;
-        }
-        else detachActive = false;
-
+        
         if (Input.GetButtonDown("Jump") && jumpActiveTime <= 0)
             jumpActiveTime = .033f;
 
@@ -360,7 +349,7 @@ public class PlayerController : MonoBehaviour
             }
 
             // If player is clinged, stop and lock movement
-            if (isClinged && !detachActive)
+            if (((leftCheck && moveInput != 1) || (rightCheck && moveInput != -1)) && isClinged)
             {
                 currentGravity = 0f;
                 velocity = Vector2.zero;
@@ -443,8 +432,9 @@ public class PlayerController : MonoBehaviour
                     StartCoroutine(SetCanMove(true));
                 }
             }
-            else if (isClinged && detachActive)
+            else if (isClinged && ((leftCheck && moveInput == 1) || (rightCheck && moveInput == -1)))
             {
+                Debug.Log("Detaching");
                 Collider2D tileCol = leftCheck ? leftCheck.collider : rightCheck.collider;
                 if (tileCol.CompareTag("Pressure"))
                 {
