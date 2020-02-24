@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CreativeSpore.SuperTilemapEditor;
 
 public class LevelEndpoint : MonoBehaviour
 {
@@ -37,6 +38,14 @@ public class LevelEndpoint : MonoBehaviour
     {
         AudioManager.am.Play("Endpoint");
         Invoke("NextLevel", timeToAllowNextLevel);
+
+        STETilemap deathbox = LevelController.levelController.GetDeathbox().GetComponent<STETilemap>();
+        if (deathbox != null)
+        {
+            deathbox.ColliderType = eColliderType.None;
+            deathbox.Refresh(false, true);
+        }
+
         levelCompleteUI.SetActive(true);
         player.SetStickyChild(spr.sprite);
         spr.enabled = false;

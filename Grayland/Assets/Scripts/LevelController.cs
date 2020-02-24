@@ -18,7 +18,7 @@ public class LevelController : MonoBehaviour
     List<GameObject> levels;
 
     Vector2 spawnPoint;
-    GameObject currentLevel, currentPlayer, currentEndpoint;
+    GameObject currentLevel, currentPlayer, currentEndpoint, currentDeathbox;
     int levelId = 1;
     float currentIntensity = 1f;
     bool isColorized = false;
@@ -47,6 +47,18 @@ public class LevelController : MonoBehaviour
                 currentIntensity = 0f;
                   
             grayscale.intensity = currentIntensity;
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            // ANALYTICS: Had to restart level
+            StartCoroutine(LoadLevel(false));
+        }
+
+        if (Input.GetKeyDown(KeyCode.RightShift))
+        {
+            // ANALYTICS: Stopped playing at levelId
+            SceneManager.LoadScene(0);
         }
     }
 
@@ -78,10 +90,11 @@ public class LevelController : MonoBehaviour
         if (currentPlayer != null) Destroy(currentPlayer);
         if (currentEndpoint != null) Destroy(currentEndpoint);
 
-        // Reset values
+        // Reset values just in case
         currentLevel = null;
         spawnPoint = Vector2.zero;
         currentEndpoint = null;
+        currentDeathbox = null;
 
         if (levelId > levels.Count)
         {
@@ -93,6 +106,7 @@ public class LevelController : MonoBehaviour
             currentLevel = Instantiate(levels[levelId - 1]);
             spawnPoint = currentLevel.transform.Find("SpawnPoint").position;
             currentEndpoint = currentLevel.transform.Find("LevelEndpoint").gameObject;
+            currentDeathbox = currentLevel.transform.Find("TilemapGroup").Find("Deathbox").gameObject;
             currentLevel.transform.parent = gameObject.transform;
 
             currentPlayer = Instantiate(player, spawnPoint, Quaternion.identity);
@@ -101,6 +115,8 @@ public class LevelController : MonoBehaviour
             currentIntensity = 1f;
             grayscale.intensity = currentIntensity;
             isColorized = false;
+            
+            // oh my god fix all of this Find bullshit after PAX please
         }
     }
 
@@ -121,5 +137,13 @@ public class LevelController : MonoBehaviour
     public void DisableSaturation()
     {
         isColorized = true;
+    }
+
+    public GameObject GetDeathbox()
+    {
+        if (currentDeathbox != null)
+            return currentDeathbox;
+        else
+            return null;
     }
 }

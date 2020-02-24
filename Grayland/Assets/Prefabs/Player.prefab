@@ -148,7 +148,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: d1debfb3845205848bd7adf821fab274, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -250,6 +250,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1280
   afterWallJumpBuffer: 0.25
+  detachWaitTime: 0.125
   eyes: {fileID: 6775861129448055877}
   body: {fileID: 6775861130570068108}
   jumpParticle: {fileID: 924670469977847833, guid: 86174c2e503d660418260076962809ff,
@@ -328,7 +329,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 33efb7913926fd74b9b98b1f4e703fdf, type: 3}
   m_Color: {r: 0.2627451, g: 0.2627451, b: 0.2627451, a: 1}
   m_FlipX: 0

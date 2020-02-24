@@ -50,6 +50,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("After wall jumping, how long it takes for the player to regain input abilities")]
     float afterWallJumpBuffer = .1f;
 
+    [SerializeField, Tooltip("Time until player detaches from wall when holding the opposite input from the wall")]
+    float detachWaitTime;
+
     [SerializeField, Tooltip("Child object that holds eyes sprite")]
     Transform eyes;
 
@@ -82,19 +85,19 @@ public class PlayerController : MonoBehaviour
     float jumpBufferCurrent = 0f;
     bool isJumping = false, isWallJumping = false, allowJumping = false, jumpActive = false;
     float speedX;
-    float jumpActiveTime = 0, jumpButtonDownTime = 0f, detachActiveTime = 0f;
+    float jumpActiveTime = 0, jumpButtonDownTime = 0f;
     
     float moveInput;
 
     bool overlap, touchingGround;
+    float currentDetachWaitTime;
+    bool detachActive = false;
 
-    
     STETilemap tilemap;
     SpriteRenderer sprRend;
 
     #endregion
     
-    [SerializeField] Shader tempShader;
     private void Awake()
     {
         col = GetComponent<BoxCollider2D>();
@@ -102,6 +105,7 @@ public class PlayerController : MonoBehaviour
         currentGravity = gravity;
         clingBufferTimeCurrent = clingBufferTime;
         coyoteTimeCurrent = coyoteTime;
+        currentDetachWaitTime = detachWaitTime;
     }
 
     private void Start()
@@ -348,8 +352,23 @@ public class PlayerController : MonoBehaviour
                 isClinged = false;
             }
 
+            if (((leftCheck && moveInput == 1) || (rightCheck && moveInput == -1)) && isClinged)
+            {
+                if (currentDetachWaitTime > 0)
+                {
+                    detachActive = false;
+                    currentDetachWaitTime -= Time.deltaTime;
+                }
+                else detachActive = true;
+            }
+            else
+            {
+                detachActive = false;
+                currentDetachWaitTime = detachWaitTime;
+            }
+
             // If player is clinged, stop and lock movement
-            if (((leftCheck && moveInput != 1) || (rightCheck && moveInput != -1)) && isClinged)
+            if (!detachActive && isClinged)
             {
                 currentGravity = 0f;
                 velocity = Vector2.zero;
@@ -396,6 +415,8 @@ public class PlayerController : MonoBehaviour
                             isClinged = false;
                             landed = false;
                             grounded = false;
+                            detachActive = false;
+                            currentDetachWaitTime = detachWaitTime;
                             StartCoroutine(SetCanMove(.66f));
                         }
                     }
@@ -429,10 +450,12 @@ public class PlayerController : MonoBehaviour
                     isClinged = false;
                     landed = false;
                     grounded = false;
+                    detachActive = false;
+                    currentDetachWaitTime = detachWaitTime;
                     StartCoroutine(SetCanMove(true));
                 }
             }
-            else if (isClinged && ((leftCheck && moveInput == 1) || (rightCheck && moveInput == -1)))
+            else if (detachActive && isClinged)
             {
                 Debug.Log("Detaching");
                 Collider2D tileCol = leftCheck ? leftCheck.collider : rightCheck.collider;
@@ -452,6 +475,8 @@ public class PlayerController : MonoBehaviour
                 isWallJumping = true;
                 landed = false;
                 grounded = false;
+                detachActive = false;
+                currentDetachWaitTime = detachWaitTime;
                 StartCoroutine(SetCanMove(true));
             }
             else

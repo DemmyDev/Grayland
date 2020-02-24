@@ -120,11 +120,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 0.09375, y: 52}
+  - {x: 0.09375, y: 52.09375}
   - {x: 0.09375, y: 52.15625}
   - {x: 0.90625, y: 52.15625}
-  - {x: 0.90625, y: 52}
-  - {x: 0.09375, y: 52}
+  - {x: 0.90625, y: 52.09375}
+  - {x: 0.09375, y: 52.09375}
 --- !u!1 &1554123715148119606
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_tilemaps:
   - {fileID: 610751035113085039}
   - {fileID: 7053884437283669428}
-  m_selectedIndex: 0
+  m_selectedIndex: 1
   m_unselectedColorMultiplier: 1
   m_defaultTilemapWindowVisible: 0
   m_displayTilemapRList: 1
@@ -665,11 +665,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 58.09375, y: 52}
+  - {x: 58.09375, y: 52.09375}
   - {x: 58.09375, y: 52.15625}
   - {x: 58.90625, y: 52.15625}
-  - {x: 58.90625, y: 52}
-  - {x: 58.09375, y: 52}
+  - {x: 58.90625, y: 52.09375}
+  - {x: 58.09375, y: 52.09375}
 --- !u!68 &2871103975915988154
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -686,11 +686,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 59.09375, y: 52}
+  - {x: 59.09375, y: 52.09375}
   - {x: 59.09375, y: 52.15625}
   - {x: 59.90625, y: 52.15625}
-  - {x: 59.90625, y: 52}
-  - {x: 59.09375, y: 52}
+  - {x: 59.90625, y: 52.09375}
+  - {x: 59.09375, y: 52.09375}
 --- !u!68 &5523737552390984940
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -707,11 +707,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 53.09375, y: 58}
+  - {x: 53.09375, y: 58.09375}
   - {x: 53.09375, y: 58.15625}
   - {x: 53.90625, y: 58.15625}
-  - {x: 53.90625, y: 58}
-  - {x: 53.09375, y: 58}
+  - {x: 53.90625, y: 58.09375}
+  - {x: 53.09375, y: 58.09375}
 --- !u!68 &6111544720940791135
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -728,11 +728,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 54.09375, y: 58}
+  - {x: 54.09375, y: 58.09375}
   - {x: 54.09375, y: 58.15625}
   - {x: 54.90625, y: 58.15625}
-  - {x: 54.90625, y: 58}
-  - {x: 54.09375, y: 58}
+  - {x: 54.90625, y: 58.09375}
+  - {x: 54.09375, y: 58.09375}
 --- !u!68 &6734139714115191627
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -749,11 +749,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 55.09375, y: 58}
+  - {x: 55.09375, y: 58.09375}
   - {x: 55.09375, y: 58.15625}
   - {x: 55.90625, y: 58.15625}
-  - {x: 55.90625, y: 58}
-  - {x: 55.09375, y: 58}
+  - {x: 55.90625, y: 58.09375}
+  - {x: 55.09375, y: 58.09375}
 --- !u!68 &7485514232500510393
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -770,11 +770,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 56.09375, y: 58}
+  - {x: 56.09375, y: 58.09375}
   - {x: 56.09375, y: 58.15625}
   - {x: 56.90625, y: 58.15625}
-  - {x: 56.90625, y: 58}
-  - {x: 56.09375, y: 58}
+  - {x: 56.90625, y: 58.09375}
+  - {x: 56.09375, y: 58.09375}
 --- !u!1 &5084324334332454791
 GameObject:
   m_ObjectHideFlags: 0
