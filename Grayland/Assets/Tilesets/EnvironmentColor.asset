@@ -496,10 +496,10 @@ MonoBehaviour:
       height: 0.125
     collData:
       vertices:
-      - {x: 0, y: 0.09375}
-      - {x: 0, y: 0.90625}
-      - {x: 0.15625, y: 0.90625}
-      - {x: 0.15625, y: 0.09375}
+      - {x: 0, y: 0.15625}
+      - {x: 0, y: 0.84375}
+      - {x: 0.15625, y: 0.84375}
+      - {x: 0.15625, y: 0.15625}
       type: 2
     paramContainer:
       m_paramList: []

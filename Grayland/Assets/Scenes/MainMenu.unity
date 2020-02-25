@@ -464,6 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 1
+  material: {fileID: 2100000, guid: 7cbd75f926efb4f4b87520973ccac329, type: 2}
 --- !u!1 &592748021
 GameObject:
   m_ObjectHideFlags: 0

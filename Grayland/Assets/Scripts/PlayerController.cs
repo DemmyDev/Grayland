@@ -239,8 +239,8 @@ public class PlayerController : MonoBehaviour
             // Wall cling and ceiling checking 
             RaycastHit2D leftCheck = Physics2D.Raycast(transform.position, Vector2.left, .5f, whatIsCling); // Left side
             RaycastHit2D rightCheck = Physics2D.Raycast(transform.position, Vector2.right, .5f, whatIsCling); // Right side
-            Debug.DrawRay(transform.position, new Vector2(-.5f, 0f), Color.green);
-            Debug.DrawRay(transform.position, new Vector2(.5f, 0f), Color.red);
+            //Debug.DrawRay(transform.position, new Vector2(-.5f, 0f), Color.green);
+            //Debug.DrawRay(transform.position, new Vector2(.5f, 0f), Color.red);
 
             RaycastHit2D ceilingCheck = Physics2D.BoxCast(transform.position, new Vector2(.75f, .1f), 0f, Vector2.up, .35f, whatIsCeiling); // Ceiling check
             
@@ -457,7 +457,6 @@ public class PlayerController : MonoBehaviour
             }
             else if (detachActive && isClinged)
             {
-                Debug.Log("Detaching");
                 Collider2D tileCol = leftCheck ? leftCheck.collider : rightCheck.collider;
                 if (tileCol.CompareTag("Pressure"))
                 {

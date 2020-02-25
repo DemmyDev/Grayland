@@ -222,6 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 1
+  material: {fileID: 2100000, guid: 7cbd75f926efb4f4b87520973ccac329, type: 2}
 --- !u!1 &592748021
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,6 +810,7 @@ MonoBehaviour:
   - {fileID: 1554123715148119606, guid: 9b9069e83f0e93f4e908ad9a8f9e7274, type: 3}
   - {fileID: 1554123715148119606, guid: b93b38ea56b7abd4fa26349b5d578c43, type: 3}
   - {fileID: 1554123715148119606, guid: aead8c26e856359408dd49005e9af742, type: 3}
+  - {fileID: 1554123715148119606, guid: e46b6f2793ae4394e918d7b42756bd1f, type: 3}
 --- !u!4 &1241479604
 Transform:
   m_ObjectHideFlags: 0
