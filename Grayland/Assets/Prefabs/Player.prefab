@@ -236,6 +236,7 @@ MonoBehaviour:
   walkAcceleration: 30
   airAcceleration: 40
   groundDeceleration: 40
+  maxFallSpeed: -20
   jumpHeight: 3.5
   bounceForceY: 4
   bounceForceX: 2
@@ -250,7 +251,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1280
   afterWallJumpBuffer: 0.25
-  detachWaitTime: 0.08
+  detachWaitTime: 0.11
   eyes: {fileID: 6775861129448055877}
   body: {fileID: 6775861130570068108}
   jumpParticle: {fileID: 924670469977847833, guid: 86174c2e503d660418260076962809ff,

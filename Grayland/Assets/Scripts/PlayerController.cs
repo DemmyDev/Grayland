@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Deceleration applied when character is grounded and not attempting to move.")]
     float groundDeceleration = 70;
 
+    [SerializeField, Tooltip("Max speed player can achieve when falling downwards. Must be negative")]
+    float maxFallSpeed;
+
     [SerializeField, Tooltip("Max height the character will jump, regardless of gravity")]
     float jumpHeight = 4;
 
@@ -92,8 +95,7 @@ public class PlayerController : MonoBehaviour
     bool overlap, touchingGround;
     float currentDetachWaitTime;
     bool detachActive = false;
-
-    STETilemap tilemap;
+    
     SpriteRenderer sprRend;
 
     #endregion
@@ -110,8 +112,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        //Camera.main.SetReplacementShader(tempShader, "RenderType");
-        tilemap = FindObjectOfType<STETilemap>();
         StartCoroutine(SetUpBlink());
         StartCoroutine(EnableJump());
     }
@@ -227,7 +227,7 @@ public class PlayerController : MonoBehaviour
             }
 
             velocity.y += currentGravity * Time.deltaTime; // Vertical movement
-            if (velocity.y < -25f) velocity.y = -25f; // Terminal velocity
+            if (velocity.y < maxFallSpeed) velocity.y = maxFallSpeed; // Terminal velocity
             transform.Translate(velocity * Time.deltaTime); // Horizontal movement
             grounded = false; // Resets grounded state
             #endregion
@@ -319,11 +319,13 @@ public class PlayerController : MonoBehaviour
                         if (hit.gameObject.CompareTag("Bounce"))
                         {
                             BounceTile bounceTile = hit.GetComponentInParent<BounceTile>();
+
                             // Assuming the bounce tile will boost the Y-axis
                             if (!bounceTile.GetAxis())
                             {
                                 AudioManager.am.Play("Bounce");
 
+                                // FUTURE BUG FIX: Set the player above the Y-position of the tile to prevent bug
                                 velocity.y = Mathf.Sqrt(bounceForceY * jumpHeight * Mathf.Abs(currentGravity));
                                 landed = false;
                                 grounded = false;
