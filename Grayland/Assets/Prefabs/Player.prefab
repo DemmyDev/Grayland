@@ -235,10 +235,10 @@ MonoBehaviour:
   speed: 6.5
   walkAcceleration: 30
   airAcceleration: 40
-  groundDeceleration: 40
+  groundDeceleration: 55
   maxFallSpeed: -20
   jumpHeight: 3.5
-  bounceForceY: 4
+  bounceForceY: 3.9
   bounceForceX: 2
   clingBufferTime: 0.25
   coyoteTime: 0.1

@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
     bool overlap, touchingGround;
     float currentDetachWaitTime;
     bool detachActive = false;
+    STETilemap tilemap;
     
     SpriteRenderer sprRend;
 
@@ -114,6 +115,8 @@ public class PlayerController : MonoBehaviour
     {
         StartCoroutine(SetUpBlink());
         StartCoroutine(EnableJump());
+        // Change this pls
+        tilemap = FindObjectOfType<STETilemap>();
     }
 
     private void Update()
@@ -324,8 +327,17 @@ public class PlayerController : MonoBehaviour
                             if (!bounceTile.GetAxis())
                             {
                                 AudioManager.am.Play("Bounce");
+                                
+                                RaycastHit2D castToGround = Physics2D.Raycast(transform.position, Vector2.down, .5f, whatIsCling); // Right side
 
-                                // FUTURE BUG FIX: Set the player above the Y-position of the tile to prevent bug
+                                // Adjust player position to ensure player does not end up inside tile
+                                if (castToGround.collider.gameObject.CompareTag("Bounce"))
+                                {
+                                    Vector2 gridPos = TilemapUtils.GetGridPosition(tilemap, castToGround.point);
+                                    Vector2 tilePos = TilemapUtils.GetGridWorldPos(tilemap, (int)gridPos.x, (int)gridPos.y);
+                                    transform.position = new Vector2(transform.position.x, tilePos.y + .25f);
+                                }
+                                
                                 velocity.y = Mathf.Sqrt(bounceForceY * jumpHeight * Mathf.Abs(currentGravity));
                                 landed = false;
                                 grounded = false;
