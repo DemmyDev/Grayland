@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
     bool isJumping = false, isWallJumping = false, allowJumping = false, jumpActive = false;
     float speedX;
     float jumpActiveTime = 0, jumpButtonDownTime = 0f;
+    RaycastHit2D leftCheck, rightCheck;
     
     float moveInput;
 
@@ -136,13 +137,16 @@ public class PlayerController : MonoBehaviour
         // Use GetAxisRaw to ensure input is either 0, 1 or -1. LeftInput = -1, RightInput = 1, NoInput = 0
         moveInput = Input.GetAxisRaw("Horizontal");
 
+        // If the player is grounded, but not clinged to a walll
         if (grounded && !isClinged)
         {
             coyoteTimeCurrent = coyoteTime;
             velocity.y = -.5f;
 
+            // If the player is able to jump and has tried to jump
             if (jumpActive && allowJumping)
             {
+                Debug.Log("Grounded jump");
                 float pitch = 1 + Random.Range(-.25f, .25f);
                 AudioManager.am.Play("Jump", pitch);
 
@@ -151,6 +155,7 @@ public class PlayerController : MonoBehaviour
                 isJumping = true;
                 landed = false;
                 grounded = false;
+                clingBufferTimeCurrent = clingBufferTime;
 
                 if (moveInput == 0)
                     velocity.x = 0f;
@@ -162,8 +167,10 @@ public class PlayerController : MonoBehaviour
             // Coyote time!
             coyoteTimeCurrent -= Time.deltaTime;
 
+            // If the player has attempted to jump and coyote time allows the jump to happen
             if (jumpActive && coyoteTimeCurrent > 0 && allowJumping)
             {
+                Debug.Log("Coyote jump");
                 float pitch = 1 + Random.Range(-.25f, .25f);
                 AudioManager.am.Play("Jump", pitch);
                 velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(currentGravity));
@@ -171,6 +178,7 @@ public class PlayerController : MonoBehaviour
                 landed = false;
                 grounded = false;
                 coyoteTimeCurrent = coyoteTime;
+                clingBufferTimeCurrent = clingBufferTime;
 
                 if (moveInput == 0)
                     velocity.x = 0f;
@@ -184,6 +192,7 @@ public class PlayerController : MonoBehaviour
 
             if (grounded && allowJumping)
             {
+                Debug.Log("Buffered jump");
                 float pitch = 1 + Random.Range(-.25f, .25f);
                 AudioManager.am.Play("Jump", pitch);
 
@@ -192,6 +201,7 @@ public class PlayerController : MonoBehaviour
                 landed = false;
                 grounded = false;
                 coyoteTimeCurrent = coyoteTime;
+                clingBufferTimeCurrent = clingBufferTime;
 
                 if (moveInput == 0)
                     velocity.x = 0f;
@@ -201,6 +211,7 @@ public class PlayerController : MonoBehaviour
         if (jumpActive && allowJumping)
             jumpBufferCurrent = 0f;
 
+        // Apply gravity
         if (isJumping && velocity.y > 3f && !Input.GetButton("Jump") && !isWallJumping)
         {
             velocity.y += 2 * currentGravity * Time.deltaTime;
@@ -240,8 +251,8 @@ public class PlayerController : MonoBehaviour
             Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, col.size, 0);
 
             // Wall cling and ceiling checking 
-            RaycastHit2D leftCheck = Physics2D.Raycast(transform.position, Vector2.left, .5f, whatIsCling); // Left side
-            RaycastHit2D rightCheck = Physics2D.Raycast(transform.position, Vector2.right, .5f, whatIsCling); // Right side
+            leftCheck = Physics2D.Raycast(transform.position, Vector2.left, .5f, whatIsCling); // Left side
+            rightCheck = Physics2D.Raycast(transform.position, Vector2.right, .5f, whatIsCling); // Right side
             //Debug.DrawRay(transform.position, new Vector2(-.5f, 0f), Color.green);
             //Debug.DrawRay(transform.position, new Vector2(.5f, 0f), Color.red);
 
@@ -313,6 +324,7 @@ public class PlayerController : MonoBehaviour
                         if (!landed)
                         {
                             AudioManager.am.Play("Land");
+                            eyes.localScale = new Vector2(eyes.localScale.x, 0f);
                             Instantiate(jumpParticle, new Vector2(transform.position.x, transform.position.y - .5f), Quaternion.identity);
                             landed = true;
                             grounded = true;
@@ -394,6 +406,7 @@ public class PlayerController : MonoBehaviour
                 if (!landed)
                 {
                     AudioManager.am.Play("Land");
+                    eyes.localScale = new Vector2(eyes.localScale.x, 0f);
                     Collider2D tileCol = leftCheck ? leftCheck.collider : rightCheck.collider;
 
                     // TILE INTERACTIONS
@@ -435,6 +448,7 @@ public class PlayerController : MonoBehaviour
                         }
                     }
 
+                    // Spawn particles when colliding with wall
                     if (leftCheck)
                         Instantiate(jumpParticle, new Vector2(transform.position.x - .5f, transform.position.y), Quaternion.Euler(0f, 0f, -90f));
                     else
@@ -443,6 +457,7 @@ public class PlayerController : MonoBehaviour
                     landed = true;
                 }
 
+                // Wall jump
                 if (jumpActive && allowJumping)
                 {
                     Collider2D tileCol = leftCheck ? leftCheck.collider : rightCheck.collider;

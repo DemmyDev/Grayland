@@ -240,7 +240,7 @@ MonoBehaviour:
   jumpHeight: 3.5
   bounceForceY: 3.9
   bounceForceX: 2
-  clingBufferTime: 0.25
+  clingBufferTime: 0.1
   coyoteTime: 0.1
   jumpBufferTime: 0.1
   gravity: -45
