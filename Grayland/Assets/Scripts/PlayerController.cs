@@ -100,6 +100,8 @@ public class PlayerController : MonoBehaviour
     
     SpriteRenderer sprRend;
 
+    bool allowInput = true;
+
     #endregion
     
     private void Awake()
@@ -123,8 +125,12 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         #region Input & Jump Logic
+
+        bool inputJump = Input.GetButtonDown("Jump");
+        if (!allowInput)
+            inputJump = false;
         
-        if (Input.GetButtonDown("Jump") && jumpActiveTime <= 0)
+        if (inputJump && jumpActiveTime <= 0)
             jumpActiveTime = .033f;
 
         if (jumpActiveTime > 0)
@@ -135,7 +141,10 @@ public class PlayerController : MonoBehaviour
         else jumpActive = false;
 
         // Use GetAxisRaw to ensure input is either 0, 1 or -1. LeftInput = -1, RightInput = 1, NoInput = 0
-        moveInput = Input.GetAxisRaw("Horizontal");
+        if (allowInput) 
+            moveInput = Input.GetAxisRaw("Horizontal");
+        else
+            moveInput = 0;
 
         // If the player is grounded, but not clinged to a walll
         if (grounded && !isClinged)
@@ -638,5 +647,10 @@ public class PlayerController : MonoBehaviour
     void DelayTransition()
     {
         StartCoroutine(LevelController.levelController.LoadLevel(false));
+    }
+
+    public void SetMove(bool move)
+    {
+        allowInput = move;
     }
 }
