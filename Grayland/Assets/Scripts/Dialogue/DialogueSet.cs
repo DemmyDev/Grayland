@@ -23,6 +23,10 @@ public class DialogueSet : ScriptableObject
     [TextArea]
     public string text;
 
+    public float pitchMin;
+    public float pitchMax;
+
+    // Below not being used for now
     public bool PlayOnEnable = true;
     public AnimationMode textAnimMode = AnimationMode.None;
 

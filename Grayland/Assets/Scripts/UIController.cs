@@ -7,6 +7,9 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject completeUI;
     [SerializeField] GameObject nextLevelUI;
     [SerializeField] GameObject dialogueUI;
+    [SerializeField] GameObject dialogueTri;
+    [SerializeField] GameObject activationUI;
+    [SerializeField] GameObject activationText;
 
     public static UIController UIControl;
 
@@ -29,5 +32,20 @@ public class UIController : MonoBehaviour
     public GameObject GetDialogueUI()
     {
         return dialogueUI;
+    }
+
+    public GameObject GetDialogueTri()
+    {
+        return dialogueTri;
+    }
+
+    public GameObject GetActivationUI()
+    {
+        return activationUI;
+    }
+
+    public GameObject GetActivationText()
+    {
+        return activationText;
     }
 }

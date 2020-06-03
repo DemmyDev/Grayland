@@ -100,6 +100,9 @@ public class PlayerController : MonoBehaviour
     
     SpriteRenderer sprRend;
 
+    Vector2 eyesTargetPos;
+    float eyesDialoguePosX;
+
     bool allowInput = true;
 
     #endregion
@@ -543,7 +546,16 @@ public class PlayerController : MonoBehaviour
             #region Animations
 
             // Changes position of eyes based on velocity of player
-            eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, velocity.x / 80, .25f), Mathf.Lerp(eyes.localPosition.y, velocity.y / 100, .25f));
+            if (allowInput)
+            {
+                eyesTargetPos = new Vector2(Mathf.Lerp(eyes.localPosition.x, velocity.x / 80, .25f), Mathf.Lerp(eyes.localPosition.y, velocity.y / 100, .25f));
+            }
+            else
+            {
+                eyesTargetPos = new Vector2(Mathf.Lerp(eyes.localPosition.x, eyesDialoguePosX, .25f), 0f);
+            }
+
+            eyes.localPosition = eyesTargetPos;
 
             // Eyes blinking
             if (isBlinking)
@@ -621,10 +633,12 @@ public class PlayerController : MonoBehaviour
     /// <returns></returns>
     public IEnumerator SetUpBlink()
     {
-        int i = Random.Range(3, 6);
-        yield return new WaitForSeconds(i);
-        isBlinking = true;
-        StartCoroutine(SetUpBlink()); // Loops blink
+        while (true)
+        {
+            int i = Random.Range(3, 6);
+            yield return new WaitForSeconds(i);
+            isBlinking = true;
+        }
     }
 
     private IEnumerator EnableJump()
@@ -652,5 +666,17 @@ public class PlayerController : MonoBehaviour
     public void SetMove(bool move)
     {
         allowInput = move;
+    }
+
+    public void SetEyesTargetPos(Transform charPos)
+    {
+        float dif = charPos.position.x - transform.position.x;
+
+        // If value is positive, eyes look to right
+        if (dif >= 0)
+            eyesDialoguePosX = .08f;
+        // If value is negative, eyes look to left
+        else
+            eyesDialoguePosX = -.08f;
     }
 }

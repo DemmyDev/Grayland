@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayer: 0
   text: but what if? big emotion. now that's what i call grayland
+  pitchMin: 0.5
+  pitchMax: 0.7
   PlayOnEnable: 0
   textAnimMode: 2
   VertexCurve:

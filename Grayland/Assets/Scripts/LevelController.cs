@@ -68,10 +68,8 @@ public class LevelController : MonoBehaviour
     /// <param name="isNextLevel">If true, goes to the next level in the levels list. If false, restarts current level</param>
     public IEnumerator LoadLevel(bool isNextLevel)
     {
-        Debug.Log("Got to transition");
         anim.Play("TransitionEnter");
         yield return new WaitForSeconds(.5f);
-        Debug.Log("Transition!");
         anim.Stop("TransitionEnter");
         LevelTransition(isNextLevel);
     }
