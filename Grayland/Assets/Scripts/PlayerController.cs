@@ -89,9 +89,11 @@ public class PlayerController : MonoBehaviour
     bool isJumping = false, isWallJumping = false, allowJumping = false, jumpActive = false;
     float speedX;
     float jumpActiveTime = 0, jumpButtonDownTime = 0f;
+    bool movingToTargetPos = false;
     RaycastHit2D leftCheck, rightCheck;
     
-    float moveInput;
+    float moveInput, forcedMoveInput;
+    float targetPosX;
 
     bool overlap, touchingGround;
     float currentDetachWaitTime;
@@ -242,14 +244,28 @@ public class PlayerController : MonoBehaviour
             float acceleration = grounded ? walkAcceleration : airAcceleration;
             float deceleration = grounded ? groundDeceleration : 0;
 
-            if (canMove)
+            if (canMove || movingToTargetPos)
             {
+                if (movingToTargetPos)
+                    moveInput = forcedMoveInput;
+
                 if (moveInput != 0)
                     // Accelerate when moving
                     velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, acceleration * Time.deltaTime);
                 else
                     // Decelerate when not moving
                     velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
+            }
+
+            if (movingToTargetPos)
+            {
+                float targetDistance = Mathf.Abs(targetPosX - transform.position.x);
+
+                if (targetDistance <= .2f)
+                {
+                    velocity.x = 0f;
+                    movingToTargetPos = false;
+                }
             }
 
             velocity.y += currentGravity * Time.deltaTime; // Vertical movement
@@ -546,7 +562,7 @@ public class PlayerController : MonoBehaviour
             #region Animations
 
             // Changes position of eyes based on velocity of player
-            if (allowInput)
+            if (allowInput || movingToTargetPos)
             {
                 eyesTargetPos = new Vector2(Mathf.Lerp(eyes.localPosition.x, velocity.x / 80, .25f), Mathf.Lerp(eyes.localPosition.y, velocity.y / 100, .25f));
             }
@@ -678,5 +694,27 @@ public class PlayerController : MonoBehaviour
         // If value is negative, eyes look to left
         else
             eyesDialoguePosX = -.08f;
+    }
+
+    public bool GetGrounded()
+    {
+        return grounded;
+    }
+
+    public void ForceSetMoveInput(float posX)
+    {
+        movingToTargetPos = true;
+        targetPosX = posX;
+        float dif = targetPosX - transform.position.x;
+
+        if (dif >= 0)
+            forcedMoveInput = 1;
+        else
+            forcedMoveInput = -1;
+    }
+
+    public bool MovingToTargetPos()
+    {
+        return movingToTargetPos;
     }
 }

@@ -16,18 +16,21 @@ public class DialogueWrite : MonoBehaviour
         NPC = 1,
     }
 
-    public float distanceToCheck = 5f;
-
     VertexAttributeModifier vertAnim;
     LevelController levelControl;
     PlayerController player;
-    //[SerializeField] GameObject activationUI;
     [SerializeField] Transform eyes;
+    [SerializeField] Transform targetPos;
+    [SerializeField] Transform distanceCheckL;
+    [SerializeField] Transform distanceCheckR;
+    [SerializeField] Transform distanceCheckU;
+    [SerializeField] Transform distanceCheckD;
     GameObject dialogueUI, dialogueBox, dialogueTri, dialogueParent, activationUI;
     Animation dialogueAnim, activationAnim;
     float initEyeSizeY;
 
     bool allowInput = true, isBlinking = false, playEnter = false, playExit = false;
+    float posL, posR, posU, posD;
     int setCount = 0;
 
     private void Start()
@@ -49,13 +52,18 @@ public class DialogueWrite : MonoBehaviour
         StartCoroutine(EyeBlink());
 
         activationUI.transform.position = new Vector2(transform.position.x, transform.position.y + 2f);
+
+        posL = distanceCheckL.position.x;
+        posR = distanceCheckR.position.x;
+        posU = distanceCheckU.position.y;
+        posD = distanceCheckD.position.y;
     }
 
     void Update()
     {
-        float distance = Vector2.Distance(player.transform.position, transform.position);
-
-        if (distance <= distanceToCheck)
+        Vector2 playerPos = player.transform.position;
+        
+        if ((playerPos.x > posL && playerPos.x < posR) && (playerPos.y > posD && playerPos.y < posU))
         {
             float dif = transform.position.x - player.transform.position.x;
 
@@ -71,8 +79,8 @@ public class DialogueWrite : MonoBehaviour
                 activationUI.SetActive(false);
                 allowInput = false;
                 player.SetMove(false);
-                player.SetEyesTargetPos(transform);
-                StartCoroutine(WriteText());
+                //player.transform.position = targetPos.position;
+                StartCoroutine(PlayerToTargetPos());
             }
             else if (allowInput)
             {
@@ -87,7 +95,7 @@ public class DialogueWrite : MonoBehaviour
                 }
             }
         }
-        else if (distance > distanceToCheck)
+        else
         {
             eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, 0f, .25f), 0f);
 
@@ -232,5 +240,14 @@ public class DialogueWrite : MonoBehaviour
         yield return new WaitForSeconds(i);
         isBlinking = true;
         StartCoroutine(EyeBlink()); // Loops blink
+    }
+
+    IEnumerator PlayerToTargetPos()
+    {
+        yield return new WaitUntil(() => player.GetGrounded());
+        player.ForceSetMoveInput(targetPos.position.x);
+        yield return new WaitUntil(() => !player.MovingToTargetPos());
+        player.SetEyesTargetPos(transform);
+        StartCoroutine(WriteText());
     }
 }

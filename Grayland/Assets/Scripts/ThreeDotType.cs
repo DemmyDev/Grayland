@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ThreeDotType : MonoBehaviour
 {
-    Text text;
+    TextMeshPro TMP;
 
     void Start()
     {
-        text = GetComponent<Text>();
+        TMP = GetComponent<TextMeshPro>();
         StartCoroutine(Type());
     }
 
@@ -17,11 +18,11 @@ public class ThreeDotType : MonoBehaviour
     {
         while (true)
         {
-            text.text = ".";
+            TMP.text = ".";
             yield return new WaitForSeconds(.33f);
-            text.text = "..";
+            TMP.text = "..";
             yield return new WaitForSeconds(.33f);
-            text.text = "...";
+            TMP.text = "...";
             yield return new WaitForSeconds(.33f);
         }    
     }
