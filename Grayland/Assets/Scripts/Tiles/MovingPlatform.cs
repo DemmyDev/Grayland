@@ -17,6 +17,9 @@ public class MovingPlatform : MonoBehaviour
     // If true, platform stops current movement
     [SerializeField] bool canMove = true;
 
+    // If true, the platform stops as soon as it reaches the endpoint
+    [SerializeField] bool endPlatform = false;
+
     Vector2 target;
     Vector2 velocity = Vector2.zero;
 
@@ -28,23 +31,43 @@ public class MovingPlatform : MonoBehaviour
 
     void Update()
     {
-        if (canMove)
+        if (endPlatform)
         {
-            if (moveToStart)
-            {
-                target = startPointPos;
-                platform.position = Vector2.SmoothDamp(platform.position, target, ref velocity, smoothTime, maxSpeed);
-                float distance = Vector2.Distance(platform.position, startPointPos);
-                if (distance < .05)
-                    moveToStart = !moveToStart;
-            }
-            else if (!moveToStart)
+            if (canMove)
             {
                 target = endPointPos;
+                Debug.Log("Before: " + platform.position);
                 platform.position = Vector2.SmoothDamp(platform.position, target, ref velocity, smoothTime, maxSpeed);
+                Debug.Log("After: " + platform.position);
                 float distance = Vector2.Distance(platform.position, endPointPos);
+                Debug.Log(distance);
                 if (distance < .05)
-                    moveToStart = !moveToStart;
+                {
+                    platform.position = endPointPos;
+                    canMove = false;
+                }
+            }
+        }
+        else
+        {
+            if (canMove)
+            {
+                if (moveToStart)
+                {
+                    target = startPointPos;
+                    platform.position = Vector2.SmoothDamp(platform.position, target, ref velocity, smoothTime, maxSpeed);
+                    float distance = Vector2.Distance(platform.position, startPointPos);
+                    if (distance < .05)
+                        moveToStart = !moveToStart;
+                }
+                else if (!moveToStart)
+                {
+                    target = endPointPos;
+                    platform.position = Vector2.SmoothDamp(platform.position, target, ref velocity, smoothTime, maxSpeed);
+                    float distance = Vector2.Distance(platform.position, endPointPos);
+                    if (distance < .05)
+                        moveToStart = !moveToStart;
+                }
             }
         }
     }
@@ -57,6 +80,11 @@ public class MovingPlatform : MonoBehaviour
     public void SetMoveState(bool moveState, bool canMovePlatform)
     {
         moveToStart = moveState;
+        canMove = canMovePlatform;
+    }
+
+    public void SetCanMove(bool canMovePlatform)
+    {
         canMove = canMovePlatform;
     }
 }

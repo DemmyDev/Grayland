@@ -25,6 +25,7 @@ public class LevelController : MonoBehaviour
     Animation anim;
     static public LevelController levelController;
     GrayscaleEffect grayscale;
+    LevelEnd levelEnd;
     
     #endregion
 
@@ -88,11 +89,12 @@ public class LevelController : MonoBehaviour
         if (currentPlayer != null) Destroy(currentPlayer);
         if (currentEndpoint != null) Destroy(currentEndpoint);
 
-        // Reset values just in case
+        // Reset values, just in case
         currentLevel = null;
         spawnPoint = Vector2.zero;
         currentEndpoint = null;
         currentDeathbox = null;
+        levelEnd = null;
 
         if (levelId > levels.Count)
         {
@@ -100,21 +102,28 @@ public class LevelController : MonoBehaviour
         }
         else
         {
-            // Instantiate level, set spawnpoint
+            // Instantiate level
             currentLevel = Instantiate(levels[levelId - 1]);
+
+            // Get level's information
+            // oh my god fix all of this Find() bullshit ASAP
             spawnPoint = currentLevel.transform.Find("SpawnPoint").position;
             currentEndpoint = currentLevel.transform.Find("LevelEndpoint").gameObject;
             currentDeathbox = currentLevel.transform.Find("TilemapGroup").Find("Deathbox").gameObject;
             currentLevel.transform.parent = gameObject.transform;
+            levelEnd = currentLevel.transform.Find("LevelEnd").GetComponent<LevelEnd>();
 
+            // Spawn player
             currentPlayer = Instantiate(player, spawnPoint, Quaternion.identity);
             currentPlayer.transform.position = spawnPoint;
 
             currentIntensity = 1f;
             grayscale.intensity = currentIntensity;
             isColorized = false;
-            
-            // oh my god fix all of this Find bullshit after PAX please
+
+            UIController.UIControl.GetActivationUI().SetActive(false);
+            UIController.UIControl.GetDialogueTri().SetActive(false);
+            UIController.UIControl.GetDialogueUI().SetActive(false);
         }
     }
 
@@ -143,5 +152,15 @@ public class LevelController : MonoBehaviour
             return currentDeathbox;
         else
             return null;
+    }
+
+    public bool GetIsColorized()
+    {
+        return isColorized;
+    }
+
+    public LevelEnd GetLevelEnd()
+    {
+        return levelEnd;
     }
 }

@@ -5,7 +5,8 @@ using TMPro;
 
 public class DialogueWrite : MonoBehaviour
 {
-    public DialogueSet[] dialogueSets;
+    public DialogueSet[] dialogueSetsNoColor;
+    public DialogueSet[] dialogueSetsColor;
 
     private TextMeshProUGUI m_textMeshPro;
     public float textSpeed = .05f;
@@ -16,7 +17,7 @@ public class DialogueWrite : MonoBehaviour
         NPC = 1,
     }
 
-    VertexAttributeModifier vertAnim;
+    //VertexAttributeModifier vertAnim;
     LevelController levelControl;
     PlayerController player;
     [SerializeField] Transform eyes;
@@ -30,7 +31,7 @@ public class DialogueWrite : MonoBehaviour
     float initEyeSizeY;
 
     bool allowInput = true, isBlinking = false, playEnter = false, playExit = false;
-    float posL, posR, posU, posD;
+    float posL, posR, posU, posD, forcedEyeDirection = 0f;
     int setCount = 0;
 
     private void Start()
@@ -43,7 +44,7 @@ public class DialogueWrite : MonoBehaviour
         activationUI = UIController.UIControl.GetActivationUI();
         activationAnim = activationUI.GetComponent<Animation>();
         dialogueAnim = dialogueParent.GetComponent<Animation>();
-        vertAnim = dialogueUI.GetComponent<VertexAttributeModifier>();
+        //vertAnim = dialogueUI.GetComponent<VertexAttributeModifier>();
 
         dialogueBox = dialogueUI.transform.parent.gameObject;
         dialogueBox.SetActive(false);
@@ -65,15 +66,22 @@ public class DialogueWrite : MonoBehaviour
         
         if ((playerPos.x > posL && playerPos.x < posR) && (playerPos.y > posD && playerPos.y < posU))
         {
-            float dif = transform.position.x - player.transform.position.x;
+            if (forcedEyeDirection == 0f)
+            {
+                float dif = transform.position.x - player.transform.position.x;
 
-            if (dif >= 0)
-                eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, -.08f, .25f), 0f);
+                if (dif >= 0)
+                    eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, -.08f, .25f), 0f);
+                else
+                    eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, .08f, .25f), 0f);
+            }
             else
-                eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, .08f, .25f), 0f);
+            {
+                eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, forcedEyeDirection, .25f), 0f);
+            }
 
             // When within distance and player 
-            if (Input.GetKeyDown(KeyCode.Return) && allowInput)
+            if (Input.GetButtonDown("Interact") && allowInput)
             {
 
                 activationUI.SetActive(false);
@@ -118,6 +126,13 @@ public class DialogueWrite : MonoBehaviour
         //vertAnim.PlayAnimation(dialogueSets[setCount]);
         dialogueBox.SetActive(true);
         dialogueTri.SetActive(true);
+        dialogueUI.SetActive(true);
+
+        DialogueSet[] dialogueSets;
+        if (levelControl.GetIsColorized())
+            dialogueSets = dialogueSetsColor;
+        else
+            dialogueSets = dialogueSetsNoColor;
 
         // Place text over player or NPC
         if (dialogueSets[setCount].isPlayer)
@@ -129,6 +144,19 @@ public class DialogueWrite : MonoBehaviour
 
         m_textMeshPro = dialogueUI.GetComponent<TextMeshProUGUI>();
         m_textMeshPro.ForceMeshUpdate();
+
+        if (dialogueSets[setCount].delayTypeTime != 0)
+        {
+            dialogueBox.SetActive(false);
+            dialogueTri.SetActive(false);
+            dialogueUI.SetActive(false);
+            yield return new WaitForSeconds(dialogueSets[setCount].delayTypeTime);
+            dialogueBox.SetActive(true);
+            dialogueTri.SetActive(true);
+            dialogueUI.SetActive(true);
+        }
+
+        forcedEyeDirection = dialogueSets[setCount].eyePosX;
 
         dialogueAnim.Play("DialogueEnter");
         yield return new WaitForSeconds(1/5f);
@@ -148,14 +176,14 @@ public class DialogueWrite : MonoBehaviour
             // When last character is revealed, wait for an input and then start next dialogue set or exit dialogue
             if (visibleCount >= totalVisibleCharacters)
             {
-                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+                yield return new WaitUntil(() => Input.GetButtonDown("Interact"));
 
                 // If not end of dialogue sets
                 if (setCount < (dialogueSets.Length - 1))
                 {
                     // Move on to next dialogue set and write text again
                     setCount++;
-                    vertAnim.Stop();
+                    //vertAnim.Stop();
                     dialogueUI.GetComponent<TextMeshProUGUI>().text = "";
 
                     dialogueAnim.Play("DialogueExit");
@@ -173,6 +201,7 @@ public class DialogueWrite : MonoBehaviour
                     dialogueAnim.Play("DialogueExit");
                     yield return new WaitForSeconds(1/6f);
                     dialogueAnim.Stop("DialogueExit");
+                    forcedEyeDirection = 0f;
 
                     StartCoroutine(EndDialogue());
                     yield break;
@@ -183,7 +212,7 @@ public class DialogueWrite : MonoBehaviour
 
             AudioManager.am.Play("Type", Random.Range(dialogueSets[setCount].pitchMin, dialogueSets[setCount].pitchMax));
 
-            if (Input.GetKey(KeyCode.Return))
+            if (Input.GetButton("Interact"))
             {
                 yield return new WaitForSeconds(textSpeed / 2);
             }

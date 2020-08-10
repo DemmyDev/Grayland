@@ -26,6 +26,12 @@ public class DialogueSet : ScriptableObject
     public float pitchMin;
     public float pitchMax;
 
+    [Range(-.08f, .08f), Tooltip("Direction the eyes look in. Must be value between -.08 and .08. If 0, eyes will look towards the player")]
+    public float eyePosX = 0f;
+
+    [Tooltip("How long there is to wait before. Value should at least be .5 if being used. If 0, there is no delay")]
+    public float delayTypeTime = 0f;
+
     // Below not being used for now
     public bool PlayOnEnable = true;
     public AnimationMode textAnimMode = AnimationMode.None;

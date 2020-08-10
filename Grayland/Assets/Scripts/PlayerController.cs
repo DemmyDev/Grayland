@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
     bool isJumping = false, isWallJumping = false, allowJumping = false, jumpActive = false;
     float speedX;
     float jumpActiveTime = 0, jumpButtonDownTime = 0f;
-    bool movingToTargetPos = false;
+    bool movingToTargetPos = false, forcedInput = false;
     RaycastHit2D leftCheck, rightCheck;
     
     float moveInput, forcedMoveInput;
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
     Vector2 eyesTargetPos;
     float eyesDialoguePosX;
 
-    bool allowInput = true;
+    bool allowInput = true, lockVelocityY = false;
 
     #endregion
     
@@ -226,7 +226,7 @@ public class PlayerController : MonoBehaviour
             jumpBufferCurrent = 0f;
 
         // Apply gravity
-        if (isJumping && velocity.y > 3f && !Input.GetButton("Jump") && !isWallJumping)
+        if (isJumping && velocity.y > 3f && !Input.GetButton("Jump") && !isWallJumping && !lockVelocityY)
         {
             velocity.y += 2 * currentGravity * Time.deltaTime;
         }
@@ -244,9 +244,9 @@ public class PlayerController : MonoBehaviour
             float acceleration = grounded ? walkAcceleration : airAcceleration;
             float deceleration = grounded ? groundDeceleration : 0;
 
-            if (canMove || movingToTargetPos)
+            if (canMove || movingToTargetPos || forcedInput)
             {
-                if (movingToTargetPos)
+                if (movingToTargetPos || forcedInput)
                     moveInput = forcedMoveInput;
 
                 if (moveInput != 0)
@@ -523,7 +523,7 @@ public class PlayerController : MonoBehaviour
 
                 currentGravity = gravity;
                 speedX = leftCheck ? speed : -speed; // Are we clinged on the left or right? 
-                velocity = new Vector2(speedX / 2, 0f);
+                velocity = new Vector2(speedX / 4, 0f);
                 clingBufferTimeCurrent = clingBufferTime;
 
                 isClinged = false;
@@ -533,7 +533,7 @@ public class PlayerController : MonoBehaviour
                 grounded = false;
                 detachActive = false;
                 currentDetachWaitTime = detachWaitTime;
-                StartCoroutine(SetCanMove(true));
+                canMove = true;
             }
             else
             {
@@ -562,7 +562,7 @@ public class PlayerController : MonoBehaviour
             #region Animations
 
             // Changes position of eyes based on velocity of player
-            if (allowInput || movingToTargetPos)
+            if (allowInput || movingToTargetPos || forcedInput)
             {
                 eyesTargetPos = new Vector2(Mathf.Lerp(eyes.localPosition.x, velocity.x / 80, .25f), Mathf.Lerp(eyes.localPosition.y, velocity.y / 100, .25f));
             }
@@ -712,9 +712,40 @@ public class PlayerController : MonoBehaviour
         else
             forcedMoveInput = -1;
     }
+    
+    public void ForceSetMoveInput(bool left, bool right, bool up, bool down)
+    {
+        forcedInput = true;
+
+        if (left)
+        {
+            forcedMoveInput = -1;
+        }
+        else if (right)
+        {
+            forcedMoveInput = 1;
+        }
+        else if (up)
+        {
+            lockVelocityY = true;
+            forcedMoveInput = 0;
+            velocity.x = 0f;
+            velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(currentGravity));
+        }
+        else if (down)
+        {
+            forcedMoveInput = 0;
+            velocity.x = 0f;
+        }
+    }
 
     public bool MovingToTargetPos()
     {
         return movingToTargetPos;
+    }
+
+    public STETilemap GetTilemap()
+    {
+        return tilemap;
     }
 }

@@ -20,24 +20,16 @@ public class LevelEndpoint : MonoBehaviour
         spr = GetComponent<SpriteRenderer>();
         levelCompleteUI = UIController.UIControl.GetCompleteUI();
         nextLevelUI = UIController.UIControl.GetNextLevelUI();
+        LevelController.levelController.GetLevelEnd().enabled = false;
 
         levelCompleteUI.SetActive(false);
         nextLevelUI.SetActive(false);
     }
 
-    void Update()
-    {
-        if (isLevelEnded && Input.GetButtonDown("Interact"))
-        {
-            Debug.Log("Go to next level");
-            StartCoroutine(LevelController.levelController.LoadLevel(true));
-        }
-    }
-
     public void EndLevel(PlayerController player)
     {
         AudioManager.am.Play("Endpoint");
-        Invoke("NextLevel", timeToAllowNextLevel);
+        //Invoke("NextLevel", timeToAllowNextLevel);
 
         STETilemap deathbox = LevelController.levelController.GetDeathbox().GetComponent<STETilemap>();
         if (deathbox != null)
@@ -46,7 +38,10 @@ public class LevelEndpoint : MonoBehaviour
             deathbox.Refresh(false, true);
         }
 
-        levelCompleteUI.SetActive(true);
+        //levelCompleteUI.SetActive(true);
+        LevelController.levelController.GetLevelEnd().enabled = true;
+        LevelController.levelController.GetLevelEnd().MoveEndPlatform();
+
         player.SetStickyChild(spr.sprite);
         spr.enabled = false;
         col.enabled = false;
