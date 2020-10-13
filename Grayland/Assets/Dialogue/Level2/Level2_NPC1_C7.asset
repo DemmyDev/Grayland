@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Level2_NPC1_C7
   m_EditorClassIdentifier: 
   isPlayer: 0
-  text: but if i train a bit i think i might be able to get past this
+  text: but maybe if i practice i can get past this
   pitchMin: 0.6
   pitchMax: 0.8
+  eyePosX: 0.08
+  delayTypeTime: 0
   PlayOnEnable: 0
   textAnimMode: 8
   VertexCurve:

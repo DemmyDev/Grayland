@@ -16,6 +16,8 @@ MonoBehaviour:
   text: huh. feeling a bit weird
   pitchMin: 0.6
   pitchMax: 0.8
+  eyePosX: 0.08
+  delayTypeTime: 0
   PlayOnEnable: 0
   textAnimMode: 8
   VertexCurve:

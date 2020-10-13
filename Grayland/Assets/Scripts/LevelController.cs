@@ -14,7 +14,9 @@ public class LevelController : MonoBehaviour
     [SerializeField, Tooltip("Transition object (child of this object)")]
     GameObject transition;
 
-    [SerializeField, Tooltip("List of level prefabs")]
+    [SerializeField, Tooltip("Level set scriptable")]
+    LevelSet levelSet;
+
     List<GameObject> levels;
 
     Vector2 spawnPoint;
@@ -34,6 +36,8 @@ public class LevelController : MonoBehaviour
         if (levelController == null) levelController = this;
         anim = transition.GetComponent<Animation>();
         grayscale = Camera.main.GetComponent<GrayscaleEffect>();
+        levels = levelSet.levels;
+        levelId = levelSet.levelToLoad;
         LevelTransition(false);
     }
 
@@ -79,10 +83,7 @@ public class LevelController : MonoBehaviour
     {
         anim.Play("TransitionExit");
         // If true, adds the current level and moves on to the next level
-        if (isNextLevel)
-        {
-            levelId = levelId + 1;
-        }
+        if (isNextLevel) levelId++;
 
         // Destroy current level
         if (currentLevel != null) Destroy(currentLevel);

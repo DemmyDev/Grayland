@@ -1011,16 +1011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 6775861129569522280, guid: ce7b983d4e477664bb9e5cf946c72d72, type: 3}
   transition: {fileID: 1847567867}
-  levels:
-  - {fileID: 1554123715148119606, guid: 14ceccd4abfc1f94796e5fd057f170ea, type: 3}
-  - {fileID: 1554123715148119606, guid: 9d3d946ce8e720c42834cbfd99ed1b9d, type: 3}
-  - {fileID: 1554123715148119606, guid: 18dcf1ed9fdb73247845d0177c54940f, type: 3}
-  - {fileID: 1554123715148119606, guid: fc22cca34fcea8e44adc2801ab9ceebf, type: 3}
-  - {fileID: 1554123715148119606, guid: ef582a3fb651e0d4da0651451650b77f, type: 3}
-  - {fileID: 1554123715148119606, guid: 9b9069e83f0e93f4e908ad9a8f9e7274, type: 3}
-  - {fileID: 1554123715148119606, guid: b93b38ea56b7abd4fa26349b5d578c43, type: 3}
-  - {fileID: 1554123715148119606, guid: aead8c26e856359408dd49005e9af742, type: 3}
-  - {fileID: 1554123715148119606, guid: e46b6f2793ae4394e918d7b42756bd1f, type: 3}
+  levelSet: {fileID: 11400000, guid: 5d6b24623f32d2246aae1c9644f7fdb2, type: 2}
 --- !u!4 &1241479604
 Transform:
   m_ObjectHideFlags: 0

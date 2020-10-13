@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7340979942563319104}
   - component: {fileID: 7032932756044268039}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sticky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 6775861129569522292}
   - component: {fileID: 6775861129569522282}
   - component: {fileID: 6775861129569522283}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6775861131139649707}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Art
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Level2_NPC1_C8
   m_EditorClassIdentifier: 
   isPlayer: 0
-  text: i didn't know i could think like that, but i like it
+  text: heh. not a bad feeling
   pitchMin: 0.6
   pitchMax: 0.8
+  eyePosX: 0.08
+  delayTypeTime: 0
   PlayOnEnable: 0
   textAnimMode: 8
   VertexCurve:

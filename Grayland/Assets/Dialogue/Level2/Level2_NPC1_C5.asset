@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Level2_NPC1_C5
   m_EditorClassIdentifier: 
   isPlayer: 0
-  text: huh...
+  text: huh
   pitchMin: 0.6
   pitchMax: 0.8
+  eyePosX: 0.08
+  delayTypeTime: 0
   PlayOnEnable: 0
   textAnimMode: 8
   VertexCurve:
