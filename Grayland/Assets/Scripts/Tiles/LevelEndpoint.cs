@@ -29,7 +29,6 @@ public class LevelEndpoint : MonoBehaviour
     public void EndLevel(PlayerController player)
     {
         AudioManager.am.Play("Endpoint");
-        //Invoke("NextLevel", timeToAllowNextLevel);
 
         STETilemap deathbox = LevelController.levelController.GetDeathbox().GetComponent<STETilemap>();
         if (deathbox != null)
@@ -37,9 +36,9 @@ public class LevelEndpoint : MonoBehaviour
             deathbox.ColliderType = eColliderType.None;
             deathbox.Refresh(false, true);
         }
-
-        //levelCompleteUI.SetActive(true);
+        
         LevelController.levelController.GetLevelEnd().enabled = true;
+        LevelController.levelController.SetLevelState(2);
         LevelController.levelController.GetLevelEnd().MoveEndPlatform();
 
         player.SetStickyChild(spr.sprite);

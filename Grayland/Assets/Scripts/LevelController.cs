@@ -17,8 +17,6 @@ public class LevelController : MonoBehaviour
     [SerializeField, Tooltip("Level set scriptable")]
     LevelSet levelSet;
 
-    List<GameObject> levels;
-
     Vector2 spawnPoint;
     GameObject currentLevel, currentPlayer, currentEndpoint, currentDeathbox;
     int levelId = 1;
@@ -36,7 +34,6 @@ public class LevelController : MonoBehaviour
         if (levelController == null) levelController = this;
         anim = transition.GetComponent<Animation>();
         grayscale = Camera.main.GetComponent<GrayscaleEffect>();
-        levels = levelSet.levels;
         levelId = levelSet.levelToLoad;
         LevelTransition(false);
     }
@@ -97,14 +94,14 @@ public class LevelController : MonoBehaviour
         currentDeathbox = null;
         levelEnd = null;
 
-        if (levelId > levels.Count)
+        if (levelId > levelSet.levels.Count)
         {
             SceneManager.LoadScene(0);
         }
         else
         {
             // Instantiate level
-            currentLevel = Instantiate(levels[levelId - 1]);
+            currentLevel = Instantiate(levelSet.levels[levelId - 1].prefab);
 
             // Get level's information
             // oh my god fix all of this Find() bullshit ASAP
@@ -126,6 +123,31 @@ public class LevelController : MonoBehaviour
             UIController.UIControl.GetDialogueTri().SetActive(false);
             UIController.UIControl.GetDialogueUI().SetActive(false);
         }
+    }
+
+    /// <summary>
+    /// Sets state of the current level, and of the next level if applicable
+    /// </summary>
+    /// <param name="stateNum">Level is locked = 0, level is unlocked = 1, level is completed = 2</param>
+    public void SetLevelState(int stateNum)
+    {
+        // Set state of current level
+        levelSet.levels[levelId - 1].state = (Level.LevelState)stateNum;
+
+        // Setting string name for PlayerPrefs. Must be consistent through all other scripts
+        string levelState = "level" + levelId + "State"; // EX: level1State
+        PlayerPrefs.SetInt(levelState, stateNum);
+
+        // If current level is complete, set next level to unlocked
+        if (stateNum == 2)
+        {
+            levelSet.levels[levelId].state = (Level.LevelState)1;
+
+            int n = levelId + 1;
+            levelState = "level" + n + "State"; // EX: level1State
+            PlayerPrefs.SetInt(levelState, 1);
+        }
+
     }
 
     /// <summary>
