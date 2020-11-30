@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using CreativeSpore.SuperTilemapEditor;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class PlayerController : MonoBehaviour
@@ -78,11 +79,12 @@ public class PlayerController : MonoBehaviour
     Text debugText;
 
     BoxCollider2D col;
-    Vector2 velocity;
+    Vector2 velocity, bufferedVelocity;
     bool grounded, landed;
     bool isClinged = false, canMove = true;
     float currentGravity;
     bool isBlinking = false;
+    bool isTeleporting = false;
     bool playOnce, isDead = false;
     float clingBufferTimeCurrent = 0f, coyoteTimeCurrent = 0f;
     float jumpBufferCurrent = 0f;
@@ -99,6 +101,8 @@ public class PlayerController : MonoBehaviour
     float currentDetachWaitTime;
     bool detachActive = false;
     STETilemap tilemap;
+
+    PauseParent pauseParent;
     
     SpriteRenderer sprRend;
 
@@ -117,6 +121,8 @@ public class PlayerController : MonoBehaviour
         clingBufferTimeCurrent = clingBufferTime;
         coyoteTimeCurrent = coyoteTime;
         currentDetachWaitTime = detachWaitTime;
+        bufferedVelocity = Vector2.zero;
+        if (SceneManager.GetActiveScene().buildIndex == 0) pauseParent = UIController.UIControl.GetPauseParent().GetComponent<PauseParent>();
     }
 
     private void Start()
@@ -131,10 +137,24 @@ public class PlayerController : MonoBehaviour
     {
         #region Input & Jump Logic
 
+        if (bufferedVelocity != Vector2.zero)
+        {
+            velocity = bufferedVelocity;
+            bufferedVelocity = Vector2.zero;
+        }
+
         bool inputJump = Input.GetButtonDown("Jump");
-        if (!allowInput)
-            inputJump = false;
-        
+
+        // Ensure PauseParent is within scene before checking for bool
+        if (pauseParent != null)
+        {
+            if (!allowInput || pauseParent.GetIsPaused())
+                inputJump = false;
+        }
+        else if (!allowInput)
+                inputJump = false;
+
+
         if (inputJump && jumpActiveTime <= 0)
             jumpActiveTime = .033f;
 
@@ -302,6 +322,9 @@ public class PlayerController : MonoBehaviour
             if (hits.Length == 1 && !isClinged)
                 landed = false;
 
+            // Reset teleportating bool
+            isTeleporting = false;
+
             // Ground checking
             foreach (Collider2D hit in hits)
             {
@@ -335,11 +358,25 @@ public class PlayerController : MonoBehaviour
                         return;
                     }
 
+                    // Teleport collision
+                    if (hit.gameObject.CompareTag("Teleport") && !isTeleporting)
+                    {
+                        TeleportTile teleport = hit.GetComponentInParent<TeleportTile>().GetOtherTeleporter();
+                        Vector3 newPos = teleport.GetTeleportPos();
+                        transform.position = newPos;
+                        bufferedVelocity = velocity;
+
+                        landed = false;
+                        grounded = false;
+                        isTeleporting = true;
+                        isClinged = false;
+                    }
+
                     overlap = true;
                     transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
 
                     // If the object beneath us intersects, grounded is true 
-                    if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
+                    if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0 && !isTeleporting)
                     {
                         isJumping = false;
                         touchingGround = true;
@@ -379,6 +416,7 @@ public class PlayerController : MonoBehaviour
                                 }
                                 
                                 velocity.y = Mathf.Sqrt(bounceForceY * jumpHeight * Mathf.Abs(currentGravity));
+                                isClinged = false;
                                 landed = false;
                                 grounded = false;
                                 if (moveInput == 0)
@@ -450,7 +488,7 @@ public class PlayerController : MonoBehaviour
                     if (tileCol.CompareTag("Pressure"))
                     {
                         PressureTile pressureTile = tileCol.GetComponentInParent<PressureTile>();
-                        pressureTile.ChangeMoveState(false);
+                        pressureTile.ChangeMoveState(true);
                     }
 
                     // Bounce 
@@ -476,6 +514,19 @@ public class PlayerController : MonoBehaviour
                         }
                     }
 
+                    if (tileCol.CompareTag("Teleport") && !isTeleporting)
+                    {
+                        TeleportTile teleport = tileCol.GetComponentInParent<TeleportTile>().GetOtherTeleporter();
+                        Vector3 newPos = teleport.GetTeleportPos();
+                        transform.position = newPos;
+                        bufferedVelocity = velocity;
+
+                        landed = false;
+                        grounded = false;
+                        isTeleporting = true;
+                        isClinged = false;
+                    }
+
                     // Spawn particles when colliding with wall
                     if (leftCheck)
                         Instantiate(jumpParticle, new Vector2(transform.position.x - .5f, transform.position.y), Quaternion.Euler(0f, 0f, -90f));
@@ -492,7 +543,7 @@ public class PlayerController : MonoBehaviour
                     if (tileCol.CompareTag("Pressure"))
                     {
                         PressureTile pressureTile = tileCol.GetComponentInParent<PressureTile>();
-                        pressureTile.ChangeMoveState(true);
+                        pressureTile.ChangeMoveState(false);
                     }
 
                     float pitch = 1 + Random.Range(-.25f, .25f);
@@ -518,7 +569,7 @@ public class PlayerController : MonoBehaviour
                 if (tileCol.CompareTag("Pressure"))
                 {
                     PressureTile pressureTile = tileCol.GetComponentInParent<PressureTile>();
-                    pressureTile.ChangeMoveState(true);
+                    pressureTile.ChangeMoveState(false);
                 }
 
                 currentGravity = gravity;

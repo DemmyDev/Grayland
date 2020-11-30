@@ -267,6 +267,75 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1001 &331044536
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4708202260431145764, guid: 93025e47f7e823e4fbe15e0b1706214b,
+        type: 3}
+      propertyPath: m_Name
+      value: Singleton Scene Loader
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443031299536235921, guid: 93025e47f7e823e4fbe15e0b1706214b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443031299536235921, guid: 93025e47f7e823e4fbe15e0b1706214b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443031299536235921, guid: 93025e47f7e823e4fbe15e0b1706214b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443031299536235921, guid: 93025e47f7e823e4fbe15e0b1706214b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443031299536235921, guid: 93025e47f7e823e4fbe15e0b1706214b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443031299536235921, guid: 93025e47f7e823e4fbe15e0b1706214b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443031299536235921, guid: 93025e47f7e823e4fbe15e0b1706214b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443031299536235921, guid: 93025e47f7e823e4fbe15e0b1706214b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443031299536235921, guid: 93025e47f7e823e4fbe15e0b1706214b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443031299536235921, guid: 93025e47f7e823e4fbe15e0b1706214b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443031299536235921, guid: 93025e47f7e823e4fbe15e0b1706214b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 93025e47f7e823e4fbe15e0b1706214b, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,7 +470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: Jump
-    clip: {fileID: 8300000, guid: bd66d33ae62028547a8ae8470bfe6335, type: 3}
+    clip: {fileID: 8300000, guid: 8eb3cb2b57d2100488af2a1c9ad7e04f, type: 3}
     volume: 1
     pitch: 1
     time: 0.075
@@ -409,7 +478,7 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
   - name: Land
-    clip: {fileID: 8300000, guid: 980e59d438fda4146bbe27b4864f2ef1, type: 3}
+    clip: {fileID: 8300000, guid: fad3bd7502a1ddd4a8c9542e44836b0a, type: 3}
     volume: 1
     pitch: 1
     time: 0.075
@@ -417,7 +486,7 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
   - name: Death
-    clip: {fileID: 8300000, guid: d1cf9df580cee244f914fc9af8f5eee5, type: 3}
+    clip: {fileID: 8300000, guid: b155254c148e713479359b2798c2db45, type: 3}
     volume: 1
     pitch: 1
     time: 0.05
@@ -425,7 +494,7 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
   - name: Endpoint
-    clip: {fileID: 8300000, guid: c9a4d06161d34af428f972df6c852f28, type: 3}
+    clip: {fileID: 8300000, guid: 21ee48c14ee73dc47a239da156b34f0e, type: 3}
     volume: 1
     pitch: 1
     time: 0
@@ -433,10 +502,18 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
   - name: Bounce
-    clip: {fileID: 8300000, guid: 6722094e0a5effd47974c1b0b70f8d74, type: 3}
+    clip: {fileID: 8300000, guid: 5f0702c0a3f377b458eb0bd9319d1267, type: 3}
     volume: 1
     pitch: 1
     time: 0.075
+    source: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
+  - name: Type
+    clip: {fileID: 8300000, guid: b7b5b162a27928546bca1fbf06fab935, type: 3}
+    volume: 0.75
+    pitch: 1
+    time: 0.0025
     source: {fileID: 0}
     loop: 0
     playOnAwake: 0

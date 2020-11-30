@@ -8,11 +8,8 @@ public class PressureTile : MonoBehaviour
     [SerializeField] bool moveToStart; // True: Move to starting pos / False: Move to ending pos
     [SerializeField] bool canMove; // True: Platform is moving / False: Platform is not moving
 
-    public void ChangeMoveState(bool inverse)
+    public void ChangeMoveState(bool move)
     {
-        if (!inverse)
-            movingPlatform.SetMoveState(moveToStart, canMove);
-        else
-            movingPlatform.SetMoveState(!moveToStart, !canMove);
+        movingPlatform.SetCanMove(move);
     }
 }

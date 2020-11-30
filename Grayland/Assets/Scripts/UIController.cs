@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject dialogueTri;
     [SerializeField] GameObject activationUI;
     [SerializeField] GameObject activationText;
+    [SerializeField] GameObject pauseParent;
 
     public static UIController UIControl;
 
@@ -47,5 +48,10 @@ public class UIController : MonoBehaviour
     public GameObject GetActivationText()
     {
         return activationText;
+    }
+
+    public GameObject GetPauseParent()
+    {
+        return pauseParent;
     }
 }

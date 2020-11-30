@@ -11,6 +11,7 @@ TagManager:
   - Endpoint
   - Bounce
   - Dialogue
+  - Teleport
   layers:
   - Default
   - TransparentFX
