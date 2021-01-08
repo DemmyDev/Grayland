@@ -408,7 +408,7 @@ public class PlayerController : MonoBehaviour
                                 RaycastHit2D castToGround = Physics2D.Raycast(transform.position, Vector2.down, .5f, whatIsCling); // Right side
 
                                 // Adjust player position to ensure player does not end up inside tile
-                                if (castToGround.collider.gameObject.CompareTag("Bounce"))
+                                if (castToGround.collider != null && castToGround.collider.gameObject.CompareTag("Bounce"))
                                 {
                                     Vector2 gridPos = TilemapUtils.GetGridPosition(tilemap, castToGround.point);
                                     Vector2 tilePos = TilemapUtils.GetGridWorldPos(tilemap, (int)gridPos.x, (int)gridPos.y);

@@ -260,7 +260,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3765486689155349248}
   m_Layer: 0
-  m_Name: Level_6
+  m_Name: Level_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -337,7 +337,7 @@ MonoBehaviour:
   - {fileID: 7053884437283669428}
   - {fileID: 6790253500636042295}
   - {fileID: 8264190799674768682}
-  m_selectedIndex: 0
+  m_selectedIndex: 1
   m_unselectedColorMultiplier: 1
   m_defaultTilemapWindowVisible: 0
   m_displayTilemapRList: 1
@@ -2883,7 +2883,7 @@ MonoBehaviour:
   m_sortingLayerName: Default
   m_orderInLayer: 0
   m_material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_tintColor: {r: 0.7529412, g: 0.7529412, b: 0.7529412, a: 1}
+  m_tintColor: {r: 1, g: 1, b: 1, a: 1}
   m_pixelSnap: 0
   m_isVisible: 1
   m_allowPaintingOutOfBounds: 1
