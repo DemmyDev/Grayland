@@ -476,7 +476,7 @@ MonoBehaviour:
   - {fileID: 4488685580704445365}
   - {fileID: 5599194757738955507}
   - {fileID: 5596612799963089223}
-  m_selectedIndex: 13
+  m_selectedIndex: 0
   m_unselectedColorMultiplier: 1
   m_defaultTilemapWindowVisible: 0
   m_displayTilemapRList: 1
