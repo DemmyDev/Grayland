@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
     bool grounded, landed;
     bool isClinged = false, canMove = true;
     float currentGravity;
-    bool isBlinking = false;
+    bool isBlinking = false, lockBlink = false;
     bool isTeleporting = false;
     bool playOnce, isDead = false;
     float clingBufferTimeCurrent = 0f, coyoteTimeCurrent = 0f;
@@ -122,12 +122,12 @@ public class PlayerController : MonoBehaviour
         coyoteTimeCurrent = coyoteTime;
         currentDetachWaitTime = detachWaitTime;
         bufferedVelocity = Vector2.zero;
-        if (SceneManager.GetActiveScene().buildIndex == 0) pauseParent = UIController.UIControl.GetPauseParent().GetComponent<PauseParent>();
+        if (SceneManager.GetActiveScene().buildIndex == 1) pauseParent = UIController.UIControl.GetPauseParent().GetComponent<PauseParent>();
     }
 
     private void Start()
     {
-        StartCoroutine(SetUpBlink());
+        if (SceneManager.GetActiveScene().buildIndex != 0) StartCoroutine(SetUpBlink());
         StartCoroutine(EnableJump());
         // Change this pls
         tilemap = FindObjectOfType<STETilemap>();
@@ -625,36 +625,39 @@ public class PlayerController : MonoBehaviour
             eyes.localPosition = eyesTargetPos;
 
             // Eyes blinking
-            if (isBlinking)
+            if (!lockBlink)
             {
-                eyes.localScale = new Vector2(eyes.localScale.x, Mathf.Lerp(eyes.localScale.y, 0f, .33f));
-
-                if (eyes.localScale.y <= .025f)
+                if (isBlinking)
                 {
-                    isBlinking = false;
+                    eyes.localScale = new Vector2(eyes.localScale.x, Mathf.Lerp(eyes.localScale.y, 0f, .33f));
+
+                    if (eyes.localScale.y <= .025f)
+                    {
+                        isBlinking = false;
+                    }
                 }
-            }
-            else
-                eyes.localScale = new Vector2(eyes.localScale.x, Mathf.Lerp(eyes.localScale.y, 1f, .33f));
+                else
+                    eyes.localScale = new Vector2(eyes.localScale.x, Mathf.Lerp(eyes.localScale.y, 1f, .33f));
 
-            // Hotfix for alleviating lerp issues relative to scale
-            if (eyes.localScale.y >= .995f)
-                eyes.localScale = new Vector2(eyes.localScale.x, 1f);
+                // Hotfix for alleviating lerp issues relative to scale
+                if (eyes.localScale.y >= .995f)
+                    eyes.localScale = new Vector2(eyes.localScale.x, 1f);
 
-            // Hotifx for alleviating lerp issues relative to position
-            if (eyes.localPosition.y < .01f && eyes.localPosition.y > -.01f && velocity.y > -1 && velocity.y < 0)
-                eyes.localPosition = new Vector2(eyes.localPosition.x, 0f);
+                // Hotfix for alleviating lerp issues relative to position
+                if (eyes.localPosition.y < .01f && eyes.localPosition.y > -.01f && velocity.y > -1 && velocity.y < 0)
+                    eyes.localPosition = new Vector2(eyes.localPosition.x, 0f);
 
-            // Plays particles if moving, stops particles if not moving
-            if ((velocity.y > -1.5f && velocity.y < .25f && velocity.x > -.25f && velocity.x < .25f) || isClinged)
-            {
-                playOnce = true;
-                groundParticle.Stop();
-            }
-            else if (playOnce)
-            {
-                playOnce = false;
-                groundParticle.Play();
+                // Plays particles if moving, stops particles if not moving
+                if ((velocity.y > -1.5f && velocity.y < .25f && velocity.x > -.25f && velocity.x < .25f) || isClinged)
+                {
+                    playOnce = true;
+                    groundParticle.Stop();
+                }
+                else if (playOnce)
+                {
+                    playOnce = false;
+                    groundParticle.Play();
+                }
             }
 
             #endregion
@@ -790,9 +793,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void SetBlinking(bool blink, bool lockB)
+    {
+        isBlinking = blink;
+        lockBlink = lockB;
+    }
+
     public bool MovingToTargetPos()
     {
         return movingToTargetPos;
+    }
+
+    public Transform GetEyes()
+    {
+        return eyes;
     }
 
     public STETilemap GetTilemap()

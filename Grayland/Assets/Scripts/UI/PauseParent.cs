@@ -55,7 +55,7 @@ public class PauseParent : MonoBehaviour
                     isPaused = false;
                     canInput = false;
                     Time.timeScale = 1f;
-                    StartCoroutine(LevelController.levelController.SceneTransition(3));
+                    StartCoroutine(LevelController.levelController.SceneTransition(0));
                     break;
                 default:
                     Debug.LogError("No option available. Idk why. This should be impossible");

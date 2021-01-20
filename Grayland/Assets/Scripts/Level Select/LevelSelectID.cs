@@ -11,15 +11,13 @@ public class LevelSelectID : MonoBehaviour
     [SerializeField] bool right;
     [SerializeField] bool up;
     [SerializeField] bool down;
-
-    BoxCollider2D col;
+    
     bool checkForPlayer = true;
     LevelSelector levelSelectParent;
     LevelSceneSelector sceneSelectParent;
 
     void Start()
     {
-        col = GetComponent<BoxCollider2D>();
         levelSelectParent = gameObject.GetComponentInParent<LevelSelector>();
     }
 

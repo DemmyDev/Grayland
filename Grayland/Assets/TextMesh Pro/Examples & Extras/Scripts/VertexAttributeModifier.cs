@@ -79,6 +79,7 @@ public class VertexAttributeModifier : MonoBehaviour
     {
         Stop();
 
+        /*
         m_TextComponent.text = dialogueSet.text;
         int textModeID = (int)dialogueSet.textAnimMode;
         //MeshAnimationMode = (AnimationMode)textModeID;
@@ -95,6 +96,7 @@ public class VertexAttributeModifier : MonoBehaviour
 
         ScaleMultiplier = dialogueSet.ScaleMultiplier;
         RotationMultiplier = dialogueSet.RotationMultiplier;
+        */
 
         m_TextComponent.ForceMeshUpdate();
 

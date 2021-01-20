@@ -31,23 +31,4 @@ public class DialogueSet : ScriptableObject
 
     [Tooltip("How long there is to wait before. Value should at least be .5 if being used. If 0, there is no delay")]
     public float delayTypeTime = 0f;
-
-    // Below not being used for now
-    public bool PlayOnEnable = true;
-    public AnimationMode textAnimMode = AnimationMode.None;
-
-    public AnimationCurve VertexCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(0.25f, 2.0f), new Keyframe(0.5f, 0), new Keyframe(0.75f, 2.0f), new Keyframe(1, 0f));
-
-    public float AngleMultiplier = 1.0f;
-    public float SpeedMultiplier = 1.0f;
-    public float CurveScale = 1.0f;
-
-    [Header("Dangle")]
-    [Range(.01f, .1f)] public float DangleRefresh = .05f;
-    public Vector2 DanglingRange = new Vector2(10f, 25f);
-    public Vector2 DanglingSpeed = new Vector2(1f, 3f);
-
-    [Header("Shake")]
-    public float ScaleMultiplier = 1.0f;
-    public float RotationMultiplier = 1.0f;
 }

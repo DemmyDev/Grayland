@@ -14,68 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayer: 1
   text: i don't think so
-  pitchMin: 0.6
-  pitchMax: 0.8
+  pitchMin: 0.8
+  pitchMax: 1
   eyePosX: 0
   delayTypeTime: 0
-  PlayOnEnable: 0
-  textAnimMode: 8
-  VertexCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.25
-      value: 2
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.75
-      value: 2
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 1
-    m_PostInfinity: 1
-    m_RotationOrder: 4
-  AngleMultiplier: 0
-  SpeedMultiplier: 0.25
-  CurveScale: 5
-  DangleRefresh: 0.05
-  DanglingRange: {x: 10, y: 25}
-  DanglingSpeed: {x: 1, y: 3}
-  ScaleMultiplier: 1
-  RotationMultiplier: 1

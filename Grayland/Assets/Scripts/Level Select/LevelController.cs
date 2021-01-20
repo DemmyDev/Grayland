@@ -63,7 +63,7 @@ public class LevelController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightShift))
         {
             // ANALYTICS: Stopped playing at levelId
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
     }
 

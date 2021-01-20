@@ -30,7 +30,7 @@ public class DialogueWrite : MonoBehaviour
     Animation dialogueAnim, activationAnim;
     float initEyeSizeY;
 
-    bool allowInput = true, isBlinking = false, playEnter = false, playExit = false;
+    bool allowInput = true, isBlinking = false, playEnter = false, playExit = false, isTyping = false;
     float posL, posR, posU, posD, forcedEyeDirection = 0f;
     int setCount = 0;
 
@@ -66,19 +66,20 @@ public class DialogueWrite : MonoBehaviour
         
         if ((playerPos.x > posL && playerPos.x < posR) && (playerPos.y > posD && playerPos.y < posU))
         {
+            /*
             if (forcedEyeDirection == 0f)
             {
                 float dif = transform.position.x - player.transform.position.x;
 
                 if (dif >= 0)
-                    eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, -.08f, .25f), 0f);
+                    eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, -.08f, .25f / 20), 0f);
                 else
-                    eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, .08f, .25f), 0f);
+                    eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, .08f, .25f / 20), 0f);
             }
             else
             {
-                eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, forcedEyeDirection, .25f), 0f);
-            }
+                eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, forcedEyeDirection, .25f / 20), 0f);
+            }*/
 
             // When within distance and player 
             if (Input.GetButtonDown("Interact") && allowInput)
@@ -105,7 +106,7 @@ public class DialogueWrite : MonoBehaviour
         }
         else
         {
-            eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, 0f, .25f), 0f);
+            //eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, 0f, .25f / 20), 0f);
 
             if (!playExit)
             {
@@ -117,13 +118,12 @@ public class DialogueWrite : MonoBehaviour
             //activationUI.SetActive(false);
         }
 
-        Blinking();
+        //Blinking();
     }
 
     // Start is called before the first frame update
     public IEnumerator WriteText()
     {
-        //vertAnim.PlayAnimation(dialogueSets[setCount]);
         dialogueBox.SetActive(true);
         dialogueTri.SetActive(true);
         dialogueUI.SetActive(true);
@@ -164,6 +164,9 @@ public class DialogueWrite : MonoBehaviour
 
         dialogueUI.GetComponent<TextMeshProUGUI>().text = dialogueSets[setCount].text;
 
+        isTyping = true;
+        StartCoroutine(TypeAudio(dialogueSets, textSpeed, setCount));
+
         int totalVisibleCharacters = dialogueSets[setCount].text.Length; // Get number of visible characters in the text object
         int counter = 0;
 
@@ -176,7 +179,9 @@ public class DialogueWrite : MonoBehaviour
             // When last character is revealed, wait for an input and then start next dialogue set or exit dialogue
             if (visibleCount >= totalVisibleCharacters)
             {
-                yield return new WaitUntil(() => Input.GetButtonDown("Interact"));
+                isTyping = false;
+
+                yield return new WaitUntil(() => Input.GetButtonDown("Interact") || Input.GetButtonDown("Jump"));
 
                 // If not end of dialogue sets
                 if (setCount < (dialogueSets.Length - 1))
@@ -210,17 +215,43 @@ public class DialogueWrite : MonoBehaviour
 
             counter += 1;
 
-            AudioManager.am.Play("Type", Random.Range(dialogueSets[setCount].pitchMin, dialogueSets[setCount].pitchMax));
-
-            if (Input.GetButton("Interact"))
+            if (Input.GetButton("Interact") || Input.GetButton("Jump"))
             {
-                yield return new WaitForSeconds(textSpeed / 2);
+                yield return new WaitForSeconds(textSpeed / 4);
             }
             else
             {
                 yield return new WaitForSeconds(textSpeed);
             }
         }
+    }
+
+    void FixedUpdate()
+    {
+        Vector2 playerPos = player.transform.position;
+
+        if ((playerPos.x > posL && playerPos.x < posR) && (playerPos.y > posD && playerPos.y < posU))
+        {
+            if (forcedEyeDirection == 0f)
+            {
+                float dif = transform.position.x - player.transform.position.x;
+
+                if (dif >= 0)
+                    eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, -.08f, .25f), 0f);
+                else
+                    eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, .08f, .25f), 0f);
+            }
+            else
+            {
+                eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, forcedEyeDirection, .25f), 0f);
+            }
+        }
+        else
+        {
+            eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, 0f, .25f), 0f);
+        }
+
+        Blinking();
     }
 
     public IEnumerator EndDialogue()
@@ -241,6 +272,14 @@ public class DialogueWrite : MonoBehaviour
         activationAnim.Play("ActivationEnter");
 
         StartCoroutine(UIController.UIControl.GetActivationText().GetComponent<ThreeDotType>().Type());
+    }
+
+    IEnumerator TypeAudio(DialogueSet[] sets, float speed, int set)
+    {
+        AudioManager.am.Play("Type", Random.Range(sets[set].pitchMin, sets[set].pitchMax));
+        yield return new WaitForSeconds(speed);
+        AudioManager.am.Stop("Type");
+        if (isTyping) StartCoroutine(TypeAudio(sets, speed, set));
     }
 
     void Blinking()

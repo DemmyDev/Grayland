@@ -651,7 +651,7 @@ MonoBehaviour:
     playOnAwake: 0
   - name: Endpoint
     clip: {fileID: 8300000, guid: 21ee48c14ee73dc47a239da156b34f0e, type: 3}
-    volume: 1
+    volume: 0.3
     pitch: 1
     time: 0
     source: {fileID: 0}
@@ -1553,9 +1553,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 6775861129569522280, guid: ce7b983d4e477664bb9e5cf946c72d72, type: 3}
   transition: {fileID: 1847567867}
-  levelSet: {fileID: 11400000, guid: 5d6b24623f32d2246aae1c9644f7fdb2, type: 2}
-  testLevel: {fileID: 1554123715148119606, guid: ffe331ebcf2573f489da024e178fd6fe,
-    type: 3}
+  levelSet: {fileID: 11400000, guid: 12d41984460212b4ca45d4ff4d61310e, type: 2}
+  testLevel: {fileID: 0}
 --- !u!4 &1241479604
 Transform:
   m_ObjectHideFlags: 0
