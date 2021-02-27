@@ -124,7 +124,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -456,7 +456,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -541,7 +541,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -641,7 +641,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -848,7 +848,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -868,36 +868,6 @@ MonoBehaviour:
     useLightProbes: 0
     reflectionProbeUsage: 0
     anchorOverride: {fileID: 0}
---- !u!1 &1351120648476772098
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3620747311514759120}
-  m_Layer: 10
-  m_Name: TeleportPos
-  m_TagString: Untagged
-  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3620747311514759120
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1351120648476772098}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: 2.6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 784436761417685433}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1473067172168136260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1912,8 +1882,6 @@ Transform:
   - {fileID: 6453648247247518323}
   - {fileID: 3591125802399896493}
   - {fileID: 7100217562369745457}
-  - {fileID: 4691932649878666237}
-  - {fileID: 7949678427388850053}
   - {fileID: 751707816412121413}
   - {fileID: 5158102238346268865}
   m_Father: {fileID: 3765486689155349248}
@@ -1954,14 +1922,6 @@ MonoBehaviour:
   - {fileID: 4488685580704445365}
   - {fileID: 5599194757738955507}
   - {fileID: 3749821966053321511}
-  - {fileID: 4470961869632875098}
-  - {fileID: 3391057212209423706}
-  - {fileID: 6940233556007186286}
-  - {fileID: 5632671689458038896}
-  - {fileID: 2943479620814106664}
-  - {fileID: 4583714887538715092}
-  - {fileID: 5578944454458393721}
-  - {fileID: 4217458503792884182}
   - {fileID: 8864067039698858617}
   - {fileID: 2373557630081982795}
   - {fileID: 7524926999057426588}
@@ -1970,7 +1930,7 @@ MonoBehaviour:
   - {fileID: 566023863645441210}
   - {fileID: 7361793767800621000}
   - {fileID: 5003389152957071915}
-  m_selectedIndex: 0
+  m_selectedIndex: 23
   m_unselectedColorMultiplier: 1
   m_defaultTilemapWindowVisible: 0
   m_displayTilemapRList: 1
@@ -2010,7 +1970,7 @@ Transform:
   - {fileID: 8814732521429071180}
   - {fileID: 9053094594575331836}
   m_Father: {fileID: 184809992549707804}
-  m_RootOrder: 18
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8864067039698858617
 MonoBehaviour:
@@ -2043,7 +2003,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -2272,7 +2232,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -2432,7 +2392,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -2655,7 +2615,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -2753,7 +2713,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -3162,7 +3122,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -3196,90 +3156,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   otherTeleporter: {fileID: 2593614174034237324}
   teleportPos: {fileID: 9105672891835523020}
---- !u!1 &3922560246033039360
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1623391854804776082}
-  - component: {fileID: 4583714887538715092}
-  m_Layer: 10
-  m_Name: Platform Parent
-  m_TagString: Untagged
-  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1623391854804776082
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3922560246033039360}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2419670192733215831}
-  - {fileID: 4628427337015487825}
-  m_Father: {fileID: 7949678427388850053}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4583714887538715092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3922560246033039360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dec3ca0fe88506448df84e8bf55b2dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowGrid: 0
-  InnerPadding: 0
-  ColliderDepth: 0.1
-  ColliderType: 1
-  Collider2DType: 0
-  ShowColliderNormals: 0
-  ColliderDisplayMode: 0
-  IsUndoEnabled: 0
-  SortOrder: 0
-  m_sortingLayer: 0
-  m_sortingLayerName: Default
-  m_orderInLayer: 0
-  m_material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_tintColor: {r: 1, g: 1, b: 1, a: 1}
-  m_pixelSnap: 0
-  m_isVisible: 1
-  m_allowPaintingOutOfBounds: 1
-  m_autoShrink: 0
-  m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
-  m_physicMaterial: {fileID: 0}
-  m_physicMaterial2D: {fileID: 0}
-  m_cellSize: {x: 1, y: 1}
-  m_mapBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 23, y: 13, z: 0}
-  m_tileset: {fileID: 11400000, guid: ce82e5da484585e4c81ba6d71d897adb, type: 2}
-  m_minGridX: -23
-  m_minGridY: -13
-  m_maxGridX: 22
-  m_maxGridY: 12
-  m_parentTilemapGroup: {fileID: 0}
-  m_parallaxFactor: {x: 1, y: 1}
-  m_chunkRendererProperties:
-    castShadows: 0
-    receiveShadows: 0
-    useLightProbes: 0
-    reflectionProbeUsage: 0
-    anchorOverride: {fileID: 0}
 --- !u!1 &3941930204067281605
 GameObject:
   m_ObjectHideFlags: 0
@@ -4056,7 +3932,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -4089,88 +3965,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isXAxis: 0
---- !u!1 &4202434948538400173
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2419670192733215831}
-  - component: {fileID: 5578944454458393721}
-  m_Layer: 10
-  m_Name: Main
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2419670192733215831
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4202434948538400173}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1623391854804776082}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5578944454458393721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4202434948538400173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dec3ca0fe88506448df84e8bf55b2dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowGrid: 0
-  InnerPadding: 0
-  ColliderDepth: 0.1
-  ColliderType: 1
-  Collider2DType: 0
-  ShowColliderNormals: 0
-  ColliderDisplayMode: 0
-  IsUndoEnabled: 0
-  SortOrder: 0
-  m_sortingLayer: 0
-  m_sortingLayerName: Default
-  m_orderInLayer: 0
-  m_material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_tintColor: {r: 1, g: 1, b: 1, a: 1}
-  m_pixelSnap: 0
-  m_isVisible: 1
-  m_allowPaintingOutOfBounds: 1
-  m_autoShrink: 0
-  m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
-  m_physicMaterial: {fileID: 0}
-  m_physicMaterial2D: {fileID: 0}
-  m_cellSize: {x: 1, y: 1}
-  m_mapBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 23, y: 13, z: 0}
-  m_tileset: {fileID: 11400000, guid: ce82e5da484585e4c81ba6d71d897adb, type: 2}
-  m_minGridX: -23
-  m_minGridY: -13
-  m_maxGridX: 22
-  m_maxGridY: 12
-  m_parentTilemapGroup: {fileID: 0}
-  m_parallaxFactor: {x: 1, y: 1}
-  m_chunkRendererProperties:
-    castShadows: 0
-    receiveShadows: 0
-    useLightProbes: 0
-    reflectionProbeUsage: 0
-    anchorOverride: {fileID: 0}
 --- !u!1 &4234524027274724808
 GameObject:
   m_ObjectHideFlags: 0
@@ -4415,110 +4209,6 @@ Transform:
   m_Father: {fileID: 3591125802399896493}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4364108974228599029
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7949678427388850053}
-  - component: {fileID: 2943479620814106664}
-  - component: {fileID: 5431729965774805582}
-  m_Layer: 10
-  m_Name: Move Parent B2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &7949678427388850053
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4364108974228599029}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 5346006599598981071}
-  - {fileID: 1623391854804776082}
-  m_Father: {fileID: 184809992549707804}
-  m_RootOrder: 17
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2943479620814106664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4364108974228599029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dec3ca0fe88506448df84e8bf55b2dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowGrid: 0
-  InnerPadding: 0
-  ColliderDepth: 0.1
-  ColliderType: 1
-  Collider2DType: 0
-  ShowColliderNormals: 0
-  ColliderDisplayMode: 0
-  IsUndoEnabled: 0
-  SortOrder: 0
-  m_sortingLayer: 0
-  m_sortingLayerName: Default
-  m_orderInLayer: 0
-  m_material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_tintColor: {r: 1, g: 1, b: 1, a: 1}
-  m_pixelSnap: 0
-  m_isVisible: 1
-  m_allowPaintingOutOfBounds: 1
-  m_autoShrink: 0
-  m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
-  m_physicMaterial: {fileID: 0}
-  m_physicMaterial2D: {fileID: 0}
-  m_cellSize: {x: 1, y: 1}
-  m_mapBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 23, y: 13, z: 0}
-  m_tileset: {fileID: 11400000, guid: ce82e5da484585e4c81ba6d71d897adb, type: 2}
-  m_minGridX: -23
-  m_minGridY: -13
-  m_maxGridX: 22
-  m_maxGridY: 12
-  m_parentTilemapGroup: {fileID: 0}
-  m_parallaxFactor: {x: 1, y: 1}
-  m_chunkRendererProperties:
-    castShadows: 0
-    receiveShadows: 0
-    useLightProbes: 0
-    reflectionProbeUsage: 0
-    anchorOverride: {fileID: 0}
---- !u!114 &5431729965774805582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4364108974228599029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 352a9f46f31893a46bc9b2afe21be635, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  platform: {fileID: 1623391854804776082}
-  endPoint: {fileID: 5346006599598981071}
-  maxSpeed: 4
-  smoothTime: 0.75
-  moveToStart: 0
-  canMove: 0
-  endPlatform: 0
 --- !u!1 &4431884452114788554
 GameObject:
   m_ObjectHideFlags: 0
@@ -4644,104 +4334,6 @@ EdgeCollider2D:
   - {x: 17, y: 59}
   - {x: 18, y: 59}
   - {x: 18, y: 55}
---- !u!1 &4548595289310243968
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4628427337015487825}
-  - component: {fileID: 4217458503792884182}
-  - component: {fileID: 2195488497374756573}
-  m_Layer: 10
-  m_Name: TeleportB2
-  m_TagString: Teleport
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4628427337015487825
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4548595289310243968}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 7835150346368916582}
-  m_Father: {fileID: 1623391854804776082}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4217458503792884182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4548595289310243968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dec3ca0fe88506448df84e8bf55b2dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowGrid: 0
-  InnerPadding: 0
-  ColliderDepth: 0.1
-  ColliderType: 1
-  Collider2DType: 0
-  ShowColliderNormals: 0
-  ColliderDisplayMode: 0
-  IsUndoEnabled: 0
-  SortOrder: 0
-  m_sortingLayer: 0
-  m_sortingLayerName: Default
-  m_orderInLayer: 0
-  m_material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_tintColor: {r: 1, g: 1, b: 1, a: 1}
-  m_pixelSnap: 0
-  m_isVisible: 1
-  m_allowPaintingOutOfBounds: 1
-  m_autoShrink: 0
-  m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
-  m_physicMaterial: {fileID: 0}
-  m_physicMaterial2D: {fileID: 0}
-  m_cellSize: {x: 1, y: 1}
-  m_mapBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 23, y: 13, z: 0}
-  m_tileset: {fileID: 11400000, guid: ce82e5da484585e4c81ba6d71d897adb, type: 2}
-  m_minGridX: -23
-  m_minGridY: -13
-  m_maxGridX: 22
-  m_maxGridY: 12
-  m_parentTilemapGroup: {fileID: 0}
-  m_parallaxFactor: {x: 1, y: 1}
-  m_chunkRendererProperties:
-    castShadows: 0
-    receiveShadows: 0
-    useLightProbes: 0
-    reflectionProbeUsage: 0
-    anchorOverride: {fileID: 0}
---- !u!114 &2195488497374756573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4548595289310243968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d5eb474ebc25744986673a49d347344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  otherTeleporter: {fileID: 8069339424314823651}
-  teleportPos: {fileID: 7835150346368916582}
 --- !u!1 &4588062100268029384
 GameObject:
   m_ObjectHideFlags: 0
@@ -4804,7 +4396,7 @@ Transform:
   - {fileID: 4519217516683923530}
   - {fileID: 5438050480808699517}
   m_Father: {fileID: 184809992549707804}
-  m_RootOrder: 19
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &965070363407291904
 MonoBehaviour:
@@ -4837,7 +4429,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -5096,7 +4688,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -5928,104 +5520,6 @@ EdgeCollider2D:
   - {x: 52, y: 59.90625}
   - {x: 52, y: 59.09375}
   - {x: 51.640625, y: 59.296875}
---- !u!1 &5625626177811669187
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 784436761417685433}
-  - component: {fileID: 5632671689458038896}
-  - component: {fileID: 8069339424314823651}
-  m_Layer: 10
-  m_Name: TeleportB1
-  m_TagString: Teleport
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &784436761417685433
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5625626177811669187}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 3620747311514759120}
-  m_Father: {fileID: 5341081470705034477}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5632671689458038896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5625626177811669187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dec3ca0fe88506448df84e8bf55b2dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowGrid: 0
-  InnerPadding: 0
-  ColliderDepth: 0.1
-  ColliderType: 1
-  Collider2DType: 0
-  ShowColliderNormals: 0
-  ColliderDisplayMode: 0
-  IsUndoEnabled: 0
-  SortOrder: 0
-  m_sortingLayer: 0
-  m_sortingLayerName: Default
-  m_orderInLayer: 0
-  m_material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_tintColor: {r: 1, g: 1, b: 1, a: 1}
-  m_pixelSnap: 0
-  m_isVisible: 1
-  m_allowPaintingOutOfBounds: 1
-  m_autoShrink: 0
-  m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
-  m_physicMaterial: {fileID: 0}
-  m_physicMaterial2D: {fileID: 0}
-  m_cellSize: {x: 1, y: 1}
-  m_mapBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 23, y: 13, z: 0}
-  m_tileset: {fileID: 11400000, guid: ce82e5da484585e4c81ba6d71d897adb, type: 2}
-  m_minGridX: -23
-  m_minGridY: -13
-  m_maxGridX: 22
-  m_maxGridY: 12
-  m_parentTilemapGroup: {fileID: 0}
-  m_parallaxFactor: {x: 1, y: 1}
-  m_chunkRendererProperties:
-    castShadows: 0
-    receiveShadows: 0
-    useLightProbes: 0
-    reflectionProbeUsage: 0
-    anchorOverride: {fileID: 0}
---- !u!114 &8069339424314823651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5625626177811669187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d5eb474ebc25744986673a49d347344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  otherTeleporter: {fileID: 2195488497374756573}
-  teleportPos: {fileID: 3620747311514759120}
 --- !u!1 &5748707306275245915
 GameObject:
   m_ObjectHideFlags: 0
@@ -6091,7 +5585,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -6403,7 +5897,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -6442,88 +5936,6 @@ MonoBehaviour:
   moveToStart: 0
   canMove: 0
   endPlatform: 0
---- !u!1 &5927134564422484946
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8982642443027678543}
-  - component: {fileID: 6940233556007186286}
-  m_Layer: 10
-  m_Name: Main
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8982642443027678543
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5927134564422484946}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5341081470705034477}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6940233556007186286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5927134564422484946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dec3ca0fe88506448df84e8bf55b2dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowGrid: 0
-  InnerPadding: 0
-  ColliderDepth: 0.1
-  ColliderType: 1
-  Collider2DType: 0
-  ShowColliderNormals: 0
-  ColliderDisplayMode: 0
-  IsUndoEnabled: 0
-  SortOrder: 0
-  m_sortingLayer: 0
-  m_sortingLayerName: Default
-  m_orderInLayer: 0
-  m_material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_tintColor: {r: 1, g: 1, b: 1, a: 1}
-  m_pixelSnap: 0
-  m_isVisible: 1
-  m_allowPaintingOutOfBounds: 1
-  m_autoShrink: 0
-  m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
-  m_physicMaterial: {fileID: 0}
-  m_physicMaterial2D: {fileID: 0}
-  m_cellSize: {x: 1, y: 1}
-  m_mapBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 23, y: 13, z: 0}
-  m_tileset: {fileID: 11400000, guid: ce82e5da484585e4c81ba6d71d897adb, type: 2}
-  m_minGridX: -23
-  m_minGridY: -13
-  m_maxGridX: 22
-  m_maxGridY: 12
-  m_parentTilemapGroup: {fileID: 0}
-  m_parallaxFactor: {x: 1, y: 1}
-  m_chunkRendererProperties:
-    castShadows: 0
-    receiveShadows: 0
-    useLightProbes: 0
-    reflectionProbeUsage: 0
-    anchorOverride: {fileID: 0}
 --- !u!1 &6128669676687128776
 GameObject:
   m_ObjectHideFlags: 0
@@ -6618,91 +6030,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
-  m_physicMaterial: {fileID: 0}
-  m_physicMaterial2D: {fileID: 0}
-  m_cellSize: {x: 1, y: 1}
-  m_mapBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 23, y: 13, z: 0}
-  m_tileset: {fileID: 11400000, guid: ce82e5da484585e4c81ba6d71d897adb, type: 2}
-  m_minGridX: -23
-  m_minGridY: -13
-  m_maxGridX: 22
-  m_maxGridY: 12
-  m_parentTilemapGroup: {fileID: 0}
-  m_parallaxFactor: {x: 1, y: 1}
-  m_chunkRendererProperties:
-    castShadows: 0
-    receiveShadows: 0
-    useLightProbes: 0
-    reflectionProbeUsage: 0
-    anchorOverride: {fileID: 0}
---- !u!1 &6843806824321765944
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5341081470705034477}
-  - component: {fileID: 3391057212209423706}
-  m_Layer: 10
-  m_Name: Platform Parent
-  m_TagString: Untagged
-  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5341081470705034477
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6843806824321765944}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 8982642443027678543}
-  - {fileID: 784436761417685433}
-  m_Father: {fileID: 4691932649878666237}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3391057212209423706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6843806824321765944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dec3ca0fe88506448df84e8bf55b2dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowGrid: 0
-  InnerPadding: 0
-  ColliderDepth: 0.1
-  ColliderType: 1
-  Collider2DType: 0
-  ShowColliderNormals: 0
-  ColliderDisplayMode: 0
-  IsUndoEnabled: 0
-  SortOrder: 0
-  m_sortingLayer: 0
-  m_sortingLayerName: Default
-  m_orderInLayer: 0
-  m_material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_tintColor: {r: 1, g: 1, b: 1, a: 1}
-  m_pixelSnap: 0
-  m_isVisible: 1
-  m_allowPaintingOutOfBounds: 1
-  m_autoShrink: 0
-  m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -6786,7 +6114,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -7009,7 +6337,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -7233,7 +6561,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -7318,7 +6646,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -7415,7 +6743,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -7435,110 +6763,6 @@ MonoBehaviour:
     useLightProbes: 0
     reflectionProbeUsage: 0
     anchorOverride: {fileID: 0}
---- !u!1 &7494446394688688186
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4691932649878666237}
-  - component: {fileID: 4470961869632875098}
-  - component: {fileID: 8233447387382420896}
-  m_Layer: 10
-  m_Name: Move Parent B1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &4691932649878666237
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7494446394688688186}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2014332507654471541}
-  - {fileID: 5341081470705034477}
-  m_Father: {fileID: 184809992549707804}
-  m_RootOrder: 16
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4470961869632875098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7494446394688688186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dec3ca0fe88506448df84e8bf55b2dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowGrid: 0
-  InnerPadding: 0
-  ColliderDepth: 0.1
-  ColliderType: 1
-  Collider2DType: 0
-  ShowColliderNormals: 0
-  ColliderDisplayMode: 0
-  IsUndoEnabled: 0
-  SortOrder: 0
-  m_sortingLayer: 0
-  m_sortingLayerName: Default
-  m_orderInLayer: 0
-  m_material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_tintColor: {r: 1, g: 1, b: 1, a: 1}
-  m_pixelSnap: 0
-  m_isVisible: 1
-  m_allowPaintingOutOfBounds: 1
-  m_autoShrink: 0
-  m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
-  m_physicMaterial: {fileID: 0}
-  m_physicMaterial2D: {fileID: 0}
-  m_cellSize: {x: 1, y: 1}
-  m_mapBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 23, y: 13, z: 0}
-  m_tileset: {fileID: 11400000, guid: ce82e5da484585e4c81ba6d71d897adb, type: 2}
-  m_minGridX: -23
-  m_minGridY: -13
-  m_maxGridX: 22
-  m_maxGridY: 12
-  m_parentTilemapGroup: {fileID: 0}
-  m_parallaxFactor: {x: 1, y: 1}
-  m_chunkRendererProperties:
-    castShadows: 0
-    receiveShadows: 0
-    useLightProbes: 0
-    reflectionProbeUsage: 0
-    anchorOverride: {fileID: 0}
---- !u!114 &8233447387382420896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7494446394688688186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 352a9f46f31893a46bc9b2afe21be635, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  platform: {fileID: 5341081470705034477}
-  endPoint: {fileID: 2014332507654471541}
-  maxSpeed: 6
-  smoothTime: 0.75
-  moveToStart: 0
-  canMove: 0
-  endPlatform: 0
 --- !u!1 &7540943149075393744
 GameObject:
   m_ObjectHideFlags: 0
@@ -7932,7 +7156,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -8217,36 +7441,6 @@ EdgeCollider2D:
   - {x: 60, y: 1}
   - {x: 60, y: 0}
   - {x: 59, y: 0}
---- !u!1 &8070286414869927779
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2014332507654471541}
-  m_Layer: 10
-  m_Name: Endpoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2014332507654471541
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8070286414869927779}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4691932649878666237}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8085503691610409138
 GameObject:
   m_ObjectHideFlags: 0
@@ -8311,7 +7505,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -8660,7 +7854,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -8906,7 +8100,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -9051,36 +8245,6 @@ EdgeCollider2D:
   - {x: 60, y: 60}
   - {x: 60, y: 59}
   - {x: 59, y: 59}
---- !u!1 &8600149383765084223
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5346006599598981071}
-  m_Layer: 10
-  m_Name: Endpoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5346006599598981071
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8600149383765084223}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7949678427388850053}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8682083229303086835
 GameObject:
   m_ObjectHideFlags: 0
@@ -9146,7 +8310,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -9335,36 +8499,6 @@ Transform:
   m_Father: {fileID: 3765486689155349248}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8907481817073001960
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7835150346368916582}
-  m_Layer: 10
-  m_Name: TeleportPos
-  m_TagString: Untagged
-  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7835150346368916582
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8907481817073001960}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: -2.7, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4628427337015487825}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9044734166413227883
 GameObject:
   m_ObjectHideFlags: 0
@@ -9430,7 +8564,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -9654,7 +8788,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}

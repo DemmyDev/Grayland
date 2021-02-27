@@ -1554,7 +1554,7 @@ MonoBehaviour:
   player: {fileID: 6775861129569522280, guid: ce7b983d4e477664bb9e5cf946c72d72, type: 3}
   transition: {fileID: 1847567867}
   levelSet: {fileID: 11400000, guid: 5d6b24623f32d2246aae1c9644f7fdb2, type: 2}
-  testLevel: {fileID: 1554123715148119606, guid: ca442292060b55148b15002b32f0e175,
+  testLevel: {fileID: 1554123715148119606, guid: edb5dc0b382e70d458335a41903b8b77,
     type: 3}
 --- !u!4 &1241479604
 Transform:

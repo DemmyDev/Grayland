@@ -5,20 +5,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DialogueSet", menuName = "Dialogue Set", order = 1)]
 public class DialogueSet : ScriptableObject
 {
-    public enum AnimationMode
+    public enum SetType
     {
-        Color = 0,
-        Wave = 1,
-        Jitter = 2,
-        Dangling = 3,
-        Reveal = 4,
-        ShakeA = 5,
-        ShakeB = 6,
-        Warp = 7,
-        None = 8,
+        Dialogue = 0,
+        Move = 1,
     }
     
-    [Header("All")]
+    public enum MoveChar
+    {
+        Player = 0,
+        NPC = 1,
+    }
+
+    public SetType setType;
+    
+    [Header("Dialogue")]
     public bool isPlayer;
     [TextArea]
     public string text;
@@ -31,4 +32,10 @@ public class DialogueSet : ScriptableObject
 
     [Tooltip("How long there is to wait before. Value should at least be .5 if being used. If 0, there is no delay")]
     public float delayTypeTime = 0f;
+
+    [Header("Move")]
+
+    public MoveChar moveChar;
+    [Tooltip("On the X-axis, how far the character should go before moving on to the next dialogue set")]
+    public float moveDir;
 }

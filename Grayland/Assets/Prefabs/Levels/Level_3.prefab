@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 113995974754684348}
   - component: {fileID: 3848529648468580732}
   - component: {fileID: 738629157768749463}
-  - component: {fileID: 5323225987021080874}
+  - component: {fileID: 7098818264940536756}
   m_Layer: 10
   m_Name: 0_0
   m_TagString: Untagged
@@ -176,7 +176,7 @@ EdgeCollider2D:
   - {x: 2, y: 6}
   - {x: 6, y: 6}
   - {x: 6, y: 4}
---- !u!68 &5323225987021080874
+--- !u!68 &7098818264940536756
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_tilemaps:
   - {fileID: 610751035113085039}
   - {fileID: 7053884437283669428}
-  m_selectedIndex: 1
+  m_selectedIndex: 0
   m_unselectedColorMultiplier: 1
   m_defaultTilemapWindowVisible: 0
   m_displayTilemapRList: 1
@@ -310,8 +310,8 @@ GameObject:
   - component: {fileID: 4042900497435207954}
   - component: {fileID: 252670315890452879}
   - component: {fileID: 2680330122754553606}
-  - component: {fileID: 2399745213260430841}
-  - component: {fileID: 3260718978355698763}
+  - component: {fileID: 9084011556392614269}
+  - component: {fileID: 813305285764646239}
   m_Layer: 10
   m_Name: -1_-1
   m_TagString: Untagged
@@ -470,7 +470,7 @@ EdgeCollider2D:
   - {x: 55, y: 55}
   - {x: 54, y: 55}
   - {x: 54, y: 60}
---- !u!68 &2399745213260430841
+--- !u!68 &9084011556392614269
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -490,7 +490,7 @@ EdgeCollider2D:
   - {x: 47, y: 58}
   - {x: 46, y: 58}
   - {x: 46, y: 60}
---- !u!68 &3260718978355698763
+--- !u!68 &813305285764646239
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -608,8 +608,8 @@ GameObject:
   - component: {fileID: 3944434298657834092}
   - component: {fileID: 2768422955611590590}
   - component: {fileID: 8409492897482838690}
-  - component: {fileID: 7126049410342197811}
-  - component: {fileID: 4258715298928348483}
+  - component: {fileID: 5925012718529186887}
+  - component: {fileID: 2960525308379256725}
   m_Layer: 10
   m_Name: 0_-1
   m_TagString: Untagged
@@ -747,7 +747,7 @@ EdgeCollider2D:
   - {x: 14, y: 55}
   - {x: 19, y: 55}
   - {x: 19, y: 60}
---- !u!68 &7126049410342197811
+--- !u!68 &5925012718529186887
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -768,7 +768,7 @@ EdgeCollider2D:
   - {x: 1, y: 58}
   - {x: 7, y: 58}
   - {x: 7, y: 60}
---- !u!68 &4258715298928348483
+--- !u!68 &2960525308379256725
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -921,8 +921,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 3.09375, y: 51.015625}
-  - {x: 3.09375, y: 51.15625}
-  - {x: 3.90625, y: 51.15625}
+  - {x: 3.453125, y: 51.46875}
+  - {x: 3.546875, y: 51.46875}
   - {x: 3.90625, y: 51.015625}
   - {x: 3.09375, y: 51.015625}
 --- !u!68 &3397888489669483471
@@ -942,8 +942,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 4.09375, y: 51.015625}
-  - {x: 4.09375, y: 51.15625}
-  - {x: 4.90625, y: 51.15625}
+  - {x: 4.453125, y: 51.46875}
+  - {x: 4.546875, y: 51.46875}
   - {x: 4.90625, y: 51.015625}
   - {x: 4.09375, y: 51.015625}
 --- !u!68 &9092111646653245664
@@ -963,8 +963,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 5.09375, y: 51.015625}
-  - {x: 5.09375, y: 51.15625}
-  - {x: 5.90625, y: 51.15625}
+  - {x: 5.453125, y: 51.46875}
+  - {x: 5.546875, y: 51.46875}
   - {x: 5.90625, y: 51.015625}
   - {x: 5.09375, y: 51.015625}
 --- !u!68 &762881949642088004
@@ -984,8 +984,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 6.09375, y: 51.015625}
-  - {x: 6.09375, y: 51.15625}
-  - {x: 6.90625, y: 51.15625}
+  - {x: 6.453125, y: 51.46875}
+  - {x: 6.546875, y: 51.46875}
   - {x: 6.90625, y: 51.015625}
   - {x: 6.09375, y: 51.015625}
 --- !u!68 &5570346657965148451
@@ -1005,8 +1005,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 1.09375, y: 58.015625}
-  - {x: 1.09375, y: 58.15625}
-  - {x: 1.90625, y: 58.15625}
+  - {x: 1.453125, y: 58.46875}
+  - {x: 1.546875, y: 58.46875}
   - {x: 1.90625, y: 58.015625}
   - {x: 1.09375, y: 58.015625}
 --- !u!68 &5170002299279783615
@@ -1026,8 +1026,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 2.09375, y: 58.015625}
-  - {x: 2.09375, y: 58.15625}
-  - {x: 2.90625, y: 58.15625}
+  - {x: 2.453125, y: 58.46875}
+  - {x: 2.546875, y: 58.46875}
   - {x: 2.90625, y: 58.015625}
   - {x: 2.09375, y: 58.015625}
 --- !u!68 &4600807534339729695
@@ -1047,8 +1047,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 3.09375, y: 58.015625}
-  - {x: 3.09375, y: 58.15625}
-  - {x: 3.90625, y: 58.15625}
+  - {x: 3.453125, y: 58.46875}
+  - {x: 3.546875, y: 58.46875}
   - {x: 3.90625, y: 58.015625}
   - {x: 3.09375, y: 58.015625}
 --- !u!68 &3668966434594383288
@@ -1068,8 +1068,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 4.09375, y: 58.015625}
-  - {x: 4.09375, y: 58.15625}
-  - {x: 4.90625, y: 58.15625}
+  - {x: 4.453125, y: 58.46875}
+  - {x: 4.546875, y: 58.46875}
   - {x: 4.90625, y: 58.015625}
   - {x: 4.09375, y: 58.015625}
 --- !u!68 &241109708391149363
@@ -1089,8 +1089,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 5.09375, y: 58.015625}
-  - {x: 5.09375, y: 58.15625}
-  - {x: 5.90625, y: 58.15625}
+  - {x: 5.453125, y: 58.46875}
+  - {x: 5.546875, y: 58.46875}
   - {x: 5.90625, y: 58.015625}
   - {x: 5.09375, y: 58.015625}
 --- !u!68 &3554362396708232279
@@ -1110,8 +1110,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 6.09375, y: 58.015625}
-  - {x: 6.09375, y: 58.15625}
-  - {x: 6.90625, y: 58.15625}
+  - {x: 6.453125, y: 58.46875}
+  - {x: 6.546875, y: 58.46875}
   - {x: 6.90625, y: 58.015625}
   - {x: 6.09375, y: 58.015625}
 --- !u!1 &7169086383702308647
@@ -1238,8 +1238,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 50.09375, y: 50.015625}
-  - {x: 50.09375, y: 50.15625}
-  - {x: 50.90625, y: 50.15625}
+  - {x: 50.453125, y: 50.46875}
+  - {x: 50.546875, y: 50.46875}
   - {x: 50.90625, y: 50.015625}
   - {x: 50.09375, y: 50.015625}
 --- !u!68 &4731509518691612771
@@ -1259,8 +1259,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 51.09375, y: 50.015625}
-  - {x: 51.09375, y: 50.15625}
-  - {x: 51.90625, y: 50.15625}
+  - {x: 51.453125, y: 50.46875}
+  - {x: 51.546875, y: 50.46875}
   - {x: 51.90625, y: 50.015625}
   - {x: 51.09375, y: 50.015625}
 --- !u!68 &1364670491566347942
@@ -1280,8 +1280,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 52.09375, y: 50.015625}
-  - {x: 52.09375, y: 50.15625}
-  - {x: 52.90625, y: 50.15625}
+  - {x: 52.453125, y: 50.46875}
+  - {x: 52.546875, y: 50.46875}
   - {x: 52.90625, y: 50.015625}
   - {x: 52.09375, y: 50.015625}
 --- !u!68 &5183647458370315962
@@ -1301,8 +1301,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 53.09375, y: 50.015625}
-  - {x: 53.09375, y: 50.15625}
-  - {x: 53.90625, y: 50.15625}
+  - {x: 53.453125, y: 50.46875}
+  - {x: 53.546875, y: 50.46875}
   - {x: 53.90625, y: 50.015625}
   - {x: 53.09375, y: 50.015625}
 --- !u!1 &7423825356368804678
@@ -1369,7 +1369,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -1447,8 +1447,8 @@ GameObject:
   - component: {fileID: 1747351772053033636}
   - component: {fileID: 6139522074552697354}
   - component: {fileID: 4504215989788446226}
-  - component: {fileID: 4951317015052461145}
-  - component: {fileID: 2568498523208065204}
+  - component: {fileID: 479545164157871086}
+  - component: {fileID: 4413967275617825947}
   m_Layer: 10
   m_Name: -1_0
   m_TagString: Untagged
@@ -1583,7 +1583,7 @@ EdgeCollider2D:
   - {x: 55, y: 1}
   - {x: 56, y: 1}
   - {x: 56, y: 0}
---- !u!68 &4951317015052461145
+--- !u!68 &479545164157871086
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1604,7 +1604,7 @@ EdgeCollider2D:
   - {x: 48, y: 1}
   - {x: 48, y: 0}
   - {x: 47, y: 0}
---- !u!68 &2568498523208065204
+--- !u!68 &4413967275617825947
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

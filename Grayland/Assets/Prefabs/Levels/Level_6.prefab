@@ -122,8 +122,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 8.09375, y: 59.015625}
-  - {x: 8.09375, y: 59.15625}
-  - {x: 8.90625, y: 59.15625}
+  - {x: 8.453125, y: 59.46875}
+  - {x: 8.546875, y: 59.46875}
   - {x: 8.90625, y: 59.015625}
   - {x: 8.09375, y: 59.015625}
 --- !u!68 &4910461210048162810
@@ -143,8 +143,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 9.09375, y: 59.015625}
-  - {x: 9.09375, y: 59.15625}
-  - {x: 9.90625, y: 59.15625}
+  - {x: 9.453125, y: 59.46875}
+  - {x: 9.546875, y: 59.46875}
   - {x: 9.90625, y: 59.015625}
   - {x: 9.09375, y: 59.015625}
 --- !u!1 &1261141147958024205
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 1800086850378984888}
   - component: {fileID: 6328484112137571978}
   - component: {fileID: 8041224116944230364}
-  - component: {fileID: 2597219379195574998}
+  - component: {fileID: 4136846341933423726}
   m_Layer: 10
   m_Name: 0_-1
   m_TagString: Untagged
@@ -273,7 +273,7 @@ EdgeCollider2D:
   - {x: 23, y: 56}
   - {x: 23, y: 47}
   - {x: 0, y: 47}
---- !u!68 &2597219379195574998
+--- !u!68 &4136846341933423726
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -792,7 +792,7 @@ GameObject:
   - component: {fileID: 5374595649384599561}
   - component: {fileID: 6956709335027126417}
   - component: {fileID: 6247186951017699369}
-  - component: {fileID: 7889718893592549294}
+  - component: {fileID: 1578726299355106891}
   m_Layer: 10
   m_Name: 0_0
   m_TagString: Untagged
@@ -933,7 +933,7 @@ EdgeCollider2D:
   - {x: 0, y: 2}
   - {x: 2, y: 2}
   - {x: 2, y: 0}
---- !u!68 &7889718893592549294
+--- !u!68 &1578726299355106891
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -967,7 +967,7 @@ GameObject:
   - component: {fileID: 8027690279488895117}
   - component: {fileID: 8827705539251593008}
   - component: {fileID: 2251565381916813171}
-  - component: {fileID: 8189235381754883179}
+  - component: {fileID: 9153802049309424900}
   m_Layer: 10
   m_Name: -1_-1
   m_TagString: Untagged
@@ -1078,7 +1078,7 @@ EdgeCollider2D:
   - {x: 60, y: 47}
   - {x: 36, y: 47}
   - {x: 36, y: 60}
---- !u!68 &8189235381754883179
+--- !u!68 &9153802049309424900
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1179,7 +1179,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -1275,7 +1275,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -1358,7 +1358,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -1405,7 +1405,7 @@ GameObject:
   - component: {fileID: 6995626111942896986}
   - component: {fileID: 700148642804374713}
   - component: {fileID: 7109863527531583815}
-  - component: {fileID: 6514735627696210985}
+  - component: {fileID: 4923004890609762254}
   m_Layer: 10
   m_Name: -1_0
   m_TagString: Untagged
@@ -1535,7 +1535,7 @@ EdgeCollider2D:
   - {x: 59, y: 0}
   - {x: 59, y: 2}
   - {x: 60, y: 2}
---- !u!68 &6514735627696210985
+--- !u!68 &4923004890609762254
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -259,7 +259,6 @@ public class PlayerController : MonoBehaviour
         if (!isDead)
         {
             #region Movement
-
             // Determine accel and decel values based on if the player is grounded or not
             float acceleration = grounded ? walkAcceleration : airAcceleration;
             float deceleration = grounded ? groundDeceleration : 0;
@@ -279,10 +278,12 @@ public class PlayerController : MonoBehaviour
 
             if (movingToTargetPos)
             {
+                Debug.Log("Moving target");
                 float targetDistance = Mathf.Abs(targetPosX - transform.position.x);
 
                 if (targetDistance <= .2f)
                 {
+                    Debug.Log(movingToTargetPos);
                     velocity.x = 0f;
                     movingToTargetPos = false;
                 }
@@ -405,6 +406,9 @@ public class PlayerController : MonoBehaviour
                             {
                                 AudioManager.am.Play("Bounce");
                                 
+                                // Somehow fixed by having tile colliders having IsTrigger set to false
+                                // What if we stopped making games like all of them :)
+                                /*
                                 RaycastHit2D castToGround = Physics2D.Raycast(transform.position, Vector2.down, .5f, whatIsCling); // Right side
 
                                 // Adjust player position to ensure player does not end up inside tile
@@ -412,9 +416,12 @@ public class PlayerController : MonoBehaviour
                                 {
                                     Vector2 gridPos = TilemapUtils.GetGridPosition(tilemap, castToGround.point);
                                     Vector2 tilePos = TilemapUtils.GetGridWorldPos(tilemap, (int)gridPos.x, (int)gridPos.y);
+                                    
                                     transform.position = new Vector2(transform.position.x, tilePos.y + .25f);
+
                                 }
-                                
+                                */
+
                                 velocity.y = Mathf.Sqrt(bounceForceY * jumpHeight * Mathf.Abs(currentGravity));
                                 isClinged = false;
                                 landed = false;
@@ -594,17 +601,17 @@ public class PlayerController : MonoBehaviour
             // Stops upward velocity if player hits ceiling
             if (ceilingCheck)
             {
-                bool hittinCeiling = true;
+                bool hittingCeiling = true;
                 Collider2D[] ceilingHits = Physics2D.OverlapBoxAll(transform.position, col.size, 0);
 
                 // If colliding with a Bounce tile, the player is not hitting the ceiling
                 foreach (Collider2D hit in ceilingHits)
                 {
                     if (hit.transform.tag == "Bounce")
-                        hittinCeiling = false;
+                        hittingCeiling = false;
                 }
 
-                if (hittinCeiling)
+                if (hittingCeiling)
                     velocity.y = 0f;
             }
 
@@ -761,10 +768,7 @@ public class PlayerController : MonoBehaviour
         targetPosX = posX;
         float dif = targetPosX - transform.position.x;
 
-        if (dif >= 0)
-            forcedMoveInput = 1;
-        else
-            forcedMoveInput = -1;
+        forcedMoveInput = dif >= 0 ? 1 : -1;
     }
     
     public void ForceSetMoveInput(bool left, bool right, bool up, bool down)

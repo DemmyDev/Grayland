@@ -36,11 +36,9 @@ public class MovingPlatform : MonoBehaviour
             if (canMove)
             {
                 target = endPointPos;
-                Debug.Log("Before: " + platform.position);
                 platform.position = Vector2.SmoothDamp(platform.position, target, ref velocity, smoothTime, maxSpeed);
-                Debug.Log("After: " + platform.position);
                 float distance = Vector2.Distance(platform.position, endPointPos);
-                Debug.Log(distance);
+
                 if (distance < .05)
                 {
                     platform.position = endPointPos;

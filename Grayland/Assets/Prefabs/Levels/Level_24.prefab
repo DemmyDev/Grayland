@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3765486689155349248}
   m_Layer: 0
-  m_Name: Level_25
+  m_Name: Level_24
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,7 +359,7 @@ MonoBehaviour:
   - {fileID: 5596612799963089223}
   - {fileID: 5441120772345327072}
   - {fileID: 722082923793736282}
-  m_selectedIndex: 1
+  m_selectedIndex: 5
   m_unselectedColorMultiplier: 1
   m_defaultTilemapWindowVisible: 0
   m_displayTilemapRList: 1
@@ -432,7 +432,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -531,7 +531,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -696,8 +696,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 52.09375, y: 53.015625}
-  - {x: 52.09375, y: 53.15625}
-  - {x: 52.90625, y: 53.15625}
+  - {x: 52.453125, y: 53.46875}
+  - {x: 52.546875, y: 53.46875}
   - {x: 52.90625, y: 53.015625}
   - {x: 52.09375, y: 53.015625}
 --- !u!68 &3704771178427683398
@@ -717,8 +717,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 53.09375, y: 53.015625}
-  - {x: 53.09375, y: 53.15625}
-  - {x: 53.90625, y: 53.15625}
+  - {x: 53.453125, y: 53.46875}
+  - {x: 53.546875, y: 53.46875}
   - {x: 53.90625, y: 53.015625}
   - {x: 53.09375, y: 53.015625}
 --- !u!68 &3557028278405955805
@@ -738,8 +738,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 54.09375, y: 53.015625}
-  - {x: 54.09375, y: 53.15625}
-  - {x: 54.90625, y: 53.15625}
+  - {x: 54.453125, y: 53.46875}
+  - {x: 54.546875, y: 53.46875}
   - {x: 54.90625, y: 53.015625}
   - {x: 54.09375, y: 53.015625}
 --- !u!68 &350805693087817305
@@ -759,8 +759,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 55.09375, y: 53.015625}
-  - {x: 55.09375, y: 53.15625}
-  - {x: 55.90625, y: 53.15625}
+  - {x: 55.453125, y: 53.46875}
+  - {x: 55.546875, y: 53.46875}
   - {x: 55.90625, y: 53.015625}
   - {x: 55.09375, y: 53.015625}
 --- !u!68 &252894323411807233
@@ -780,8 +780,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 56.09375, y: 53.015625}
-  - {x: 56.09375, y: 53.15625}
-  - {x: 56.90625, y: 53.15625}
+  - {x: 56.453125, y: 53.46875}
+  - {x: 56.546875, y: 53.46875}
   - {x: 56.90625, y: 53.015625}
   - {x: 56.09375, y: 53.015625}
 --- !u!68 &8059717946760455033
@@ -1049,7 +1049,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -1808,8 +1808,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 55.09375, y: 2.015625}
-  - {x: 55.09375, y: 2.15625}
-  - {x: 55.90625, y: 2.15625}
+  - {x: 55.453125, y: 2.46875}
+  - {x: 55.546875, y: 2.46875}
   - {x: 55.90625, y: 2.015625}
   - {x: 55.09375, y: 2.015625}
 --- !u!68 &1751331889862264579
@@ -1829,8 +1829,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 56.09375, y: 2.015625}
-  - {x: 56.09375, y: 2.15625}
-  - {x: 56.90625, y: 2.15625}
+  - {x: 56.453125, y: 2.46875}
+  - {x: 56.546875, y: 2.46875}
   - {x: 56.90625, y: 2.015625}
   - {x: 56.09375, y: 2.015625}
 --- !u!68 &2235281809618468964
@@ -1850,8 +1850,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 57.09375, y: 2.015625}
-  - {x: 57.09375, y: 2.15625}
-  - {x: 57.90625, y: 2.15625}
+  - {x: 57.453125, y: 2.46875}
+  - {x: 57.546875, y: 2.46875}
   - {x: 57.90625, y: 2.015625}
   - {x: 57.09375, y: 2.015625}
 --- !u!68 &1221736439564330942
@@ -1871,8 +1871,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 58.09375, y: 2.015625}
-  - {x: 58.09375, y: 2.15625}
-  - {x: 58.90625, y: 2.15625}
+  - {x: 58.453125, y: 2.46875}
+  - {x: 58.546875, y: 2.46875}
   - {x: 58.90625, y: 2.015625}
   - {x: 58.09375, y: 2.015625}
 --- !u!1 &5300417300617579150
@@ -2084,8 +2084,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 5.09375, y: 3.015625}
-  - {x: 5.09375, y: 3.15625}
-  - {x: 5.90625, y: 3.15625}
+  - {x: 5.453125, y: 3.46875}
+  - {x: 5.546875, y: 3.46875}
   - {x: 5.90625, y: 3.015625}
   - {x: 5.09375, y: 3.015625}
 --- !u!68 &2042710706101762800
@@ -2105,8 +2105,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 6.09375, y: 3.015625}
-  - {x: 6.09375, y: 3.15625}
-  - {x: 6.90625, y: 3.15625}
+  - {x: 6.453125, y: 3.46875}
+  - {x: 6.546875, y: 3.46875}
   - {x: 6.90625, y: 3.015625}
   - {x: 6.09375, y: 3.015625}
 --- !u!68 &7690247374756105047
@@ -2126,8 +2126,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 7.09375, y: 3.015625}
-  - {x: 7.09375, y: 3.15625}
-  - {x: 7.90625, y: 3.15625}
+  - {x: 7.453125, y: 3.46875}
+  - {x: 7.546875, y: 3.46875}
   - {x: 7.90625, y: 3.015625}
   - {x: 7.09375, y: 3.015625}
 --- !u!1 &5794370393636662858
@@ -2449,8 +2449,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 5.09375, y: 49.015625}
-  - {x: 5.09375, y: 49.15625}
-  - {x: 5.90625, y: 49.15625}
+  - {x: 5.453125, y: 49.46875}
+  - {x: 5.546875, y: 49.46875}
   - {x: 5.90625, y: 49.015625}
   - {x: 5.09375, y: 49.015625}
 --- !u!68 &6706723837633798983
@@ -2470,8 +2470,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 6.09375, y: 49.015625}
-  - {x: 6.09375, y: 49.15625}
-  - {x: 6.90625, y: 49.15625}
+  - {x: 6.453125, y: 49.46875}
+  - {x: 6.546875, y: 49.46875}
   - {x: 6.90625, y: 49.015625}
   - {x: 6.09375, y: 49.015625}
 --- !u!68 &8512068906711792703
@@ -2491,8 +2491,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 7.09375, y: 49.015625}
-  - {x: 7.09375, y: 49.15625}
-  - {x: 7.90625, y: 49.15625}
+  - {x: 7.453125, y: 49.46875}
+  - {x: 7.546875, y: 49.46875}
   - {x: 7.90625, y: 49.015625}
   - {x: 7.09375, y: 49.015625}
 --- !u!68 &8891348343255377081
@@ -2512,8 +2512,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 8.09375, y: 49.015625}
-  - {x: 8.09375, y: 49.15625}
-  - {x: 8.90625, y: 49.15625}
+  - {x: 8.453125, y: 49.46875}
+  - {x: 8.546875, y: 49.46875}
   - {x: 8.90625, y: 49.015625}
   - {x: 8.09375, y: 49.015625}
 --- !u!68 &2046093206927920272
@@ -2533,8 +2533,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 9.09375, y: 49.015625}
-  - {x: 9.09375, y: 49.15625}
-  - {x: 9.90625, y: 49.15625}
+  - {x: 9.453125, y: 49.46875}
+  - {x: 9.546875, y: 49.46875}
   - {x: 9.90625, y: 49.015625}
   - {x: 9.09375, y: 49.015625}
 --- !u!68 &2666172668847389988
@@ -2554,8 +2554,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 10.09375, y: 49.015625}
-  - {x: 10.09375, y: 49.15625}
-  - {x: 10.90625, y: 49.15625}
+  - {x: 10.453125, y: 49.46875}
+  - {x: 10.546875, y: 49.46875}
   - {x: 10.90625, y: 49.015625}
   - {x: 10.09375, y: 49.015625}
 --- !u!68 &3991013873513375578
@@ -2575,8 +2575,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 11.09375, y: 49.015625}
-  - {x: 11.09375, y: 49.15625}
-  - {x: 11.90625, y: 49.15625}
+  - {x: 11.453125, y: 49.46875}
+  - {x: 11.546875, y: 49.46875}
   - {x: 11.90625, y: 49.015625}
   - {x: 11.09375, y: 49.015625}
 --- !u!68 &2158202024843220128
@@ -2596,8 +2596,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 12.09375, y: 49.015625}
-  - {x: 12.09375, y: 49.15625}
-  - {x: 12.90625, y: 49.15625}
+  - {x: 12.453125, y: 49.46875}
+  - {x: 12.546875, y: 49.46875}
   - {x: 12.90625, y: 49.015625}
   - {x: 12.09375, y: 49.015625}
 --- !u!68 &8161818443732408767
@@ -2617,8 +2617,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 13.09375, y: 49.015625}
-  - {x: 13.09375, y: 49.15625}
-  - {x: 13.90625, y: 49.15625}
+  - {x: 13.453125, y: 49.46875}
+  - {x: 13.546875, y: 49.46875}
   - {x: 13.90625, y: 49.015625}
   - {x: 13.09375, y: 49.015625}
 --- !u!68 &5812159867730096133
@@ -2638,8 +2638,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 9.09375, y: 57.015625}
-  - {x: 9.09375, y: 57.15625}
-  - {x: 9.90625, y: 57.15625}
+  - {x: 9.453125, y: 57.46875}
+  - {x: 9.546875, y: 57.46875}
   - {x: 9.90625, y: 57.015625}
   - {x: 9.09375, y: 57.015625}
 --- !u!68 &986195654942405387
@@ -2659,8 +2659,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 10.09375, y: 57.015625}
-  - {x: 10.09375, y: 57.15625}
-  - {x: 10.90625, y: 57.15625}
+  - {x: 10.453125, y: 57.46875}
+  - {x: 10.546875, y: 57.46875}
   - {x: 10.90625, y: 57.015625}
   - {x: 10.09375, y: 57.015625}
 --- !u!68 &4776447536247769196
@@ -2680,8 +2680,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 11.09375, y: 57.015625}
-  - {x: 11.09375, y: 57.15625}
-  - {x: 11.90625, y: 57.15625}
+  - {x: 11.453125, y: 57.46875}
+  - {x: 11.546875, y: 57.46875}
   - {x: 11.90625, y: 57.015625}
   - {x: 11.09375, y: 57.015625}
 --- !u!1 &5971660851748261892
@@ -2798,7 +2798,7 @@ EdgeCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -2874,7 +2874,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -3346,7 +3346,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -3445,7 +3445,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -3529,7 +3529,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -3839,7 +3839,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -3939,7 +3939,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -4193,7 +4193,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}

@@ -5,21 +5,24 @@ using TMPro;
 
 public class DialogueWrite : MonoBehaviour
 {
+    public enum ActivateType
+    {
+        Input = 0,
+        Trigger = 1,
+    }
+
+    [SerializeField, Tooltip("")] int charID;
     public DialogueSet[] dialogueSetsNoColor;
     public DialogueSet[] dialogueSetsColor;
+    public DialogueSet[] dialogueSetsCutscene;
 
     private TextMeshProUGUI m_textMeshPro;
     public float textSpeed = .05f;
 
-    public enum DialogueType
-    {
-        Player = 0,
-        NPC = 1,
-    }
-
-    //VertexAttributeModifier vertAnim;
     LevelController levelControl;
     PlayerController player;
+    [SerializeField] ActivateType activateType;
+    [SerializeField] bool isCutscene = false;
     [SerializeField] Transform eyes;
     [SerializeField] Transform targetPos;
     [SerializeField] Transform distanceCheckL;
@@ -30,12 +33,19 @@ public class DialogueWrite : MonoBehaviour
     Animation dialogueAnim, activationAnim;
     float initEyeSizeY;
 
-    bool allowInput = true, isBlinking = false, playEnter = false, playExit = false, isTyping = false;
+    bool allowInput = true, isBlinking = false, playEnter = false, playExit = false, isTyping = false, isMovingChar = false, hasDoneCutscene = false;
     float posL, posR, posU, posD, forcedEyeDirection = 0f;
     int setCount = 0;
+    float moveDir = 0f, velocityX = 0, initPosX = 0, targetPosX = 0;
+    string npcActivateType;
 
     private void Start()
     {
+        npcActivateType = "npc" + charID + "ActivateType";
+        activateType = (ActivateType)ReadWriteSaveManager.Instance.GetData(npcActivateType, (int)activateType);
+
+        ReadWriteSaveManager.Instance.Write();
+
         levelControl = LevelController.levelController;
         player = levelControl.GetPlayerController();
         dialogueUI = UIController.UIControl.GetDialogueUI();
@@ -44,7 +54,6 @@ public class DialogueWrite : MonoBehaviour
         activationUI = UIController.UIControl.GetActivationUI();
         activationAnim = activationUI.GetComponent<Animation>();
         dialogueAnim = dialogueParent.GetComponent<Animation>();
-        //vertAnim = dialogueUI.GetComponent<VertexAttributeModifier>();
 
         dialogueBox = dialogueUI.transform.parent.gameObject;
         dialogueBox.SetActive(false);
@@ -63,51 +72,42 @@ public class DialogueWrite : MonoBehaviour
     void Update()
     {
         Vector2 playerPos = player.transform.position;
-        
+
         if ((playerPos.x > posL && playerPos.x < posR) && (playerPos.y > posD && playerPos.y < posU))
         {
-            /*
-            if (forcedEyeDirection == 0f)
+            if (activateType == (ActivateType)0)
             {
-                float dif = transform.position.x - player.transform.position.x;
+                // When within distance and player 
+                if (Input.GetButtonDown("Interact") && allowInput)
+                {
+                    activationUI.SetActive(false);
+                    allowInput = false;
+                    player.SetMove(false);
+                    StartCoroutine(PlayerToTargetPos());
+                }
+                else if (allowInput)
+                {
+                    activationUI.SetActive(true);
 
-                if (dif >= 0)
-                    eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, -.08f, .25f / 20), 0f);
-                else
-                    eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, .08f, .25f / 20), 0f);
+                    if (!playEnter)
+                    {
+                        playEnter = true;
+                        playExit = false;
+                        activationAnim.Stop("ActivationExit");
+                        activationAnim.Play("ActivationEnter");
+                    }
+                }
             }
-            else
+            else if (activateType == (ActivateType)1 && allowInput)
             {
-                eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, forcedEyeDirection, .25f / 20), 0f);
-            }*/
-
-            // When within distance and player 
-            if (Input.GetButtonDown("Interact") && allowInput)
-            {
-
                 activationUI.SetActive(false);
                 allowInput = false;
                 player.SetMove(false);
-                //player.transform.position = targetPos.position;
                 StartCoroutine(PlayerToTargetPos());
-            }
-            else if (allowInput)
-            {
-                activationUI.SetActive(true);
-
-                if (!playEnter)
-                {
-                    playEnter = true;
-                    playExit = false;
-                    activationAnim.Stop("ActivationExit");
-                    activationAnim.Play("ActivationEnter");
-                }
             }
         }
         else
         {
-            //eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, 0f, .25f / 20), 0f);
-
             if (!playExit)
             {
                 playEnter = false;
@@ -115,149 +115,170 @@ public class DialogueWrite : MonoBehaviour
                 activationAnim.Stop("ActivationEnter");
                 activationAnim.Play("ActivationExit");
             }    
-            //activationUI.SetActive(false);
         }
-
-        //Blinking();
     }
 
     // Start is called before the first frame update
     public IEnumerator WriteText()
     {
-        dialogueBox.SetActive(true);
-        dialogueTri.SetActive(true);
-        dialogueUI.SetActive(true);
-
         DialogueSet[] dialogueSets;
-        if (levelControl.GetIsColorized())
-            dialogueSets = dialogueSetsColor;
+
+        if (isCutscene && !hasDoneCutscene)
+            dialogueSets = dialogueSetsCutscene;
         else
-            dialogueSets = dialogueSetsNoColor;
+        {
+            if (levelControl.GetIsColorized())
+                dialogueSets = dialogueSetsColor;
+            else
+                dialogueSets = dialogueSetsNoColor;
+        }
 
         // Place text over player or NPC
         if (dialogueSets[setCount].isPlayer)
             dialogueParent.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + 3f);
         else
-            dialogueParent.transform.position = new Vector2(activationUI.transform.position.x, activationUI.transform.position.y + 1f);
-
-        //dialogueTri.transform.position = new Vector2(dialogueBox.transform.position.x, dialogueBox.transform.position.y);
+            dialogueParent.transform.position = new Vector2(transform.position.x, transform.position.y + 3f);
 
         m_textMeshPro = dialogueUI.GetComponent<TextMeshProUGUI>();
         m_textMeshPro.ForceMeshUpdate();
 
-        if (dialogueSets[setCount].delayTypeTime != 0)
+        forcedEyeDirection = dialogueSets[setCount].eyePosX;
+
+        // Dialogue
+        if (dialogueSets[setCount].setType == (DialogueSet.SetType)0)
         {
-            dialogueBox.SetActive(false);
-            dialogueTri.SetActive(false);
-            dialogueUI.SetActive(false);
-            yield return new WaitForSeconds(dialogueSets[setCount].delayTypeTime);
             dialogueBox.SetActive(true);
             dialogueTri.SetActive(true);
             dialogueUI.SetActive(true);
-        }
 
-        forcedEyeDirection = dialogueSets[setCount].eyePosX;
-
-        dialogueAnim.Play("DialogueEnter");
-        yield return new WaitForSeconds(1/5f);
-        dialogueAnim.Stop("DialogueEnter");
-
-        dialogueUI.GetComponent<TextMeshProUGUI>().text = dialogueSets[setCount].text;
-
-        isTyping = true;
-        StartCoroutine(TypeAudio(dialogueSets, textSpeed, setCount));
-
-        int totalVisibleCharacters = dialogueSets[setCount].text.Length; // Get number of visible characters in the text object
-        int counter = 0;
-
-        while (true)
-        {
-            int visibleCount = counter % (totalVisibleCharacters + 1);
-
-            m_textMeshPro.maxVisibleCharacters = visibleCount; // How many characters should be displayed right now?
-
-            // When last character is revealed, wait for an input and then start next dialogue set or exit dialogue
-            if (visibleCount >= totalVisibleCharacters)
+            if (dialogueSets[setCount].delayTypeTime != 0)
             {
-                isTyping = false;
+                dialogueBox.SetActive(false);
+                dialogueTri.SetActive(false);
+                dialogueUI.SetActive(false);
+                yield return new WaitForSeconds(dialogueSets[setCount].delayTypeTime);
+                dialogueBox.SetActive(true);
+                dialogueTri.SetActive(true);
+                dialogueUI.SetActive(true);
+            }
 
-                yield return new WaitUntil(() => Input.GetButtonDown("Interact") || Input.GetButtonDown("Jump"));
+            dialogueUI.GetComponent<TextMeshProUGUI>().text = "";
 
-                // If not end of dialogue sets
-                if (setCount < (dialogueSets.Length - 1))
+            dialogueAnim.Play("DialogueEnter");
+            yield return new WaitForSeconds(1 / 5f);
+            dialogueAnim.Stop("DialogueEnter");
+
+            dialogueUI.GetComponent<TextMeshProUGUI>().text = dialogueSets[setCount].text;
+
+            isTyping = true;
+            StartCoroutine(TypeAudio(dialogueSets, textSpeed, setCount));
+
+            int totalVisibleCharacters = dialogueSets[setCount].text.Length; // Get number of visible characters in the text object
+            int counter = 0;
+
+            while (true)
+            {
+                int visibleCount = counter % (totalVisibleCharacters + 1);
+
+                m_textMeshPro.maxVisibleCharacters = visibleCount; // How many characters should be displayed right now?
+
+                // When last character is revealed, wait for an input and then start next dialogue set or exit dialogue
+                if (visibleCount >= totalVisibleCharacters)
                 {
-                    // Move on to next dialogue set and write text again
-                    setCount++;
-                    //vertAnim.Stop();
-                    dialogueUI.GetComponent<TextMeshProUGUI>().text = "";
+                    isTyping = false;
 
-                    dialogueAnim.Play("DialogueExit");
-                    yield return new WaitForSeconds(1/6f);
-                    dialogueAnim.Stop("DialogueExit");
+                    yield return new WaitUntil(() => Input.GetButtonDown("Interact") || Input.GetButtonDown("Jump"));
 
-                    dialogueBox.SetActive(false);
-                    dialogueTri.SetActive(false);
-                    StartCoroutine(WriteText());
-                    yield break;
+                    // If not end of dialogue sets
+                    if (setCount < (dialogueSets.Length - 1))
+                    {
+                        // Move on to next dialogue set and write text again
+                        setCount++;
+                        //vertAnim.Stop();
+                        dialogueUI.GetComponent<TextMeshProUGUI>().text = "";
+
+                        dialogueAnim.Play("DialogueExit");
+                        yield return new WaitForSeconds(1 / 6f);
+                        dialogueAnim.Stop("DialogueExit");
+
+                        dialogueBox.SetActive(false);
+                        dialogueTri.SetActive(false);
+                        StartCoroutine(WriteText());
+                        yield break;
+                    }
+                    else
+                    {
+                        // End the dialogue
+                        dialogueAnim.Play("DialogueExit");
+                        yield return new WaitForSeconds(1 / 6f);
+                        dialogueAnim.Stop("DialogueExit");
+                        forcedEyeDirection = 0f;
+
+                        if (isCutscene && !hasDoneCutscene)
+                        {
+                            hasDoneCutscene = true;
+                            activateType = 0;
+                        }
+
+                        StartCoroutine(EndDialogue());
+                        yield break;
+                    }
+                }
+
+                counter += 1;
+
+                if (Input.GetButton("Interact") || Input.GetButton("Jump"))
+                {
+                    yield return new WaitForSeconds(textSpeed / 4);
                 }
                 else
                 {
-                    // End the dialogue
-                    dialogueAnim.Play("DialogueExit");
-                    yield return new WaitForSeconds(1/6f);
-                    dialogueAnim.Stop("DialogueExit");
-                    forcedEyeDirection = 0f;
-
-                    StartCoroutine(EndDialogue());
-                    yield break;
+                    yield return new WaitForSeconds(textSpeed);
                 }
             }
+        }
+        // Move
+        else if (dialogueSets[setCount].setType == (DialogueSet.SetType)1)
+        {
+            moveDir = dialogueSets[setCount].moveDir;
+            initPosX = transform.position.x;
+            targetPosX = moveDir + initPosX;
+            isMovingChar = true;
 
-            counter += 1;
+            yield return new WaitUntil(() => !isMovingChar);
 
-            if (Input.GetButton("Interact") || Input.GetButton("Jump"))
+            // Continue to next dialogue set
+            if (setCount < (dialogueSets.Length - 1))
             {
-                yield return new WaitForSeconds(textSpeed / 4);
+                setCount++;
+                StartCoroutine(WriteText());
             }
+            // End dialogue
             else
             {
-                yield return new WaitForSeconds(textSpeed);
+                forcedEyeDirection = 0f;
+                if (isCutscene && !hasDoneCutscene)
+                {
+                    hasDoneCutscene = true;
+                    activateType = 0;
+                    ReadWriteSaveManager.Instance.SetData(npcActivateType, (int)activateType);
+                    ReadWriteSaveManager.Instance.Write();
+                }
+                StartCoroutine(EndDialogue());
             }
         }
     }
 
     void FixedUpdate()
     {
-        Vector2 playerPos = player.transform.position;
-
-        if ((playerPos.x > posL && playerPos.x < posR) && (playerPos.y > posD && playerPos.y < posU))
-        {
-            if (forcedEyeDirection == 0f)
-            {
-                float dif = transform.position.x - player.transform.position.x;
-
-                if (dif >= 0)
-                    eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, -.08f, .25f), 0f);
-                else
-                    eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, .08f, .25f), 0f);
-            }
-            else
-            {
-                eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, forcedEyeDirection, .25f), 0f);
-            }
-        }
-        else
-        {
-            eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, 0f, .25f), 0f);
-        }
-
+        EyeDirection();
         Blinking();
+        MoveChar();
     }
 
     public IEnumerator EndDialogue()
     {
         // Reset set count and wait before allowing input
-        //vertAnim.Stop();
         dialogueBox.SetActive(false);
         dialogueTri.SetActive(false);
         setCount = 0;
@@ -282,6 +303,32 @@ public class DialogueWrite : MonoBehaviour
         if (isTyping) StartCoroutine(TypeAudio(sets, speed, set));
     }
 
+    void EyeDirection()
+    {
+        Vector2 playerPos = player.transform.position;
+
+        if ((playerPos.x > posL && playerPos.x < posR) && (playerPos.y > posD && playerPos.y < posU))
+        {
+            if (forcedEyeDirection == 0f)
+            {
+                float dif = transform.position.x - player.transform.position.x;
+
+                if (dif >= 0)
+                    eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, -.08f, .25f), 0f);
+                else
+                    eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, .08f, .25f), 0f);
+            }
+            else
+            {
+                eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, forcedEyeDirection, .25f), 0f);
+            }
+        }
+        else
+        {
+            eyes.localPosition = new Vector2(Mathf.Lerp(eyes.localPosition.x, 0f, .25f), 0f);
+        }
+    }
+
     void Blinking()
     {
         // Eyes blinking
@@ -300,6 +347,34 @@ public class DialogueWrite : MonoBehaviour
         // Hotfix for alleviating lerp issues relative to scale
         if (eyes.localScale.y >= .995f)
             eyes.localScale = new Vector2(eyes.localScale.x, initEyeSizeY);
+    }
+
+    void MoveChar()
+    {
+        if (isMovingChar)
+        {
+            float targetDistance = Mathf.Abs(targetPosX - transform.position.x);
+
+            if (targetDistance <= .5f)
+            {
+                velocityX = Mathf.MoveTowards(velocityX, 0, 70 * Time.deltaTime);
+
+                if (targetDistance <= 0f || velocityX == 0f)
+                {
+                    velocityX = 0f;
+                    transform.position = new Vector2(targetPosX, transform.position.y);
+                    isMovingChar = false;
+                }
+            }
+            else
+            {
+                int dir = moveDir > 0 ? 1 : -1;
+                velocityX = Mathf.MoveTowards(velocityX, 9 * dir, 75 * Time.deltaTime);
+            }
+        }
+
+        Vector2 velocity = new Vector2(velocityX, 0f);
+        transform.Translate(velocity * Time.deltaTime);
     }
 
     IEnumerator EyeBlink()

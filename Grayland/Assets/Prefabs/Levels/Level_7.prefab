@@ -122,8 +122,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 5.09375, y: 7.015625}
-  - {x: 5.09375, y: 7.15625}
-  - {x: 5.90625, y: 7.15625}
+  - {x: 5.453125, y: 7.46875}
+  - {x: 5.546875, y: 7.46875}
   - {x: 5.90625, y: 7.015625}
   - {x: 5.09375, y: 7.015625}
 --- !u!68 &977141217182854059
@@ -143,8 +143,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 6.09375, y: 7.015625}
-  - {x: 6.09375, y: 7.15625}
-  - {x: 6.90625, y: 7.15625}
+  - {x: 6.453125, y: 7.46875}
+  - {x: 6.546875, y: 7.46875}
   - {x: 6.90625, y: 7.015625}
   - {x: 6.09375, y: 7.015625}
 --- !u!1 &1358964348822966679
@@ -352,8 +352,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 4.09375, y: 51.015625}
-  - {x: 4.09375, y: 51.15625}
-  - {x: 4.90625, y: 51.15625}
+  - {x: 4.453125, y: 51.46875}
+  - {x: 4.546875, y: 51.46875}
   - {x: 4.90625, y: 51.015625}
   - {x: 4.09375, y: 51.015625}
 --- !u!68 &6891006928765422911
@@ -373,8 +373,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 5.09375, y: 51.015625}
-  - {x: 5.09375, y: 51.15625}
-  - {x: 5.90625, y: 51.15625}
+  - {x: 5.453125, y: 51.46875}
+  - {x: 5.546875, y: 51.46875}
   - {x: 5.90625, y: 51.015625}
   - {x: 5.09375, y: 51.015625}
 --- !u!68 &2345480948812657470
@@ -394,8 +394,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 6.09375, y: 51.015625}
-  - {x: 6.09375, y: 51.15625}
-  - {x: 6.90625, y: 51.15625}
+  - {x: 6.453125, y: 51.46875}
+  - {x: 6.546875, y: 51.46875}
   - {x: 6.90625, y: 51.015625}
   - {x: 6.09375, y: 51.015625}
 --- !u!68 &3183668143461458304
@@ -415,8 +415,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 7.09375, y: 51.015625}
-  - {x: 7.09375, y: 51.15625}
-  - {x: 7.90625, y: 51.15625}
+  - {x: 7.453125, y: 51.46875}
+  - {x: 7.546875, y: 51.46875}
   - {x: 7.90625, y: 51.015625}
   - {x: 7.09375, y: 51.015625}
 --- !u!68 &4892699663499256426
@@ -436,8 +436,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 8.09375, y: 51.015625}
-  - {x: 8.09375, y: 51.15625}
-  - {x: 8.90625, y: 51.15625}
+  - {x: 8.453125, y: 51.46875}
+  - {x: 8.546875, y: 51.46875}
   - {x: 8.90625, y: 51.015625}
   - {x: 8.09375, y: 51.015625}
 --- !u!68 &195427770048417330
@@ -457,8 +457,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 9.09375, y: 51.015625}
-  - {x: 9.09375, y: 51.15625}
-  - {x: 9.90625, y: 51.15625}
+  - {x: 9.453125, y: 51.46875}
+  - {x: 9.546875, y: 51.46875}
   - {x: 9.90625, y: 51.015625}
   - {x: 9.09375, y: 51.015625}
 --- !u!1 &2217102942865555137
@@ -513,7 +513,7 @@ MonoBehaviour:
   - {fileID: 7053884437283669428}
   - {fileID: 6790253500636042295}
   - {fileID: 8264190799674768682}
-  m_selectedIndex: 1
+  m_selectedIndex: 0
   m_unselectedColorMultiplier: 1
   m_defaultTilemapWindowVisible: 0
   m_displayTilemapRList: 1
@@ -535,7 +535,7 @@ GameObject:
   - component: {fileID: 9069556202227094590}
   - component: {fileID: 106348008826971936}
   - component: {fileID: 7370005805186346978}
-  - component: {fileID: 1554656722308333368}
+  - component: {fileID: 4948184524930474336}
   m_Layer: 10
   m_Name: 0_-1
   m_TagString: Untagged
@@ -684,7 +684,7 @@ EdgeCollider2D:
   - {x: 23, y: 52}
   - {x: 23, y: 47}
   - {x: 0, y: 47}
---- !u!68 &1554656722308333368
+--- !u!68 &4948184524930474336
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -841,8 +841,8 @@ GameObject:
   - component: {fileID: 2470775959011304660}
   - component: {fileID: 5911859727158850172}
   - component: {fileID: 6133837215658778361}
-  - component: {fileID: 1195235155684816591}
-  - component: {fileID: 3941086579625186084}
+  - component: {fileID: 1153875453062692693}
+  - component: {fileID: 534222691672454744}
   m_Layer: 10
   m_Name: -1_-1
   m_TagString: Untagged
@@ -953,7 +953,7 @@ EdgeCollider2D:
   - {x: 60, y: 47}
   - {x: 37, y: 47}
   - {x: 37, y: 60}
---- !u!68 &1195235155684816591
+--- !u!68 &1153875453062692693
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -989,7 +989,7 @@ EdgeCollider2D:
   - {x: 53, y: 57}
   - {x: 56, y: 57}
   - {x: 56, y: 60}
---- !u!68 &3941086579625186084
+--- !u!68 &534222691672454744
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1021,7 +1021,7 @@ GameObject:
   - component: {fileID: 1194694324043861047}
   - component: {fileID: 2502244410071426584}
   - component: {fileID: 5640087793963085366}
-  - component: {fileID: 4173305345333484890}
+  - component: {fileID: 2398468210440726102}
   m_Layer: 10
   m_Name: -1_0
   m_TagString: Untagged
@@ -1153,7 +1153,7 @@ EdgeCollider2D:
   - {x: 58, y: 4}
   - {x: 58, y: 5}
   - {x: 60, y: 5}
---- !u!68 &4173305345333484890
+--- !u!68 &2398468210440726102
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1407,7 +1407,7 @@ GameObject:
   - component: {fileID: 77982824695360195}
   - component: {fileID: 2705082113227553577}
   - component: {fileID: 3877974175052412442}
-  - component: {fileID: 3949959712391319342}
+  - component: {fileID: 2558729880645652215}
   m_Layer: 10
   m_Name: 0_0
   m_TagString: Untagged
@@ -1559,7 +1559,7 @@ EdgeCollider2D:
   - {x: 2, y: 1}
   - {x: 1, y: 1}
   - {x: 1, y: 0}
---- !u!68 &3949959712391319342
+--- !u!68 &2558729880645652215
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1768,7 +1768,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -1865,7 +1865,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
@@ -1949,7 +1949,7 @@ MonoBehaviour:
   m_allowPaintingOutOfBounds: 1
   m_autoShrink: 0
   m_enableUndoWhilePainting: 1
-  m_isTrigger: 1
+  m_isTrigger: 0
   m_physicMaterial: {fileID: 0}
   m_physicMaterial2D: {fileID: 0}
   m_cellSize: {x: 1, y: 1}
