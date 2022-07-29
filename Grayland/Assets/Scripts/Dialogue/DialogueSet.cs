@@ -9,6 +9,8 @@ public class DialogueSet : ScriptableObject
     {
         Dialogue = 0,
         Move = 1,
+        ColorPlayer = 2,
+        Credits = 3,
     }
     
     public enum MoveChar

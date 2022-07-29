@@ -72,6 +72,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Particle object that spawns on player death")]
     GameObject deathParticle;
 
+    [SerializeField, Tooltip("Hidden object that is used to color player in final level")]
+    SpriteRenderer colorBody;
+
     [SerializeField, Tooltip("Child object used for sticking objects")]
     SpriteRenderer stickySprRend;
 
@@ -816,5 +819,10 @@ public class PlayerController : MonoBehaviour
     public STETilemap GetTilemap()
     {
         return tilemap;
+    }
+
+    public SpriteRenderer GetColorBody()
+    {
+        return colorBody;
     }
 }

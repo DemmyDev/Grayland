@@ -19,5 +19,5 @@ MonoBehaviour:
   pitchMax: 1
   eyePosX: 0
   delayTypeTime: 0
-  moveChar: 1
+  moveChar: 0
   moveDir: 2

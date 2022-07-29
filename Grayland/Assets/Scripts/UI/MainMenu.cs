@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] PlayerController player;
     [SerializeField] LayerMask whatIsPlayer;
     
-    bool transitioning = false, checkForPlayer = true, animCam = false, isOpening = true;
+    bool checkForPlayer = true, animCam = false, isOpening = true;
     float camEndSize, animTime = 0f;
     CanvasMenuAnim animCanvas;
     Vector3 camEndPos;
@@ -107,7 +107,6 @@ public class MainMenu : MonoBehaviour
     IEnumerator Transition()
     {
         player.ForceSetMoveInput(false, true, false, false);
-        transitioning = true;
         anim.Play("TransitionEnter");
         yield return new WaitForSeconds(.5f);
 

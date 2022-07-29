@@ -29,11 +29,12 @@ public class DialogueWrite : MonoBehaviour
     [SerializeField] Transform distanceCheckR;
     [SerializeField] Transform distanceCheckU;
     [SerializeField] Transform distanceCheckD;
+    [SerializeField] ParticleSystem npcParticle;
     GameObject dialogueUI, dialogueBox, dialogueTri, dialogueParent, activationUI;
     Animation dialogueAnim, activationAnim;
     float initEyeSizeY;
 
-    bool allowInput = true, isBlinking = false, playEnter = false, playExit = false, isTyping = false, isMovingChar = false, hasDoneCutscene = false;
+    bool allowInput = true, isBlinking = false, playEnter = false, playExit = false, isTyping = false, isMovingChar = false, hasDoneCutscene = false, isColoringPlayer = false, playParticle = false;
     float posL, posR, posU, posD, forcedEyeDirection = 0f;
     int setCount = 0;
     float moveDir = 0f, velocityX = 0, initPosX = 0, targetPosX = 0;
@@ -62,11 +63,14 @@ public class DialogueWrite : MonoBehaviour
         StartCoroutine(EyeBlink());
 
         activationUI.transform.position = new Vector2(transform.position.x, transform.position.y + 2f);
-
+        
         posL = distanceCheckL.position.x;
         posR = distanceCheckR.position.x;
         posU = distanceCheckU.position.y;
         posD = distanceCheckD.position.y;
+
+        npcParticle.gameObject.GetComponent<Renderer>().material.SetColor("_Color", GetComponent<SpriteRenderer>().color);
+        npcParticle.gameObject.SetActive(false);
     }
 
     void Update()
@@ -75,7 +79,7 @@ public class DialogueWrite : MonoBehaviour
 
         if ((playerPos.x > posL && playerPos.x < posR) && (playerPos.y > posD && playerPos.y < posU))
         {
-            if (activateType == (ActivateType)0)
+            if (activateType == 0)
             {
                 // When within distance and player 
                 if (Input.GetButtonDown("Interact") && allowInput)
@@ -240,12 +244,15 @@ public class DialogueWrite : MonoBehaviour
         // Move
         else if (dialogueSets[setCount].setType == (DialogueSet.SetType)1)
         {
+            npcParticle.gameObject.SetActive(true);
             moveDir = dialogueSets[setCount].moveDir;
             initPosX = transform.position.x;
             targetPosX = moveDir + initPosX;
             isMovingChar = true;
 
             yield return new WaitUntil(() => !isMovingChar);
+
+            npcParticle.gameObject.SetActive(false);
 
             // Continue to next dialogue set
             if (setCount < (dialogueSets.Length - 1))
@@ -267,6 +274,27 @@ public class DialogueWrite : MonoBehaviour
                 StartCoroutine(EndDialogue());
             }
         }
+        // Color Player
+        else if (dialogueSets[setCount].setType == (DialogueSet.SetType)2)
+        {
+            isColoringPlayer = true;
+
+            yield return new WaitUntil(() => !isColoringPlayer);
+
+            // Continue to next dialogue set
+            if (setCount < (dialogueSets.Length - 1))
+            {
+                setCount++;
+                StartCoroutine(WriteText());
+            }
+        }
+        // Credits (only use in final scene)
+        else if (dialogueSets[setCount].setType == (DialogueSet.SetType)3)
+        {
+            // Enable UI animation for credits
+            // After animation is finished, go to main menu scene
+            StartCoroutine(CreditsSequence());
+        }
     }
 
     void FixedUpdate()
@@ -274,6 +302,7 @@ public class DialogueWrite : MonoBehaviour
         EyeDirection();
         Blinking();
         MoveChar();
+        ColorPlayer();
     }
 
     public IEnumerator EndDialogue()
@@ -293,6 +322,21 @@ public class DialogueWrite : MonoBehaviour
         activationAnim.Play("ActivationEnter");
 
         StartCoroutine(UIController.UIControl.GetActivationText().GetComponent<ThreeDotType>().Type());
+    }
+
+    IEnumerator CreditsSequence()
+    {
+        GameObject credits = UIController.UIControl.GetCreditsParent();
+        credits.SetActive(true);
+        credits.GetComponent<Animation>().Play();
+
+        yield return new WaitForSeconds(3f);
+
+        credits.transform.GetChild(0).GetComponent<Animation>().Play();
+
+        yield return new WaitForSeconds(5f);
+
+        StartCoroutine(levelControl.LoadLevel(true));
     }
 
     IEnumerator TypeAudio(DialogueSet[] sets, float speed, int set)
@@ -375,6 +419,39 @@ public class DialogueWrite : MonoBehaviour
 
         Vector2 velocity = new Vector2(velocityX, 0f);
         transform.Translate(velocity * Time.deltaTime);
+
+        // Plays particles if moving, stops particles if not moving
+        if (velocity.x > -.25f && velocity.x < .25f)
+        {
+            playParticle = true;
+            npcParticle.Stop();
+        }
+        else if (playParticle)
+        {
+            playParticle = false;
+            npcParticle.Play();
+        }
+    }
+
+    void ColorPlayer()
+    {
+        if (isColoringPlayer)
+        {
+            SpriteRenderer bodySprite = player.GetColorBody();
+            Color bodyColor = bodySprite.color;
+
+            if (bodyColor.a < 1f)
+            {
+                bodyColor.a = Mathf.MoveTowards(bodyColor.a, 1, Time.deltaTime);
+                bodySprite.color = bodyColor;
+            }
+            else
+            {
+                bodyColor.a = 1f;
+                bodySprite.color = bodyColor;
+                isColoringPlayer = false;
+            }
+        }
     }
 
     IEnumerator EyeBlink()

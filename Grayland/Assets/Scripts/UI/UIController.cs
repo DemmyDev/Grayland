@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField] GameObject completeUI;
-    [SerializeField] GameObject nextLevelUI;
     [SerializeField] GameObject dialogueUI;
     [SerializeField] GameObject dialogueTri;
     [SerializeField] GameObject activationUI;
     [SerializeField] GameObject activationText;
     [SerializeField] GameObject pauseParent;
+    [SerializeField] GameObject creditsParent;
 
     public static UIController UIControl;
 
@@ -18,16 +17,6 @@ public class UIController : MonoBehaviour
     {
         if (UIControl == null)
             UIControl = this;
-    }
-
-    public GameObject GetCompleteUI()
-    {
-        return completeUI;
-    }
-
-    public GameObject GetNextLevelUI()
-    {
-        return nextLevelUI;
     }
 
     public GameObject GetDialogueUI()
@@ -53,5 +42,10 @@ public class UIController : MonoBehaviour
     public GameObject GetPauseParent()
     {
         return pauseParent;
+    }
+
+    public GameObject GetCreditsParent()
+    {
+        return creditsParent;
     }
 }

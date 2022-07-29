@@ -12,18 +12,11 @@ public class LevelEndpoint : MonoBehaviour
     Collider2D col;
     SpriteRenderer spr;
 
-    GameObject levelCompleteUI, nextLevelUI;
-
     private void Start()
     {
         col = GetComponent<Collider2D>();
         spr = GetComponent<SpriteRenderer>();
-        levelCompleteUI = UIController.UIControl.GetCompleteUI();
-        nextLevelUI = UIController.UIControl.GetNextLevelUI();
         LevelController.levelController.GetLevelEnd().enabled = false;
-
-        levelCompleteUI.SetActive(false);
-        nextLevelUI.SetActive(false);
     }
 
     public void EndLevel(PlayerController player)
@@ -44,11 +37,5 @@ public class LevelEndpoint : MonoBehaviour
         player.SetStickyChild(spr.sprite);
         spr.enabled = false;
         col.enabled = false;
-    }
-
-    void NextLevel()
-    {
-        isLevelEnded = true;
-        nextLevelUI.SetActive(true);
     }
 }
